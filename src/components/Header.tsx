@@ -1,11 +1,16 @@
 
 import { useState } from "react";
-import { User } from "lucide-react";
+import { User, Flame } from "lucide-react";
 
 const Header = () => {
   const [user] = useState({
     name: "Emma",
     totalSaved: "1,200"
+  });
+
+  const [streak] = useState({
+    streakDays: 5,
+    nextBadgeAt: 7
   });
 
   return (
@@ -28,8 +33,17 @@ const Header = () => {
           </div>
           <div className="text-2xl font-bold text-stashbox-text">Stashbox</div>
         </div>
-        <div className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center">
-          <User className="w-5 h-5 text-stashbox-text" />
+        <div className="flex items-center space-x-3">
+          {/* Streak indicator */}
+          <div className="flex items-center space-x-1 bg-stashbox-yellow/20 px-2 py-1 rounded-full">
+            <Flame className="w-4 h-4 text-stashbox-orange animate-bounce-gentle" />
+            <span className="text-sm font-semibold text-stashbox-text">{streak.streakDays}</span>
+          </div>
+          
+          {/* Profile */}
+          <div className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center">
+            <User className="w-5 h-5 text-stashbox-text" />
+          </div>
         </div>
       </div>
       

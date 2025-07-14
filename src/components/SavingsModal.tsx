@@ -265,19 +265,15 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-4 space-y-3">
               <div className="flex items-center space-x-2">
                 <span className="text-lg">📈</span>
-                <h4 className="text-sm font-medium text-white">Estimated Return</h4>
+                <h4 className="text-sm font-medium text-white">Return Estimate</h4>
               </div>
-              
-              <p className="text-xs text-white/80">
-                Investing ${amount} for {duration} days at {config.apy}% APY
-              </p>
               
               <div className="text-lg font-semibold text-stashbox-mint">
                 You'll get ~${calculateEstimatedReturn().toFixed(2)}
               </div>
               
               <p className="text-xs text-white/60">
-                Returns are fixed. Early withdrawal incurs penalty of {config.penalty}.
+                Fixed returns. Early withdrawal penalty: {config.penalty}
               </p>
             </div>
           )}
@@ -290,13 +286,13 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 <h4 className="text-sm font-medium text-white">Custom Return Estimate</h4>
               </div>
               
-              <p className="text-xs text-white/80">
-                At Risk Level {riskLevel}, you could earn ~{getRiskAPY().toFixed(1)}% APY
-              </p>
-              
               <div className="text-lg font-semibold text-stashbox-mint">
-                Est. return on ${targetAmount}: ${calculateCustomReturn().toFixed(2)}
+                Est. return: ${calculateCustomReturn().toFixed(2)}
               </div>
+              
+              <p className="text-xs text-white/60">
+                Risk Level {riskLevel} • {getRiskAPY().toFixed(1)}% APY
+              </p>
             </div>
           )}
           

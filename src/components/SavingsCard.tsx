@@ -117,7 +117,7 @@ const SavingsCard = ({
             isPressed ? 'scale-95' : ''
           }`}
         >
-          {isGoalJar ? 'Create Goal' : 'Details'}
+          {isGoalJar ? 'Create Goal' : 'Start Saving'}
         </Button>
       </div>
     </div>
