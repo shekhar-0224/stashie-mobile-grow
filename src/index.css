@@ -39,6 +39,20 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    /* Stashbox Design System */
+    --stashbox-cream: 30 50% 97%;
+    --stashbox-text: 0 0% 17%;
+    --stashbox-mint: 154 38% 86%;
+    --stashbox-orange: 30 96% 70%;
+    --stashbox-yellow: 48 96% 76%;
+    --stashbox-blue: 200 63% 89%;
+    --stashbox-purple: 245 28% 88%;
+    
+    /* Glass effect variables */
+    --glass-bg: 255 255 255 / 0.1;
+    --glass-border: 255 255 255 / 0.2;
+    --glass-backdrop: blur(10px);
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -96,4 +110,78 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-manrope;
   }
+}
+
+/* Stashbox utility classes */
+@layer utilities {
+  .bg-stashbox-cream { background-color: hsl(var(--stashbox-cream)); }
+  .bg-stashbox-mint { background-color: hsl(var(--stashbox-mint)); }
+  .bg-stashbox-orange { background-color: hsl(var(--stashbox-orange)); }
+  .bg-stashbox-yellow { background-color: hsl(var(--stashbox-yellow)); }
+  .bg-stashbox-blue { background-color: hsl(var(--stashbox-blue)); }
+  .bg-stashbox-purple { background-color: hsl(var(--stashbox-purple)); }
+  .text-stashbox-text { color: hsl(var(--stashbox-text)); }
+  .border-stashbox-text { border-color: hsl(var(--stashbox-text)); }
+  .rounded-stashbox { border-radius: 24px; }
+  
+  /* Glass morphism effects */
+  .glass-modal {
+    background: rgba(var(--glass-bg));
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid rgba(var(--glass-border));
+  }
+  
+  /* Duolingo-style animations */
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .animate-bounce-gentle {
+    animation: bounceGentle 2s infinite;
+  }
+  
+  .animate-sparkle {
+    animation: sparkle 1s ease-in-out;
+  }
+  
+  .animate-fluid-fill {
+    animation: fluidFill 2s ease-in-out infinite;
+  }
+  
+  .animate-confetti {
+    animation: confetti 1s ease-out;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+}
+
+@keyframes fluidFill {
+  0% { transform: scaleY(0); }
+  50% { transform: scaleY(0.8); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes confetti {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+  100% { transform: scale(1) rotate(360deg); opacity: 1; }
 }

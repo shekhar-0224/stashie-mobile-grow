@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
 
 interface SavingsModalProps {
@@ -14,7 +13,7 @@ interface SavingsModalProps {
 
 const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const [amount, setAmount] = useState("");
-  const [duration, setDuration] = useState<number[]>([30]);
+  const [duration, setDuration] = useState<number>(30);
   const [goalName, setGoalName] = useState("");
   const [targetAmount, setTargetAmount] = useState("");
 
@@ -71,13 +70,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const config = getModalConfig();
 
   const handleDeposit = () => {
-    const [selectedDuration] = duration;
-    
     // Trigger confetti animation
     const confettiEvent = () => {
       // Vibration feedback
       if (navigator.vibrate) {
-        navigator.vibrate([100, 50, 100]);
+        navigator.vibrate([50, 100, 50, 100]);
       }
       
       // Show success toast with confetti effect
@@ -92,18 +89,29 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     
     // Reset form and close modal
     setAmount("");
-    setDuration([config.defaultDuration]);
+    setDuration(config.defaultDuration);
     setGoalName("");
     setTargetAmount("");
     onClose();
   };
 
+  const durationOptions = [30, 90, 180, 365];
+  
+  const handleDurationChange = (value: number) => {
+    setDuration(value);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] bg-stashbox-cream border-none rounded-stashbox">
+      <DialogContent className="sm:max-w-[425px] glass-modal border-none rounded-stashbox animate-slide-up">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-stashbox-text">
-            {config.title}
+          <DialogTitle className="text-xl font-semibold text-stashbox-text flex items-center space-x-2">
+            <img 
+              src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+              alt="Stashie" 
+              className="w-6 h-6 animate-bounce-gentle"
+            />
+            <span>{config.title}</span>
           </DialogTitle>
         </DialogHeader>
         
@@ -118,7 +126,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 placeholder="e.g., PS5"
                 value={goalName}
                 onChange={(e) => setGoalName(e.target.value)}
-                className="rounded-stashbox border-stashbox-text/20"
+                className="rounded-stashbox border-stashbox-text/20 bg-white/50"
               />
             </div>
           )}
@@ -132,31 +140,66 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               placeholder={config.placeholder}
               value={type === "custom" ? targetAmount : amount}
               onChange={(e) => type === "custom" ? setTargetAmount(e.target.value) : setAmount(e.target.value)}
-              className="rounded-stashbox border-stashbox-text/20"
+              className="rounded-stashbox border-stashbox-text/20 bg-white/50"
             />
           </div>
           
           <div className="space-y-4">
             <Label className="text-sm font-medium text-stashbox-text">
-              Duration ({duration[0]} days)
+              Duration ({duration} days)
             </Label>
-            <Slider
-              value={duration}
-              onValueChange={setDuration}
-              max={config.maxDuration}
-              min={config.minDuration}
-              step={1}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-stashbox-text/60">
-              <span>{config.minDuration} days</span>
-              <span>{config.maxDuration} days</span>
+            
+            {/* Custom Duration Picker */}
+            <div className="relative bg-white/30 rounded-stashbox p-4">
+              <div className="flex justify-between items-center mb-4">
+                {durationOptions.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleDurationChange(option)}
+                    className={`flex flex-col items-center space-y-2 p-3 rounded-stashbox transition-all duration-200 ${
+                      duration === option 
+                        ? 'bg-stashbox-mint scale-110 shadow-lg' 
+                        : 'bg-white/50 hover:bg-white/70'
+                    }`}
+                  >
+                    <img 
+                      src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                      alt="Duration option" 
+                      className={`w-8 h-8 ${duration === option ? 'animate-sparkle' : ''}`}
+                    />
+                    <span className="text-xs font-medium text-stashbox-text">
+                      {option}d
+                    </span>
+                  </button>
+                ))}
+              </div>
+              
+              <div className="relative w-full h-2 bg-stashbox-cream rounded-full">
+                <div 
+                  className="absolute top-0 left-0 h-full bg-stashbox-orange rounded-full transition-all duration-500 animate-fluid-fill"
+                  style={{ 
+                    width: `${(durationOptions.indexOf(duration) + 1) * 25}%` 
+                  }}
+                />
+                <div 
+                  className="absolute top-1/2 transform -translate-y-1/2 w-6 h-6 transition-all duration-500"
+                  style={{ 
+                    left: `calc(${(durationOptions.indexOf(duration)) * 25}% + ${durationOptions.indexOf(duration) * 6}px)` 
+                  }}
+                >
+                  <img 
+                    src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                    alt="Slider handle" 
+                    className="w-6 h-6 animate-bounce-gentle"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           
           <Button
             onClick={handleDeposit}
-            className="w-full bg-stashbox-mint text-stashbox-text hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105"
+            className="w-full bg-stashbox-mint text-stashbox-text hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle"
           >
             {type === "custom" ? "Create Jar" : "Deposit to Jar"}
           </Button>

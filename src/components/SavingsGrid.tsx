@@ -30,48 +30,67 @@ const SavingsGrid = () => {
   return (
     <>
       <div className="px-6 py-4 space-y-4">
-        <SavingsCard
-          title="QuickSave"
-          subtitle="QuickSave · 30 days"
-          caption="Fixed 4.5% APY"
-          background="#C2E9F7"
-          onAction={handleQuickSave}
-          animationDelay={200}
-          progress={45}
-          progressColor="#AEE6C5"
-        />
-        
-        <SavingsCard
-          title="SafeStack"
-          subtitle="SafeStack · 90 days"
-          caption="Fixed 6.5% APY"
-          background="#AEE6C5"
-          onAction={handleSafeStack}
-          animationDelay={400}
-          progress={72}
-          progressColor="#F9B572"
-        />
-        
-        <SavingsCard
-          title="GrowFund"
-          subtitle="GrowFund · 180+ days"
-          caption="Fixed 8.0% APY"
-          background="#F9B572"
-          onAction={handleGrowFund}
-          animationDelay={600}
-          progress={28}
-          progressColor="#FEE191"
-        />
-
+        {/* Custom Goal Jar - moved to top */}
         <SavingsCard
           title="🎯 Goal Jar (Custom)"
           subtitle="Custom Goal Jar"
           caption="Create custom goal like 'PS5', set target"
-          background="#E0E4F1"
+          background="hsl(var(--stashbox-purple))"
           onAction={handleCustomJar}
-          animationDelay={800}
+          animationDelay={200}
           isGoalJar={true}
         />
+        
+        {/* 2x2 Grid Layout */}
+        <div className="grid grid-cols-2 gap-3">
+          <SavingsCard
+            title="QuickSave"
+            subtitle="QuickSave · 30 days"
+            caption="Fixed 4.5% APY"
+            background="hsl(var(--stashbox-blue))"
+            onAction={handleQuickSave}
+            animationDelay={400}
+            progress={45}
+            progressColor="hsl(var(--stashbox-mint))"
+            compact={true}
+          />
+          
+          <SavingsCard
+            title="SafeStack"
+            subtitle="SafeStack · 90 days"
+            caption="Fixed 6.5% APY"
+            background="hsl(var(--stashbox-mint))"
+            onAction={handleSafeStack}
+            animationDelay={600}
+            progress={72}
+            progressColor="hsl(var(--stashbox-orange))"
+            compact={true}
+          />
+          
+          <SavingsCard
+            title="GrowFund"
+            subtitle="GrowFund · 180+ days"
+            caption="Fixed 8.0% APY"
+            background="hsl(var(--stashbox-orange))"
+            onAction={handleGrowFund}
+            animationDelay={800}
+            progress={28}
+            progressColor="hsl(var(--stashbox-yellow))"
+            compact={true}
+          />
+          
+          <SavingsCard
+            title="Emergency"
+            subtitle="Emergency Fund"
+            caption="High liquidity 2.5% APY"
+            background="hsl(var(--stashbox-yellow))"
+            onAction={() => setOpenModal("safe")}
+            animationDelay={1000}
+            progress={15}
+            progressColor="hsl(var(--stashbox-mint))"
+            compact={true}
+          />
+        </div>
       </div>
 
       {/* Modals */}
