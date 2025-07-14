@@ -11,6 +11,13 @@ import { Button } from '@/components/ui/button';
 const languages = [
   { code: 'en', name: 'common.english' },
   { code: 'es', name: 'common.spanish' },
+  { code: 'hi', name: 'common.hindi' },
+  { code: 'ko', name: 'common.korean' },
+  { code: 'id', name: 'common.indonesian' },
+  { code: 'ja', name: 'common.japanese' },
+  { code: 'th', name: 'common.thai' },
+  { code: 'vi', name: 'common.vietnamese' },
+  { code: 'zh', name: 'common.chinese' }
 ];
 
 export const LanguageSelector = () => {
@@ -33,9 +40,9 @@ export const LanguageSelector = () => {
           size="sm"
           className="flex items-center gap-2 text-stashbox-text hover:bg-stashbox-orange/20"
         >
-          <Globe className="w-4 h-4" />
-          <span className="hidden sm:inline text-xs">🌐 {getCurrentLanguageName()}</span>
-          <span className="sm:hidden text-sm">🌐</span>
+          <Globe className="w-5 h-5" />
+          <span className="hidden sm:inline text-sm">🌐 {getCurrentLanguageName()}</span>
+          <span className="sm:hidden text-lg">🌐</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-background border border-border">
