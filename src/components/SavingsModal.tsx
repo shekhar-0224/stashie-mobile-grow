@@ -126,7 +126,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 placeholder="e.g., PS5"
                 value={goalName}
                 onChange={(e) => setGoalName(e.target.value)}
-                className="rounded-stashbox border-gray-200 bg-gray-50 text-gray-700 placeholder:text-gray-400"
+                className="rounded-stashbox border-gray-200 bg-gray-50 text-gray-500 placeholder:text-gray-300"
               />
             </div>
           )}
@@ -140,7 +140,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               placeholder={config.placeholder}
               value={type === "custom" ? targetAmount : amount}
               onChange={(e) => type === "custom" ? setTargetAmount(e.target.value) : setAmount(e.target.value)}
-              className="rounded-stashbox border-gray-200 bg-gray-50 text-gray-700 placeholder:text-gray-400"
+              className="rounded-stashbox border-gray-200 bg-gray-50 text-gray-500 placeholder:text-gray-300"
             />
           </div>
           
@@ -167,7 +167,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                       alt="Duration option" 
                       className={`w-8 h-8 ${duration === option ? 'animate-sparkle' : ''}`}
                     />
-                    <span className="text-xs font-medium text-gray-600">
+                    <span className="text-xs font-medium text-gray-500">
                       {option}d
                     </span>
                   </button>
@@ -199,7 +199,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           
           <Button
             onClick={handleDeposit}
-            className="w-full bg-stashbox-mint text-gray-700 hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle"
+            className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle"
           >
             {type === "custom" ? "Create Jar" : "Deposit to Jar"}
           </Button>
