@@ -273,7 +273,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </div>
               
               <p className="text-xs text-white/60">
-                Risk Level 1 • {config.apy}% APY • Early withdrawal penalty: {config.penalty}
+                {config.apy}% APY
               </p>
             </div>
           )}
@@ -291,7 +291,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </div>
               
               <p className="text-xs text-white/60">
-                Risk Level {riskLevel} • {getRiskAPY().toFixed(1)}% APY
+                {getRiskAPY().toFixed(1)}% APY
               </p>
             </div>
           )}
