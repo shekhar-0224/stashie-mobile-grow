@@ -273,7 +273,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </div>
               
               <p className="text-xs text-white/60">
-                Fixed returns. Early withdrawal penalty: {config.penalty}
+                Risk Level 1 • {config.apy}% APY • Early withdrawal penalty: {config.penalty}
               </p>
             </div>
           )}
