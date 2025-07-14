@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,148 +8,201 @@ const Login = () => {
 
   const slides = [
     {
-      background: "hsl(var(--stashbox-blue))",
-      icon: "/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png",
-      title: "Pick a Jar, Start Saving",
-      description: "Choose a plan that fits you — short-term, long-term, or custom goals."
+      title: "Pick a Jar",
+      description: "Choose how you want to save — short-term, long-term, or a custom goal.",
+      visual: "jar-selection"
     },
     {
-      background: "hsl(var(--stashbox-mint))",
-      icon: "/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png",
-      title: "Earn Streaks & Rewards",
-      description: "Get rewarded for daily saves, hit milestones, and unlock badges!"
+      title: "Save & Earn",
+      description: "Add money anytime, earn fixed returns, and grow your stash.",
+      visual: "coin-drop"
     },
     {
-      background: "hsl(var(--stashbox-orange))",
-      icon: "/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png",
-      title: "Let Genie Auto-Save for You",
-      description: "Genie watches your expenses & nudges you to stash a little extra daily.",
-      hasButton: true
+      title: "Hit Streaks & Unlock Badges",
+      description: "Save daily, hit milestones, and unlock rewards with Genie Mode.",
+      visual: "streaks-badges"
     }
   ];
 
-  // Auto-advance carousel
+  // Auto-advance carousel every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => {
-        if (prev === slides.length - 1) return prev; // Stop on last slide
-        return prev + 1;
-      });
-    }, 3200);
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const handleLogin = () => {
-    // Bypass login for now - navigate directly to home
+  const handleGetStarted = () => {
     navigate("/home");
-  };
-
-  const nextSlide = () => {
-    if (currentSlide < slides.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    }
   };
 
   return (
     <div className="min-h-screen bg-stashbox-cream flex flex-col">
-      <div className="max-w-md mx-auto w-full flex-1 flex flex-col">
+      <div className="max-w-md mx-auto flex-1 flex flex-col">
+        
         {/* Header */}
-        <div className="p-6 text-center">
-          <div className="flex items-center justify-center space-x-3 mb-4">
+        <div className="pt-12 pb-6 text-center">
+          <div className="flex items-center justify-center space-x-3">
             <img 
               src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
-              alt="Stashie Mascot" 
-              className="w-8 h-8 animate-bounce-gentle"
+              alt="Stashie" 
+              className="w-10 h-10"
             />
             <h1 className="text-2xl font-bold text-stashbox-text">Stashbox</h1>
           </div>
+          <p className="text-lg text-stashbox-text mt-2 font-medium">Save in 3 easy steps</p>
         </div>
 
-        {/* Carousel Container */}
-        <div className="flex-1 px-6 pb-6">
-          <div className="relative h-full">
-            {/* Carousel Content */}
-            <div className="h-full overflow-hidden rounded-stashbox">
-              <div 
-                className="flex h-full transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {slides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className="w-full h-full flex-shrink-0 p-8 flex flex-col items-center justify-center text-center animate-slide-up"
-                    style={{ backgroundColor: slide.background }}
-                  >
-                    <div className="mb-8">
-                      <img 
-                        src={slide.icon} 
-                        alt={slide.title} 
-                        className="w-16 h-16 mx-auto animate-bounce-gentle"
-                      />
+        {/* Main Content Area */}
+        <div className="flex-1 px-6 overflow-hidden">
+          <div 
+            className="flex transition-transform duration-700 ease-out h-full"
+            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          >
+            {slides.map((slide, index) => (
+              <div key={index} className="w-full flex-shrink-0 flex flex-col items-center justify-center text-center px-4">
+                
+                {/* Large Visual Area */}
+                <div className="w-full h-80 flex items-center justify-center mb-8">
+                  {slide.visual === "jar-selection" && (
+                    <div className="relative">
+                      {/* Main Stashie character */}
+                      <div className="mb-6">
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Stashie" 
+                          className="w-24 h-24 mx-auto animate-bounce-gentle"
+                        />
+                      </div>
+                      
+                      {/* Three jars */}
+                      <div className="flex justify-center space-x-4">
+                        <div className="text-center">
+                          <div className="w-16 h-20 bg-stashbox-blue rounded-stashbox mb-2 flex items-end justify-center relative overflow-hidden">
+                            <div className="w-full h-1/2 bg-stashbox-mint rounded-b-stashbox"></div>
+                            <span className="absolute top-2 text-xs font-bold text-stashbox-text">30d</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="w-16 h-20 bg-stashbox-mint rounded-stashbox mb-2 flex items-end justify-center relative overflow-hidden">
+                            <div className="w-full h-3/4 bg-stashbox-orange rounded-b-stashbox"></div>
+                            <span className="absolute top-2 text-xs font-bold text-stashbox-text">90d</span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="w-16 h-20 bg-stashbox-orange rounded-stashbox mb-2 flex items-end justify-center relative overflow-hidden">
+                            <div className="w-full h-1/4 bg-stashbox-yellow rounded-b-stashbox"></div>
+                            <span className="absolute top-2 text-xs font-bold text-stashbox-text">Goal</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <h2 className="text-2xl font-bold text-stashbox-text mb-4">
-                      {slide.title}
-                    </h2>
-                    
-                    <p className="text-stashbox-text/80 text-base leading-relaxed mb-8 max-w-sm">
-                      {slide.description}
-                    </p>
+                  )}
 
-                    {slide.hasButton && (
-                      <Button
-                        onClick={handleLogin}
-                        className="bg-white text-stashbox-text hover:bg-white/90 font-semibold py-4 px-8 rounded-stashbox text-lg transition-all duration-200 transform hover:scale-105 animate-bounce-gentle"
-                      >
-                        🚀 Get Started
-                      </Button>
-                    )}
-                  </div>
-                ))}
+                  {slide.visual === "coin-drop" && (
+                    <div className="relative">
+                      {/* Coin dropping animation */}
+                      <div className="mb-4 relative">
+                        <div className="w-8 h-8 bg-stashbox-yellow rounded-full animate-bounce-gentle mx-auto mb-4"></div>
+                        <div className="flex justify-center">
+                          <div className="w-3 h-16 bg-gradient-to-b from-stashbox-yellow/50 to-transparent rounded-full"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Large Stashie jar */}
+                      <div className="relative">
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Stashie" 
+                          className="w-32 h-32 mx-auto"
+                        />
+                        
+                        {/* Progress bar */}
+                        <div className="w-40 h-3 bg-stashbox-cream rounded-full mt-4 mx-auto overflow-hidden">
+                          <div className="w-3/4 h-full bg-stashbox-mint rounded-full animate-fluid-fill"></div>
+                        </div>
+                        
+                        {/* Return percentage */}
+                        <div className="mt-3 text-xl font-bold text-stashbox-text">+6.5% APY</div>
+                      </div>
+                    </div>
+                  )}
+
+                  {slide.visual === "streaks-badges" && (
+                    <div className="relative">
+                      {/* Streak flame */}
+                      <div className="mb-6 relative">
+                        <div className="text-6xl animate-bounce-gentle">🔥</div>
+                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-stashbox-orange rounded-full flex items-center justify-center text-white font-bold text-sm">7</div>
+                      </div>
+                      
+                      {/* Celebrating Stashie */}
+                      <div className="relative">
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Celebrating Stashie" 
+                          className="w-24 h-24 mx-auto animate-sparkle"
+                        />
+                        
+                        {/* Badge */}
+                        <div className="absolute -top-4 -right-4 w-12 h-12 bg-stashbox-yellow rounded-full flex items-center justify-center text-2xl animate-bounce-gentle">
+                          🏆
+                        </div>
+                      </div>
+                      
+                      {/* Confetti */}
+                      <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute top-4 left-8 text-2xl animate-sparkle">✨</div>
+                        <div className="absolute top-8 right-12 text-2xl animate-sparkle" style={{ animationDelay: '0.3s' }}>🎉</div>
+                        <div className="absolute bottom-16 left-12 text-2xl animate-sparkle" style={{ animationDelay: '0.6s' }}>⭐</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Text Content */}
+                <div className="space-y-4 max-w-sm">
+                  <h2 className="text-2xl font-bold text-stashbox-text">
+                    {slide.title}
+                  </h2>
+                  <p className="text-stashbox-text/70 text-base leading-relaxed">
+                    {slide.description}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            {currentSlide > 0 && (
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm p-2 rounded-full transition-all duration-200 hover:bg-white/30"
-              >
-                <ChevronLeft className="w-6 h-6 text-stashbox-text" />
-              </button>
-            )}
-
-            {currentSlide < slides.length - 1 && (
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm p-2 rounded-full transition-all duration-200 hover:bg-white/30"
-              >
-                <ChevronRight className="w-6 h-6 text-stashbox-text" />
-              </button>
-            )}
-          </div>
-
-          {/* Slide Indicators */}
-          <div className="flex justify-center space-x-2 mt-6">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                  currentSlide === index 
-                    ? 'bg-stashbox-text scale-125' 
-                    : 'bg-stashbox-text/30 hover:bg-stashbox-text/50'
-                }`}
-              />
             ))}
           </div>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="flex justify-center space-x-2 mb-6">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                currentSlide === index 
+                  ? 'bg-stashbox-text w-6' 
+                  : 'bg-stashbox-text/30'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Static CTA Button */}
+        <div className="px-6 pb-8">
+          <Button
+            onClick={handleGetStarted}
+            className="w-full bg-stashbox-mint text-stashbox-text hover:bg-stashbox-mint/90 font-bold py-4 px-8 rounded-stashbox text-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-3"
+          >
+            <img 
+              src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+              alt="Stashie" 
+              className="w-6 h-6"
+            />
+            <span>Get Started</span>
+          </Button>
         </div>
       </div>
     </div>
