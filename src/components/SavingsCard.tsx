@@ -85,12 +85,9 @@ const SavingsCard = ({
 
         {/* Simplified vault info */}
         {!isGoalJar && (
-          <div className="space-y-1">
+          <div>
             <p className={`text-stashbox-text/80 ${compact ? 'text-xs' : 'text-sm'}`}>
               ${totalDeposited.toFixed(0)} saved
-            </p>
-            <p className={`text-stashbox-text/80 ${compact ? 'text-xs' : 'text-sm'}`}>
-              Fixed {title === "QuickSave" ? "4.5%" : title === "SafeStack" ? "6.5%" : title === "GrowFund" ? "8.0%" : "2.5%"} APY
             </p>
           </div>
         )}
