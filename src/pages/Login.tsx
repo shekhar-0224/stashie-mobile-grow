@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button";
 const Login = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { login, ready, authenticated } = usePrivy();
+  const privyHook = usePrivy();
+  console.log("Privy hook result:", privyHook);
+  const { login, ready, authenticated } = privyHook || {};
+  console.log("Destructured values:", { login, ready, authenticated });
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
