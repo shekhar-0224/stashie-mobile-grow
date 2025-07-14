@@ -105,7 +105,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px] glass-modal border-none rounded-stashbox animate-slide-up">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-stashbox-text-modal flex items-center space-x-2">
+          <DialogTitle className="text-xl font-semibold text-white flex items-center space-x-2">
             <img 
               src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
               alt="Stashie" 
@@ -118,7 +118,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
         <div className="space-y-6 py-4">
           {type === "custom" && (
             <div className="space-y-2">
-              <Label htmlFor="goalName" className="text-sm font-medium text-stashbox-text-modal">
+              <Label htmlFor="goalName" className="text-sm font-medium text-white">
                 Goal Name
               </Label>
               <Input
@@ -126,13 +126,13 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 placeholder="e.g., PS5"
                 value={goalName}
                 onChange={(e) => setGoalName(e.target.value)}
-                className="rounded-stashbox border-gray-200 bg-gray-50 text-gray-500 placeholder:text-gray-300"
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400"
               />
             </div>
           )}
           
           <div className="space-y-2">
-            <Label htmlFor="amount" className="text-sm font-medium text-stashbox-text-modal">
+            <Label htmlFor="amount" className="text-sm font-medium text-white">
               {type === "custom" ? "Target Amount ($)" : "Enter Amount ($)"}
             </Label>
             <Input
@@ -140,12 +140,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               placeholder={config.placeholder}
               value={type === "custom" ? targetAmount : amount}
               onChange={(e) => type === "custom" ? setTargetAmount(e.target.value) : setAmount(e.target.value)}
-              className="rounded-stashbox border-gray-200 bg-gray-50 text-gray-500 placeholder:text-gray-300"
+              className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400"
             />
           </div>
           
           <div className="space-y-4">
-            <Label className="text-sm font-medium text-stashbox-text-modal">
+            <Label className="text-sm font-medium text-white">
               Duration ({duration} days)
             </Label>
             
@@ -167,7 +167,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                       alt="Duration option" 
                       className={`w-8 h-8 ${duration === option ? 'animate-sparkle' : ''}`}
                     />
-                    <span className="text-xs font-medium text-gray-500">
+                    <span className="text-xs font-medium text-gray-800">
                       {option}d
                     </span>
                   </button>
@@ -205,7 +205,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           </Button>
           
           {config.penalty && (
-            <p className="text-xs text-stashbox-text-light text-center">
+            <p className="text-xs text-gray-300 text-center">
               ⚠️ Early withdrawal penalty: {config.penalty}
             </p>
           )}

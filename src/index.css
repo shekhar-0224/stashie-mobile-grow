@@ -42,8 +42,9 @@ All colors MUST be HSL.
     /* Stashbox Design System */
     --stashbox-cream: 30 50% 97%;
     --stashbox-text: 0 0% 20%;
-    --stashbox-text-light: 0 0% 60%;
-    --stashbox-text-modal: 0 0% 50%;
+    --stashbox-text-light: 0 0% 70%;
+    --stashbox-text-modal: 0 0% 85%;
+    --stashbox-label-modal: 0 0% 90%;
     --stashbox-mint: 154 38% 86%;
     --stashbox-orange: 30 96% 70%;
     --stashbox-yellow: 48 96% 76%;
@@ -125,6 +126,7 @@ All colors MUST be HSL.
   .text-stashbox-text { color: hsl(var(--stashbox-text)); }
   .text-stashbox-text-light { color: hsl(var(--stashbox-text-light)); }
   .text-stashbox-text-modal { color: hsl(var(--stashbox-text-modal)); }
+  .text-stashbox-label-modal { color: hsl(var(--stashbox-label-modal)); }
   .border-stashbox-text { border-color: hsl(var(--stashbox-text)); }
   .rounded-stashbox { border-radius: 24px; }
   
