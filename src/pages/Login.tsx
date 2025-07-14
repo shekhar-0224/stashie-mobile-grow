@@ -39,61 +39,61 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-stashbox-cream flex flex-col">
-      <div className="max-w-md mx-auto flex-1 flex flex-col">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         
         {/* Header */}
-        <div className="pt-12 pb-6 text-center">
-          <div className="flex items-center justify-center space-x-3">
+        <div className="pt-8 pb-4 text-center px-6">
+          <div className="flex items-center justify-center space-x-2 mb-2">
             <img 
               src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
               alt="Stashie" 
-              className="w-10 h-10"
+              className="w-8 h-8"
             />
-            <h1 className="text-2xl font-bold text-stashbox-text">Stashbox</h1>
+            <h1 className="text-xl font-bold text-stashbox-text">Stashbox</h1>
           </div>
-          <p className="text-lg text-stashbox-text mt-2 font-medium">Save in 3 easy steps</p>
+          <p className="text-sm text-stashbox-text/70 font-medium">Save in 3 easy steps</p>
         </div>
 
-        {/* Main Content Area */}
-        <div className="flex-1 px-6 overflow-hidden">
+        {/* Main Content Area - Full Screen Slides */}
+        <div className="flex-1 overflow-hidden">
           <div 
             className="flex transition-transform duration-700 ease-out h-full"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
             {slides.map((slide, index) => (
-              <div key={index} className="w-full flex-shrink-0 flex flex-col items-center justify-center text-center px-4">
+              <div key={index} className="w-full flex-shrink-0 flex flex-col h-full px-6">
                 
-                {/* Large Visual Area */}
-                <div className="w-full h-80 flex items-center justify-center mb-8">
+                {/* Large Visual Area - Takes most of the screen */}
+                <div className="flex-1 flex items-center justify-center py-8">
                   {slide.visual === "jar-selection" && (
-                    <div className="relative">
+                    <div className="text-center">
                       {/* Main Stashie character */}
-                      <div className="mb-6">
+                      <div className="mb-8">
                         <img 
                           src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
                           alt="Stashie" 
-                          className="w-24 h-24 mx-auto animate-bounce-gentle"
+                          className="w-20 h-20 mx-auto animate-bounce-gentle"
                         />
                       </div>
                       
-                      {/* Three jars */}
-                      <div className="flex justify-center space-x-4">
+                      {/* Three jars - Mobile optimized */}
+                      <div className="flex justify-center space-x-6">
                         <div className="text-center">
-                          <div className="w-16 h-20 bg-stashbox-blue rounded-stashbox mb-2 flex items-end justify-center relative overflow-hidden">
-                            <div className="w-full h-1/2 bg-stashbox-mint rounded-b-stashbox"></div>
-                            <span className="absolute top-2 text-xs font-bold text-stashbox-text">30d</span>
+                          <div className="w-12 h-16 bg-stashbox-blue rounded-2xl mb-2 flex items-end justify-center relative overflow-hidden shadow-sm">
+                            <div className="w-full h-1/2 bg-stashbox-mint rounded-b-2xl transition-all duration-1000"></div>
+                            <span className="absolute top-1 text-xs font-bold text-stashbox-text">30d</span>
                           </div>
                         </div>
                         <div className="text-center">
-                          <div className="w-16 h-20 bg-stashbox-mint rounded-stashbox mb-2 flex items-end justify-center relative overflow-hidden">
-                            <div className="w-full h-3/4 bg-stashbox-orange rounded-b-stashbox"></div>
-                            <span className="absolute top-2 text-xs font-bold text-stashbox-text">90d</span>
+                          <div className="w-12 h-16 bg-stashbox-mint rounded-2xl mb-2 flex items-end justify-center relative overflow-hidden shadow-sm">
+                            <div className="w-full h-3/4 bg-stashbox-orange rounded-b-2xl transition-all duration-1000"></div>
+                            <span className="absolute top-1 text-xs font-bold text-stashbox-text">90d</span>
                           </div>
                         </div>
                         <div className="text-center">
-                          <div className="w-16 h-20 bg-stashbox-orange rounded-stashbox mb-2 flex items-end justify-center relative overflow-hidden">
-                            <div className="w-full h-1/4 bg-stashbox-yellow rounded-b-stashbox"></div>
-                            <span className="absolute top-2 text-xs font-bold text-stashbox-text">Goal</span>
+                          <div className="w-12 h-16 bg-stashbox-orange rounded-2xl mb-2 flex items-end justify-center relative overflow-hidden shadow-sm">
+                            <div className="w-full h-1/4 bg-stashbox-yellow rounded-b-2xl transition-all duration-1000"></div>
+                            <span className="absolute top-1 text-xs font-bold text-stashbox-text">Goal</span>
                           </div>
                         </div>
                       </div>
@@ -101,72 +101,72 @@ const Login = () => {
                   )}
 
                   {slide.visual === "coin-drop" && (
-                    <div className="relative">
+                    <div className="text-center">
                       {/* Coin dropping animation */}
-                      <div className="mb-4 relative">
-                        <div className="w-8 h-8 bg-stashbox-yellow rounded-full animate-bounce-gentle mx-auto mb-4"></div>
+                      <div className="mb-6">
+                        <div className="w-6 h-6 bg-stashbox-yellow rounded-full animate-bounce mx-auto mb-4 shadow-sm"></div>
                         <div className="flex justify-center">
-                          <div className="w-3 h-16 bg-gradient-to-b from-stashbox-yellow/50 to-transparent rounded-full"></div>
+                          <div className="w-1 h-12 bg-gradient-to-b from-stashbox-yellow/60 to-transparent rounded-full"></div>
                         </div>
                       </div>
                       
                       {/* Large Stashie jar */}
-                      <div className="relative">
+                      <div className="space-y-4">
                         <img 
                           src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
                           alt="Stashie" 
-                          className="w-32 h-32 mx-auto"
+                          className="w-24 h-24 mx-auto"
                         />
                         
+                        {/* Return percentage - More prominent */}
+                        <div className="text-2xl font-bold text-stashbox-text">+6.5% APY</div>
+                        
                         {/* Progress bar */}
-                        <div className="w-40 h-3 bg-stashbox-cream rounded-full mt-4 mx-auto overflow-hidden">
+                        <div className="w-32 h-2 bg-stashbox-cream/50 rounded-full mx-auto overflow-hidden">
                           <div className="w-3/4 h-full bg-stashbox-mint rounded-full animate-fluid-fill"></div>
                         </div>
-                        
-                        {/* Return percentage */}
-                        <div className="mt-3 text-xl font-bold text-stashbox-text">+6.5% APY</div>
                       </div>
                     </div>
                   )}
 
                   {slide.visual === "streaks-badges" && (
-                    <div className="relative">
+                    <div className="text-center">
                       {/* Streak flame */}
-                      <div className="mb-6 relative">
-                        <div className="text-6xl animate-bounce-gentle">🔥</div>
-                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-stashbox-orange rounded-full flex items-center justify-center text-white font-bold text-sm">7</div>
+                      <div className="mb-6 relative inline-block">
+                        <div className="text-5xl animate-bounce-gentle">🔥</div>
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-stashbox-orange rounded-full flex items-center justify-center text-white font-bold text-xs">7</div>
                       </div>
                       
                       {/* Celebrating Stashie */}
-                      <div className="relative">
+                      <div className="relative inline-block mb-4">
                         <img 
                           src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
                           alt="Celebrating Stashie" 
-                          className="w-24 h-24 mx-auto animate-sparkle"
+                          className="w-20 h-20 animate-sparkle"
                         />
                         
                         {/* Badge */}
-                        <div className="absolute -top-4 -right-4 w-12 h-12 bg-stashbox-yellow rounded-full flex items-center justify-center text-2xl animate-bounce-gentle">
+                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-stashbox-yellow rounded-full flex items-center justify-center text-lg animate-bounce-gentle">
                           🏆
                         </div>
                       </div>
                       
                       {/* Confetti */}
                       <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-4 left-8 text-2xl animate-sparkle">✨</div>
-                        <div className="absolute top-8 right-12 text-2xl animate-sparkle" style={{ animationDelay: '0.3s' }}>🎉</div>
-                        <div className="absolute bottom-16 left-12 text-2xl animate-sparkle" style={{ animationDelay: '0.6s' }}>⭐</div>
+                        <div className="absolute top-8 left-16 text-xl animate-sparkle">✨</div>
+                        <div className="absolute top-12 right-16 text-xl animate-sparkle" style={{ animationDelay: '0.3s' }}>🎉</div>
+                        <div className="absolute bottom-32 left-20 text-xl animate-sparkle" style={{ animationDelay: '0.6s' }}>⭐</div>
                       </div>
                     </div>
                   )}
                 </div>
 
-                {/* Text Content */}
-                <div className="space-y-4 max-w-sm">
-                  <h2 className="text-2xl font-bold text-stashbox-text">
+                {/* Text Content - Fixed at bottom */}
+                <div className="pb-6 text-center space-y-3">
+                  <h2 className="text-xl font-bold text-stashbox-text leading-tight">
                     {slide.title}
                   </h2>
-                  <p className="text-stashbox-text/70 text-base leading-relaxed">
+                  <p className="text-stashbox-text/70 text-sm leading-relaxed px-4">
                     {slide.description}
                   </p>
                 </div>
@@ -176,30 +176,30 @@ const Login = () => {
         </div>
 
         {/* Slide Indicators */}
-        <div className="flex justify-center space-x-2 mb-6">
+        <div className="flex justify-center space-x-2 pb-4">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 currentSlide === index 
                   ? 'bg-stashbox-text w-6' 
-                  : 'bg-stashbox-text/30'
+                  : 'bg-stashbox-text/30 w-1.5'
               }`}
             />
           ))}
         </div>
 
         {/* Static CTA Button */}
-        <div className="px-6 pb-8">
+        <div className="px-6 pb-6">
           <Button
             onClick={handleGetStarted}
-            className="w-full bg-stashbox-mint text-stashbox-text hover:bg-stashbox-mint/90 font-bold py-4 px-8 rounded-stashbox text-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-3"
+            className="w-full bg-stashbox-mint text-stashbox-text hover:bg-stashbox-mint/90 font-bold py-4 rounded-3xl text-base transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center space-x-2 shadow-sm"
           >
             <img 
               src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
               alt="Stashie" 
-              className="w-6 h-6"
+              className="w-5 h-5"
             />
             <span>Get Started</span>
           </Button>
