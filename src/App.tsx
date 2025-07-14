@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrivyProvider } from '@privy-io/react-auth';
 import Login from "./pages/Login";
 import Index from "./pages/Index";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import "./lib/i18n";
 
@@ -70,6 +71,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Index />} />
+              <Route path="/profile" element={<Profile />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

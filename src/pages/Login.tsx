@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { usePrivy } from '@privy-io/react-auth';
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Mail, Phone } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -52,6 +54,49 @@ const Login = () => {
       login();
     }
   };
+
+  const renderLoginModal = () => (
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white/95 backdrop-blur-md rounded-3xl p-8 w-full max-w-sm mx-auto shadow-2xl border border-white/20">
+        {/* Stashie character */}
+        <div className="text-center mb-6">
+          <img 
+            src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+            alt="Stashie" 
+            className="w-20 h-20 mx-auto mb-4 animate-bounce-gentle"
+          />
+          <h2 className="text-2xl font-bold text-stashbox-text mb-2">Welcome to Stashbox</h2>
+          <p className="text-stashbox-text/70 text-sm">Start saving, earning, and streaking.</p>
+        </div>
+
+        {/* Input fields */}
+        <div className="space-y-4 mb-6">
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-stashbox-text/40 w-5 h-5" />
+            <Input 
+              placeholder="Email" 
+              className="pl-12 py-4 rounded-2xl border-2 border-stashbox-text/10 bg-white/50 backdrop-blur-sm focus:border-stashbox-orange/50 text-stashbox-text placeholder:text-stashbox-text/40"
+            />
+          </div>
+          <div className="relative">
+            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-stashbox-text/40 w-5 h-5" />
+            <Input 
+              placeholder="Phone number" 
+              className="pl-12 py-4 rounded-2xl border-2 border-stashbox-text/10 bg-white/50 backdrop-blur-sm focus:border-stashbox-orange/50 text-stashbox-text placeholder:text-stashbox-text/40"
+            />
+          </div>
+        </div>
+
+        {/* Continue button */}
+        <Button
+          onClick={handleGetStarted}
+          className="w-full bg-stashbox-orange text-white hover:bg-stashbox-orange/90 font-bold py-4 rounded-2xl text-base transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+        >
+          Continue
+        </Button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-stashbox-cream flex flex-col">

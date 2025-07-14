@@ -2,10 +2,12 @@
 import { useState } from "react";
 import { User, Flame } from "lucide-react";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 import { LanguageSelector } from './LanguageSelector';
 
 const Header = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [user] = useState({
     name: "Emma",
     totalSaved: "1,200"
@@ -47,7 +49,10 @@ const Header = () => {
           <LanguageSelector />
           
           {/* Profile */}
-          <div className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center">
+          <div 
+            className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center cursor-pointer hover:bg-stashbox-orange/80 transition-colors"
+            onClick={() => navigate("/profile")}
+          >
             <User className="w-5 h-5 text-stashbox-text" />
           </div>
         </div>
