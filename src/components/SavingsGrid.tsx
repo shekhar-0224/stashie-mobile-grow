@@ -53,6 +53,8 @@ const SavingsGrid = () => {
             progress={45}
             progressColor="hsl(var(--stashbox-mint))"
             compact={true}
+            totalDeposited={124.50}
+            interestEarned={2.34}
           />
           
           <SavingsCard
@@ -65,6 +67,8 @@ const SavingsGrid = () => {
             progress={72}
             progressColor="hsl(var(--stashbox-orange))"
             compact={true}
+            totalDeposited={485.75}
+            interestEarned={12.67}
           />
           
           <SavingsCard
@@ -77,6 +81,8 @@ const SavingsGrid = () => {
             progress={28}
             progressColor="hsl(var(--stashbox-yellow))"
             compact={true}
+            totalDeposited={892.25}
+            interestEarned={45.89}
           />
           
           <SavingsCard
@@ -89,6 +95,8 @@ const SavingsGrid = () => {
             progress={15}
             progressColor="hsl(var(--stashbox-mint))"
             compact={true}
+            totalDeposited={67.89}
+            interestEarned={0.89}
           />
         </div>
       </div>

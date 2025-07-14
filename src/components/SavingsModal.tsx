@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { SAVINGS_JARS } from "@/constants";
 
 interface SavingsModalProps {
   isOpen: boolean;
@@ -22,49 +23,46 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
       case "quick":
         return {
           title: "Start QuickSave",
-          minDuration: 30,
-          maxDuration: 365,
-          defaultDuration: 30,
-          penalty: "1%",
+          ...SAVINGS_JARS.QUICK,
           placeholder: "e.g., 25"
         };
       case "safe":
         return {
           title: "Start SafeStack",
-          minDuration: 60,
-          maxDuration: 365,
-          defaultDuration: 90,
-          penalty: "2%",
+          ...SAVINGS_JARS.SAFE,
           placeholder: "e.g., 50"
         };
       case "grow":
         return {
           title: "Start GrowFund",
-          minDuration: 180,
-          maxDuration: 730,
-          defaultDuration: 180,
-          penalty: "3%",
+          ...SAVINGS_JARS.GROW,
           placeholder: "e.g., 100"
         };
       case "custom":
         return {
           title: "Create Goal Jar",
-          minDuration: 30,
-          maxDuration: 365,
-          defaultDuration: 90,
-          penalty: null,
+          ...SAVINGS_JARS.CUSTOM,
           placeholder: "e.g., 500"
         };
       default:
         return {
           title: "Start Saving",
-          minDuration: 30,
-          maxDuration: 365,
-          defaultDuration: 30,
-          penalty: "1%",
+          ...SAVINGS_JARS.QUICK,
           placeholder: "e.g., 25"
         };
     }
+  };
+
+  const calculateEstimatedReturn = () => {
+    const inputAmount = parseFloat(amount);
+    if (isNaN(inputAmount) || inputAmount <= 0) return 0;
+    
+    const principal = inputAmount;
+    const rate = config.apy / 100;
+    const time = duration / 365;
+    
+    const estimatedReturn = principal * (1 + rate * time);
+    return estimatedReturn;
   };
 
   const config = getModalConfig();
@@ -196,6 +194,28 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </div>
             </div>
           </div>
+
+          {/* Return Estimator Card */}
+          {type !== "custom" && amount && (
+            <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-4 space-y-3">
+              <div className="flex items-center space-x-2">
+                <span className="text-lg">📈</span>
+                <h4 className="text-sm font-medium text-white">Estimated Return</h4>
+              </div>
+              
+              <p className="text-xs text-white/80">
+                Investing ${amount} for {duration} days at {config.apy}% APY
+              </p>
+              
+              <div className="text-lg font-semibold text-stashbox-mint">
+                You'll get ~${calculateEstimatedReturn().toFixed(2)}
+              </div>
+              
+              <p className="text-xs text-white/60">
+                Returns are fixed. Early withdrawal incurs penalty of {config.penalty}.
+              </p>
+            </div>
+          )}
           
           <Button
             onClick={handleDeposit}

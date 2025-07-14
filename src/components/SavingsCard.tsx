@@ -14,6 +14,8 @@ interface SavingsCardProps {
   progressColor?: string;
   isGoalJar?: boolean;
   compact?: boolean;
+  totalDeposited?: number;
+  interestEarned?: number;
 }
 
 const SavingsCard = ({
@@ -26,7 +28,9 @@ const SavingsCard = ({
   progress,
   progressColor,
   isGoalJar = false,
-  compact = false
+  compact = false,
+  totalDeposited = 0,
+  interestEarned = 0
 }: SavingsCardProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -78,6 +82,18 @@ const SavingsCard = ({
             {isGoalJar ? caption : caption}
           </p>
         </div>
+
+        {/* Deposited & Earned Amount for vault cards */}
+        {!isGoalJar && (
+          <div className="space-y-1">
+            <p className="text-xs text-stashbox-text/70">
+              Saved so far: ${totalDeposited.toFixed(2)}
+            </p>
+            <p className="text-xs text-stashbox-text/70">
+              Interest earned: ${interestEarned.toFixed(2)}
+            </p>
+          </div>
+        )}
         
         {/* Progress bar for vault cards */}
         {!isGoalJar && progress !== undefined && (
