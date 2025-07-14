@@ -1,8 +1,11 @@
 
 import { useState } from "react";
 import { User, Flame } from "lucide-react";
+import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from './LanguageSelector';
 
 const Header = () => {
+  const { t } = useTranslation();
   const [user] = useState({
     name: "Emma",
     totalSaved: "1,200"
@@ -22,7 +25,7 @@ const Header = () => {
               src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
               alt="Stashie Mascot" 
               className="w-8 h-8 animate-bounce-gentle cursor-pointer hover:animate-sparkle"
-              title="Stashie watches your jars!"
+              title={t('header.mascotTitle')}
               onClick={() => {
                 // Add mascot reaction animation
                 if (navigator.vibrate) {
@@ -31,7 +34,7 @@ const Header = () => {
               }}
             />
           </div>
-          <div className="text-2xl font-bold text-stashbox-text">Stashbox</div>
+          <div className="text-2xl font-bold text-stashbox-text">{t('header.appName')}</div>
         </div>
         <div className="flex items-center space-x-3">
           {/* Streak indicator */}
@@ -39,6 +42,9 @@ const Header = () => {
             <Flame className="w-4 h-4 text-stashbox-orange animate-bounce-gentle" />
             <span className="text-sm font-semibold text-stashbox-text">{streak.streakDays}</span>
           </div>
+          
+          {/* Language Selector */}
+          <LanguageSelector />
           
           {/* Profile */}
           <div className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center">
@@ -49,16 +55,16 @@ const Header = () => {
       
       <div className="space-y-2">
         <h1 className="text-2xl font-bold text-stashbox-text leading-tight">
-          Hey {user.name}, <br />
-          let's grow <br />
-          your stash!
+          {t('header.greeting', { name: user.name })} <br />
+          {t('header.subtitle')} <br />
+          {t('header.subtitle2')}
         </h1>
         
         <div className="mt-6 p-4 bg-stashbox-mint rounded-stashbox">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-stashbox-text/80 mb-1">
-                Your total saved so far:
+                {t('header.totalSaved')}
               </p>
               <p className="text-3xl font-bold text-stashbox-text">
                 ${user.totalSaved}
@@ -69,7 +75,7 @@ const Header = () => {
                 src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
                 alt="Stashie celebrating your savings" 
                 className="w-16 h-16 animate-bounce-gentle hover:animate-sparkle cursor-pointer"
-                title="Click me for a surprise!"
+                title={t('header.celebratingTitle')}
                 onClick={() => {
                   // Trigger sparkle animation and haptic feedback
                   if (navigator.vibrate) {

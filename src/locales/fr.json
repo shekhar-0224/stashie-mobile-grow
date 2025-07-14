@@ -1,0 +1,43 @@
+{
+  "common": {
+    "language": "Langue",
+    "english": "Anglais",
+    "spanish": "Espagnol",
+    "french": "Français",
+    "german": "Allemand"
+  },
+  "header": {
+    "appName": "Stashbox",
+    "greeting": "Salut {{name}},",
+    "subtitle": "faisons grandir",
+    "subtitle2": "votre épargne!",
+    "totalSaved": "Votre total épargné jusqu'à présent:",
+    "mascotTitle": "Stashie surveille vos bocaux!",
+    "celebratingTitle": "Cliquez-moi pour une surprise!"
+  },
+  "savings": {
+    "myJars": "Mes Bocaux",
+    "addJar": "Ajouter Bocal",
+    "customJar": "Bocal Personnalisé",
+    "vacationFund": "Fonds de Vacances",
+    "emergencyFund": "Fonds d'Urgence",
+    "newCarFund": "Fonds pour Nouvelle Voiture",
+    "dreamHomeFund": "Fonds pour Maison de Rêve",
+    "createJar": "Créer Bocal",
+    "jarName": "Nom du Bocal",
+    "targetAmount": "Montant Cible",
+    "targetDate": "Date Cible",
+    "riskLevel": "Niveau de Risque",
+    "conservative": "Conservateur",
+    "moderate": "Modéré",
+    "aggressive": "Agressif",
+    "expectedReturn": "Rendement Attendu",
+    "apy": "TPA"
+  },
+  "login": {
+    "welcome": "Bienvenue sur Stashbox",
+    "subtitle": "Votre compagnon d'épargne amical",
+    "getStarted": "Commencer",
+    "signIn": "Se Connecter"
+  }
+}

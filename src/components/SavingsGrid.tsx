@@ -3,8 +3,10 @@ import { useState } from "react";
 import SavingsCard from "./SavingsCard";
 import SavingsModal from "./SavingsModal";
 import { toast } from "@/hooks/use-toast";
+import { useTranslation } from 'react-i18next';
 
 const SavingsGrid = () => {
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState<"quick" | "safe" | "grow" | "custom" | null>(null);
 
   const handleQuickSave = () => {
@@ -32,8 +34,8 @@ const SavingsGrid = () => {
       <div className="px-6 py-4 space-y-4">
         {/* Custom Goal Jar - moved to top */}
         <SavingsCard
-          title="🎯 Goal Jar (Custom)"
-          subtitle="Custom Goal Jar"
+          title={`🎯 ${t('savings.customJar')}`}
+          subtitle={t('savings.customJar')}
           caption="Create custom goal like 'PS5', set target"
           background="hsl(var(--stashbox-purple))"
           onAction={handleCustomJar}

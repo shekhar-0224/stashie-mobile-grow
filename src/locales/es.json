@@ -1,0 +1,43 @@
+{
+  "common": {
+    "language": "Idioma",
+    "english": "Inglés",
+    "spanish": "Español",
+    "french": "Francés", 
+    "german": "Alemán"
+  },
+  "header": {
+    "appName": "Stashbox",
+    "greeting": "Hola {{name}},",
+    "subtitle": "hagamos crecer",
+    "subtitle2": "tu reserva!",
+    "totalSaved": "Tu total ahorrado hasta ahora:",
+    "mascotTitle": "¡Stashie vigila tus frascos!",
+    "celebratingTitle": "¡Haz clic para una sorpresa!"
+  },
+  "savings": {
+    "myJars": "Mis Frascos",
+    "addJar": "Agregar Frasco",
+    "customJar": "Frasco Personalizado",
+    "vacationFund": "Fondo de Vacaciones",
+    "emergencyFund": "Fondo de Emergencia",
+    "newCarFund": "Fondo para Auto Nuevo",
+    "dreamHomeFund": "Fondo para Casa de Ensueño",
+    "createJar": "Crear Frasco",
+    "jarName": "Nombre del Frasco",
+    "targetAmount": "Cantidad Objetivo",
+    "targetDate": "Fecha Objetivo",
+    "riskLevel": "Nivel de Riesgo",
+    "conservative": "Conservador",
+    "moderate": "Moderado",
+    "aggressive": "Agresivo",
+    "expectedReturn": "Retorno Esperado",
+    "apy": "TAE"
+  },
+  "login": {
+    "welcome": "Bienvenido a Stashbox",
+    "subtitle": "Tu compañero amigable de ahorros",
+    "getStarted": "Comenzar",
+    "signIn": "Iniciar Sesión"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "common": {
+    "language": "Sprache",
+    "english": "Englisch",
+    "spanish": "Spanisch",
+    "french": "Französisch",
+    "german": "Deutsch"
+  },
+  "header": {
+    "appName": "Stashbox",
+    "greeting": "Hallo {{name}},",
+    "subtitle": "lass uns dein",
+    "subtitle2": "Erspartes wachsen!",
+    "totalSaved": "Dein bisher gespartes Gesamtguthaben:",
+    "mascotTitle": "Stashie bewacht deine Gläser!",
+    "celebratingTitle": "Klick mich für eine Überraschung!"
+  },
+  "savings": {
+    "myJars": "Meine Gläser",
+    "addJar": "Glas Hinzufügen",
+    "customJar": "Benutzerdefiniertes Glas",
+    "vacationFund": "Urlaubsfonds",
+    "emergencyFund": "Notfallfonds",
+    "newCarFund": "Neuer Auto Fonds",
+    "dreamHomeFund": "Traumhaus Fonds",
+    "createJar": "Glas Erstellen",
+    "jarName": "Glasname",
+    "targetAmount": "Zielbetrag",
+    "targetDate": "Zieldatum",
+    "riskLevel": "Risikolevel",
+    "conservative": "Konservativ",
+    "moderate": "Moderat",
+    "aggressive": "Aggressiv",
+    "expectedReturn": "Erwartete Rendite",
+    "apy": "JAZ"
+  },
+  "login": {
+    "welcome": "Willkommen bei Stashbox",
+    "subtitle": "Ihr freundlicher Sparpartner",
+    "getStarted": "Loslegen",
+    "signIn": "Anmelden"
+  }
+}

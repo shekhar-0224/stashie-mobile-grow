@@ -1,0 +1,43 @@
+{
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "spanish": "Spanish", 
+    "french": "French",
+    "german": "German"
+  },
+  "header": {
+    "appName": "Stashbox",
+    "greeting": "Hey {{name}},",
+    "subtitle": "let's grow",
+    "subtitle2": "your stash!",
+    "totalSaved": "Your total saved so far:",
+    "mascotTitle": "Stashie watches your jars!",
+    "celebratingTitle": "Click me for a surprise!"
+  },
+  "savings": {
+    "myJars": "My Jars",
+    "addJar": "Add Jar",
+    "customJar": "Custom Jar",
+    "vacationFund": "Vacation Fund",
+    "emergencyFund": "Emergency Fund", 
+    "newCarFund": "New Car Fund",
+    "dreamHomeFund": "Dream Home Fund",
+    "createJar": "Create Jar",
+    "jarName": "Jar Name",
+    "targetAmount": "Target Amount",
+    "targetDate": "Target Date",
+    "riskLevel": "Risk Level",
+    "conservative": "Conservative",
+    "moderate": "Moderate", 
+    "aggressive": "Aggressive",
+    "expectedReturn": "Expected Return",
+    "apy": "APY"
+  },
+  "login": {
+    "welcome": "Welcome to Stashbox",
+    "subtitle": "Your friendly savings companion",
+    "getStarted": "Get Started",
+    "signIn": "Sign In"
+  }
+}
