@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { usePrivy } from '@privy-io/react-auth';
 import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { login, ready, authenticated } = usePrivy();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -35,8 +37,17 @@ const Login = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  // Redirect to home if already authenticated
+  useEffect(() => {
+    if (ready && authenticated) {
+      navigate("/home");
+    }
+  }, [ready, authenticated, navigate]);
+
   const handleGetStarted = () => {
-    navigate("/home");
+    if (ready) {
+      login();
+    }
   };
 
   return (
