@@ -15,9 +15,15 @@ const Header = () => {
           <div className="relative">
             <img 
               src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
-              alt="Stashie, your savings buddy!" 
-              className="w-8 h-8 animate-bounce-gentle"
-              title="This is Stashie, your savings buddy!"
+              alt="Stashie Mascot" 
+              className="w-8 h-8 animate-bounce-gentle cursor-pointer hover:animate-sparkle"
+              title="Stashie watches your jars!"
+              onClick={() => {
+                // Add mascot reaction animation
+                if (navigator.vibrate) {
+                  navigator.vibrate(100);
+                }
+              }}
             />
           </div>
           <div className="text-2xl font-bold text-stashbox-text">Stashbox</div>
@@ -47,10 +53,17 @@ const Header = () => {
             <div className="relative">
               <img 
                 src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
-                alt="Stashie doing a little dance" 
-                className="w-16 h-16 animate-bounce-gentle"
+                alt="Stashie celebrating your savings" 
+                className="w-16 h-16 animate-bounce-gentle hover:animate-sparkle cursor-pointer"
+                title="Click me for a surprise!"
+                onClick={() => {
+                  // Trigger sparkle animation and haptic feedback
+                  if (navigator.vibrate) {
+                    navigator.vibrate([50, 100, 50]);
+                  }
+                }}
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-stashbox-orange rounded-full"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-stashbox-orange rounded-full animate-pulse"></div>
             </div>
           </div>
         </div>

@@ -119,10 +119,46 @@ export default {
 				},
 				'sparkle': {
 					'0%, 100%': {
-						transform: 'scale(1) rotate(0deg)'
+						transform: 'scale(1) rotate(0deg)',
+						opacity: '0.7'
 					},
 					'50%': {
-						transform: 'scale(1.1) rotate(180deg)'
+						transform: 'scale(1.3) rotate(180deg)',
+						opacity: '1'
+					}
+				},
+				'confetti': {
+					'0%': {
+						transform: 'scale(0) rotate(0deg)',
+						opacity: '0'
+					},
+					'50%': {
+						transform: 'scale(1.2) rotate(180deg)',
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'scale(0) rotate(360deg)',
+						opacity: '0'
+					}
+				},
+				'fluid-fill': {
+					'0%': {
+						transform: 'translateX(-100%)',
+						opacity: '0.5'
+					},
+					'100%': {
+						transform: 'translateX(0%)',
+						opacity: '1'
+					}
+				},
+				'jar-fill': {
+					'0%': {
+						height: '0%',
+						opacity: '0.7'
+					},
+					'100%': {
+						height: '100%',
+						opacity: '1'
 					}
 				}
 			},
@@ -131,7 +167,10 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
 				'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
-				'sparkle': 'sparkle 1.5s ease-in-out infinite'
+				'sparkle': 'sparkle 1.5s ease-in-out infinite',
+				'confetti': 'confetti 1s ease-out',
+				'fluid-fill': 'fluid-fill 0.8s ease-out',
+				'jar-fill': 'jar-fill 1.2s ease-out'
 			}
 		}
 	},
