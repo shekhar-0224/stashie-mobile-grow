@@ -1,25 +1,27 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      title: "Pick a Jar",
-      description: "Choose how you want to save — short-term, long-term, or a custom goal.",
+      title: t('login.slide1Title'),
+      description: t('login.slide1Description'),
       visual: "jar-selection"
     },
     {
-      title: "Save & Earn",
-      description: "Add money anytime, earn fixed returns, and grow your stash.",
+      title: t('login.slide2Title'),
+      description: t('login.slide2Description'),
       visual: "coin-drop"
     },
     {
-      title: "Hit Streaks & Unlock Badges",
-      description: "Save daily, hit milestones, and unlock rewards with Genie Mode.",
+      title: t('login.slide3Title'),
+      description: t('login.slide3Description'),
       visual: "streaks-badges"
     }
   ];
@@ -49,9 +51,9 @@ const Login = () => {
               alt="Stashie" 
               className="w-8 h-8"
             />
-            <h1 className="text-xl font-bold text-stashbox-text">Stashbox</h1>
+            <h1 className="text-xl font-bold text-stashbox-text">{t('header.appName')}</h1>
           </div>
-          <p className="text-sm text-stashbox-text/70 font-medium">Save in 3 easy steps</p>
+          <p className="text-sm text-stashbox-text/70 font-medium">{t('login.title')}</p>
         </div>
 
         {/* Main Content Area - Full Screen Slides */}
@@ -247,7 +249,7 @@ const Login = () => {
               alt="Stashie" 
               className="w-5 h-5"
             />
-            <span>Get Started</span>
+            <span>{t('login.getStarted')}</span>
           </Button>
         </div>
       </div>

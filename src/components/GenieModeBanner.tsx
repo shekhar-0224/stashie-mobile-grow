@@ -1,7 +1,9 @@
 
 import { Sparkles } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const GenieModeBanner = () => {
+  const { t } = useTranslation();
   const handleClick = () => {
     console.log("Opening Genie settings...");
     // This would open the Genie settings modal/page
@@ -20,7 +22,7 @@ const GenieModeBanner = () => {
         </div>
         <div className="flex-1">
           <p className="text-sm text-stashbox-text leading-relaxed">
-            <span className="font-semibold">Genie Mode active:</span> Watching your spend to suggest round-ups!
+            <span className="font-semibold">{t('genie.modeActive')}</span> {t('genie.watchingSpend')}
           </p>
         </div>
         <div className="text-stashbox-text/60">

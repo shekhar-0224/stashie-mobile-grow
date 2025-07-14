@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { useTranslation } from 'react-i18next';
 import { useState } from "react";
 
 interface SavingsCardProps {
@@ -32,6 +33,7 @@ const SavingsCard = ({
   totalDeposited = 0,
   interestEarned = 0
 }: SavingsCardProps) => {
+  const { t } = useTranslation();
   const [isPressed, setIsPressed] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -87,7 +89,7 @@ const SavingsCard = ({
         {!isGoalJar && (
           <div>
             <p className={`text-stashbox-text/80 ${compact ? 'text-xs' : 'text-sm'}`}>
-              ${totalDeposited.toFixed(0)} saved
+              ${totalDeposited.toFixed(0)} {t('savings.saved')}
             </p>
           </div>
         )}
@@ -96,7 +98,7 @@ const SavingsCard = ({
         {!isGoalJar && progress !== undefined && (
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-stashbox-text/60">
-              <span>Progress</span>
+              <span>{t('savings.progress')}</span>
               <span>{progress}%</span>
             </div>
             <div className="w-full bg-white/30 rounded-full h-2">
@@ -117,7 +119,7 @@ const SavingsCard = ({
             isPressed ? 'scale-95' : ''
           }`}
         >
-          {isGoalJar ? 'Create Goal' : 'Start Saving'}
+          {isGoalJar ? t('savings.createGoal') : t('savings.startSaving')}
         </Button>
       </div>
     </div>

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Flame } from "lucide-react";
 
 const StreakCard = () => {
+  const { t } = useTranslation();
   const [streak] = useState({
     streakDays: 5,
     nextBadgeAt: 7
@@ -15,7 +17,7 @@ const StreakCard = () => {
         <div className="flex items-center space-x-2">
           <Flame className="w-5 h-5 text-stashbox-text animate-bounce-gentle" />
           <h3 className="text-lg font-semibold text-stashbox-text">
-            Streak: {streak.streakDays} days
+            {t('streak.streak', { days: streak.streakDays })}
           </h3>
         </div>
         <div className="text-2xl">🔥</div>
@@ -29,7 +31,7 @@ const StreakCard = () => {
       </div>
       
       <p className="text-sm text-stashbox-text/80">
-        Next badge at {streak.nextBadgeAt} days! 💪
+        {t('streak.nextBadge', { days: streak.nextBadgeAt })}
       </p>
     </div>
   );

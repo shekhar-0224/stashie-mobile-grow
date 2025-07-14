@@ -34,7 +34,8 @@ export const LanguageSelector = () => {
           className="flex items-center gap-2 text-stashbox-text hover:bg-stashbox-orange/20"
         >
           <Globe className="w-4 h-4" />
-          <span className="hidden sm:inline">{getCurrentLanguageName()}</span>
+          <span className="hidden sm:inline text-xs">🌐 {getCurrentLanguageName()}</span>
+          <span className="sm:hidden text-sm">🌐</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-background border border-border">

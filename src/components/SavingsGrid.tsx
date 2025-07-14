@@ -36,7 +36,7 @@ const SavingsGrid = () => {
         <SavingsCard
           title={`🎯 ${t('savings.customJar')}`}
           subtitle={t('savings.customJar')}
-          caption="Create custom goal like 'PS5', set target"
+          caption={t('savings.customJar')}
           background="hsl(var(--stashbox-purple))"
           onAction={handleCustomJar}
           animationDelay={200}
@@ -46,9 +46,9 @@ const SavingsGrid = () => {
         {/* 2x2 Grid Layout */}
         <div className="grid grid-cols-2 gap-3">
           <SavingsCard
-            title="QuickSave"
-            subtitle="QuickSave · 30 days"
-            caption="Fixed 4.5% APY"
+            title={t('savings.quickSave')}
+            subtitle={t('savings.quickSaveSubtitle')}
+            caption={t('savings.quickSaveCaption')}
             background="hsl(var(--stashbox-blue))"
             onAction={handleQuickSave}
             animationDelay={400}
@@ -60,9 +60,9 @@ const SavingsGrid = () => {
           />
           
           <SavingsCard
-            title="SafeStack"
-            subtitle="SafeStack · 90 days"
-            caption="Fixed 6.5% APY"
+            title={t('savings.safeStack')}
+            subtitle={t('savings.safeStackSubtitle')}
+            caption={t('savings.safeStackCaption')}
             background="hsl(var(--stashbox-mint))"
             onAction={handleSafeStack}
             animationDelay={600}
@@ -74,9 +74,9 @@ const SavingsGrid = () => {
           />
           
           <SavingsCard
-            title="GrowFund"
-            subtitle="GrowFund · 180+ days"
-            caption="Fixed 8.0% APY"
+            title={t('savings.growFund')}
+            subtitle={t('savings.growFundSubtitle')}
+            caption={t('savings.growFundCaption')}
             background="hsl(var(--stashbox-orange))"
             onAction={handleGrowFund}
             animationDelay={800}
@@ -88,9 +88,9 @@ const SavingsGrid = () => {
           />
           
           <SavingsCard
-            title="Emergency"
-            subtitle="Emergency Fund"
-            caption="High liquidity 2.5% APY"
+            title={t('savings.emergency')}
+            subtitle={t('savings.emergencySubtitle')}
+            caption={t('savings.emergencyCaption')}
             background="hsl(var(--stashbox-yellow))"
             onAction={() => setOpenModal("safe")}
             animationDelay={1000}

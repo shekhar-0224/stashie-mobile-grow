@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +15,7 @@ interface SavingsModalProps {
 }
 
 const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
+  const { t } = useTranslation();
   const [amount, setAmount] = useState("");
   const [duration, setDuration] = useState<number>(30);
   const [goalName, setGoalName] = useState("");
@@ -24,31 +26,31 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     switch (type) {
       case "quick":
         return {
-          title: "Start QuickSave",
+          title: t('modal.startQuickSave'),
           ...SAVINGS_JARS.QUICK,
           placeholder: "e.g., 25"
         };
       case "safe":
         return {
-          title: "Start SafeStack",
+          title: t('modal.startSafeStack'),
           ...SAVINGS_JARS.SAFE,
           placeholder: "e.g., 50"
         };
       case "grow":
         return {
-          title: "Start GrowFund",
+          title: t('modal.startGrowFund'),
           ...SAVINGS_JARS.GROW,
           placeholder: "e.g., 100"
         };
       case "custom":
         return {
-          title: "Create Goal Jar",
+          title: t('modal.createGoalJar'),
           ...SAVINGS_JARS.CUSTOM,
           placeholder: "e.g., 500"
         };
       default:
         return {
-          title: "Start Saving",
+          title: t('modal.startQuickSave'),
           ...SAVINGS_JARS.QUICK,
           placeholder: "e.g., 25"
         };
@@ -98,8 +100,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
       
       // Show success toast with confetti effect
       toast({
-        title: "🎉 Saved!",
-        description: "Jar topped up. You're 1 step closer to your goal!",
+        title: t('toast.saved'),
+        description: t('toast.savedDescription'),
       });
     };
 
@@ -139,11 +141,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           {type === "custom" && (
             <div className="space-y-2">
               <Label htmlFor="goalName" className="text-sm font-medium text-white">
-                Goal Name
+                {t('modal.goalName')}
               </Label>
               <Input
                 id="goalName"
-                placeholder="e.g., PS5"
+                placeholder={t('modal.goalNamePlaceholder')}
                 value={goalName}
                 onChange={(e) => setGoalName(e.target.value)}
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400"
@@ -153,7 +155,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           
           <div className="space-y-2">
             <Label htmlFor="amount" className="text-sm font-medium text-white">
-              {type === "custom" ? "Target Amount ($)" : "Enter Amount ($)"}
+              {type === "custom" ? t('modal.targetAmount') : t('modal.enterAmount')}
             </Label>
             <Input
               id="amount"
@@ -167,8 +169,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           {type === "custom" && (
             <div className="space-y-4">
               <Label className="text-sm font-medium text-white">
-                Choose Risk Level: {riskLevel} 
-                <span className="text-xs text-white/70 ml-2">Higher risk, higher returns</span>
+                {t('modal.chooseRiskLevel')}: {riskLevel} 
+                <span className="text-xs text-white/70 ml-2">{t('modal.higherRiskHigherReturns')}</span>
               </Label>
               
               <div className="bg-white/30 rounded-stashbox p-4">
@@ -181,15 +183,15 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                   className="w-full"
                 />
                 <div className="flex justify-between text-xs text-white/60 mt-2">
-                  <span>Low Risk</span>
-                  <span>High Risk</span>
+                  <span>{t('modal.lowRisk')}</span>
+                  <span>{t('modal.highRisk')}</span>
                 </div>
               </div>
               
               <div className="bg-white/20 rounded-stashbox p-3">
                 <div className="flex items-center space-x-2 mb-2">
                   <span className="text-sm">📊</span>
-                  <span className="text-sm font-medium text-white">Expected Return</span>
+                  <span className="text-sm font-medium text-white">{t('modal.expectedReturn')}</span>
                 </div>
                 <div className="w-full bg-white/30 rounded-full h-2">
                   <div 
@@ -201,7 +203,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                   />
                 </div>
                 <div className="text-xs text-white/70 mt-1">
-                  {riskLevel * 20}% potential
+                  {riskLevel * 20}% {t('modal.potential')}
                 </div>
               </div>
             </div>
@@ -209,7 +211,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           
           <div className="space-y-4">
             <Label className="text-sm font-medium text-white">
-              Duration ({duration} days)
+              {t('modal.duration')} ({duration} {t('modal.days')})
             </Label>
             
             {/* Custom Duration Picker */}
@@ -231,7 +233,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                       className={`w-8 h-8 ${duration === option ? 'animate-sparkle' : ''}`}
                     />
                     <span className="text-xs font-medium text-gray-800">
-                      {option}d
+                      {option}{t('modal.days').substring(0,1)}
                     </span>
                   </button>
                 ))}
@@ -265,15 +267,15 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-4 space-y-3">
               <div className="flex items-center space-x-2">
                 <span className="text-lg">📈</span>
-                <h4 className="text-sm font-medium text-white">Return Estimate</h4>
+                <h4 className="text-sm font-medium text-white">{t('modal.returnEstimate')}</h4>
               </div>
               
               <div className="text-lg font-semibold text-stashbox-mint">
-                You'll get ~${calculateEstimatedReturn().toFixed(2)}
+                {t('modal.youllGet', { amount: calculateEstimatedReturn().toFixed(2) })}
               </div>
               
               <p className="text-xs text-white/60">
-                {config.apy}% APY
+                {t('modal.apy', { rate: config.apy })}
               </p>
             </div>
           )}
@@ -283,15 +285,15 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-4 space-y-3">
               <div className="flex items-center space-x-2">
                 <span className="text-lg">📊</span>
-                <h4 className="text-sm font-medium text-white">Custom Return Estimate</h4>
+                <h4 className="text-sm font-medium text-white">{t('modal.customReturnEstimate')}</h4>
               </div>
               
               <div className="text-lg font-semibold text-stashbox-mint">
-                Est. return: ${calculateCustomReturn().toFixed(2)}
+                {t('modal.estimatedReturn', { amount: calculateCustomReturn().toFixed(2) })}
               </div>
               
               <p className="text-xs text-white/60">
-                {getRiskAPY().toFixed(1)}% APY
+                {t('modal.apy', { rate: getRiskAPY().toFixed(1) })}
               </p>
             </div>
           )}
@@ -300,12 +302,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             onClick={handleDeposit}
             className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle"
           >
-            {type === "custom" ? "Create Jar" : "Deposit to Jar"}
+            {type === "custom" ? t('modal.createJar') : t('modal.depositToJar')}
           </Button>
           
           {config.penalty && (
             <p className="text-xs text-gray-300 text-center">
-              ⚠️ Early withdrawal penalty: {config.penalty}
+              {t('modal.earlyWithdrawalPenalty', { penalty: config.penalty })}
             </p>
           )}
         </div>
