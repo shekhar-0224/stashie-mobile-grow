@@ -37,12 +37,22 @@ const Profile = () => {
     ]
   };
 
-  const shareWalletCard = () => {
+  const shareWalletCard = async () => {
     const text = "📈 I'm growing my savings on Stashbox! Check out my journey → stashbox.xyz #save2earn #crypto";
-    if (navigator.share) {
-      navigator.share({ text });
-    } else {
-      navigator.clipboard.writeText(text);
+    try {
+      if (navigator.share && navigator.canShare && navigator.canShare({ text })) {
+        await navigator.share({ text });
+      } else {
+        await navigator.clipboard.writeText(text);
+        // Could add a toast notification here
+      }
+    } catch (error) {
+      // Fallback to clipboard
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (clipboardError) {
+        console.log('Share failed, text copied to clipboard');
+      }
     }
   };
 
@@ -52,106 +62,106 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stashbox-cream pb-20">
-      <div className="max-w-md mx-auto">
+    <div className="min-h-screen bg-stashbox-cream pb-16">
+      <div className="max-w-sm mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 pt-8">
+        <div className="flex items-center justify-between p-3 pt-6">
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={() => navigate("/home")}
-            className="text-stashbox-text hover:bg-stashbox-text/10"
+            className="text-stashbox-text hover:bg-stashbox-text/10 p-2"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
           </Button>
-          <h1 className="text-xl font-bold text-stashbox-text">Profile</h1>
+          <h1 className="text-lg font-bold text-stashbox-text">Profile</h1>
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={handleLogout}
-            className="text-stashbox-text hover:bg-stashbox-text/10 text-sm"
+            className="text-stashbox-text hover:bg-stashbox-text/10 text-xs p-2"
           >
             Logout
           </Button>
         </div>
 
-        <div className="px-4 space-y-6">
+        <div className="px-3 space-y-4">
           {/* User greeting */}
-          <div className="flex items-center space-x-3">
-            <Avatar className="w-12 h-12">
+          <div className="flex items-center space-x-2">
+            <Avatar className="w-10 h-10">
               <AvatarImage src={mockUserData.avatar} />
-              <AvatarFallback className="bg-stashbox-mint text-stashbox-text font-bold">
+              <AvatarFallback className="bg-stashbox-mint text-stashbox-text font-bold text-sm">
                 {mockUserData.name.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <h2 className="text-lg font-semibold text-stashbox-text">
+            <h2 className="text-base font-semibold text-stashbox-text">
               Hi, {mockUserData.name} 👋
             </h2>
           </div>
 
           {/* Wallet Summary Card */}
-          <Card className="bg-stashbox-mint border-0 shadow-lg rounded-3xl overflow-hidden">
-            <CardContent className="p-6">
-              <p className="text-stashbox-text/70 text-sm font-medium mb-2">Your Wallet Summary</p>
-              <h3 className="text-3xl font-bold text-stashbox-text mb-2">{mockUserData.wallet.balanceLocal}</h3>
-              <p className="text-stashbox-text/60 text-sm mb-4">{mockUserData.wallet.addressShort}</p>
+          <Card className="bg-stashbox-mint border-0 shadow-lg rounded-2xl overflow-hidden">
+            <CardContent className="p-4">
+              <p className="text-stashbox-text/70 text-xs font-medium mb-1">Your Wallet Summary</p>
+              <h3 className="text-2xl font-bold text-stashbox-text mb-1">{mockUserData.wallet.balanceLocal}</h3>
+              <p className="text-stashbox-text/60 text-xs mb-3">{mockUserData.wallet.addressShort}</p>
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={shareWalletCard}
-                className="text-stashbox-text hover:bg-white/20 font-medium"
+                className="text-stashbox-text hover:bg-white/20 font-medium text-xs p-2 h-8"
               >
-                <Share className="w-4 h-4 mr-2" />
+                <Share className="w-3 h-3 mr-1" />
                 📤 Share on X
               </Button>
             </CardContent>
           </Card>
 
           {/* Token Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            <Card className="bg-gray-50 border-0 rounded-2xl">
-              <CardContent className="p-4 text-center">
+          <div className="grid grid-cols-2 gap-3">
+            <Card className="bg-gray-50 border-0 rounded-xl">
+              <CardContent className="p-3 text-center">
                 <p className="text-stashbox-text/60 text-xs font-medium mb-1">USDC</p>
-                <p className="text-stashbox-text font-bold text-lg">${mockUserData.wallet.tokens.USDC}</p>
+                <p className="text-stashbox-text font-bold text-base">${mockUserData.wallet.tokens.USDC}</p>
               </CardContent>
             </Card>
-            <Card className="bg-gray-50 border-0 rounded-2xl">
-              <CardContent className="p-4 text-center">
+            <Card className="bg-gray-50 border-0 rounded-xl">
+              <CardContent className="p-3 text-center">
                 <p className="text-stashbox-text/60 text-xs font-medium mb-1">ETH</p>
-                <p className="text-stashbox-text font-bold text-lg">{mockUserData.wallet.tokens.ETH} ETH</p>
+                <p className="text-stashbox-text font-bold text-base">{mockUserData.wallet.tokens.ETH} ETH</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Tabs */}
           <Tabs defaultValue="badges" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-white/50 rounded-2xl p-1">
-              <TabsTrigger value="badges" className="rounded-xl">Badges</TabsTrigger>
-              <TabsTrigger value="txns" className="rounded-xl">Txns</TabsTrigger>
-              <TabsTrigger value="settings" className="rounded-xl">Settings</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 bg-white/50 rounded-xl p-1 h-9">
+              <TabsTrigger value="badges" className="rounded-lg text-xs">Badges</TabsTrigger>
+              <TabsTrigger value="txns" className="rounded-lg text-xs">Txns</TabsTrigger>
+              <TabsTrigger value="settings" className="rounded-lg text-xs">Settings</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="badges" className="space-y-4 mt-6">
-              <div className="grid grid-cols-2 gap-4">
+            <TabsContent value="badges" className="space-y-3 mt-4">
+              <div className="grid grid-cols-2 gap-3">
                 {mockUserData.badges.map((badge, index) => (
-                  <Card key={index} className="bg-white/80 border-0 rounded-2xl">
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl mb-2">{badge.icon}</div>
-                      <p className="text-stashbox-text font-semibold text-sm mb-1">{badge.label}</p>
-                      <p className="text-stashbox-text/60 text-xs">{badge.description}</p>
+                  <Card key={index} className="bg-white/80 border-0 rounded-xl">
+                    <CardContent className="p-3 text-center">
+                      <div className="text-xl mb-1">{badge.icon}</div>
+                      <p className="text-stashbox-text font-semibold text-xs mb-1">{badge.label}</p>
+                      <p className="text-stashbox-text/60 text-xs leading-tight">{badge.description}</p>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             </TabsContent>
 
-            <TabsContent value="txns" className="space-y-3 mt-6">
+            <TabsContent value="txns" className="space-y-2 mt-4">
               {mockUserData.transactions.map((txn, index) => (
-                <Card key={index} className="bg-white/80 border-0 rounded-2xl">
-                  <CardContent className="p-4 flex items-center space-x-4">
-                    <div className="text-2xl">{txn.icon}</div>
+                <Card key={index} className="bg-white/80 border-0 rounded-xl">
+                  <CardContent className="p-3 flex items-center space-x-3">
+                    <div className="text-lg">{txn.icon}</div>
                     <div className="flex-1">
-                      <p className="text-stashbox-text font-semibold text-sm">{txn.title}</p>
+                      <p className="text-stashbox-text font-semibold text-xs">{txn.title}</p>
                       <p className="text-stashbox-text/60 text-xs">{txn.subtitle}</p>
                     </div>
                   </CardContent>
@@ -159,12 +169,12 @@ const Profile = () => {
               ))}
             </TabsContent>
 
-            <TabsContent value="settings" className="space-y-4 mt-6">
-              <Card className="bg-white/80 border-0 rounded-2xl">
-                <CardContent className="p-4 space-y-4">
+            <TabsContent value="settings" className="space-y-3 mt-4">
+              <Card className="bg-white/80 border-0 rounded-xl">
+                <CardContent className="p-3 space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-stashbox-text font-semibold text-sm">Notifications</p>
+                      <p className="text-stashbox-text font-semibold text-xs">Notifications</p>
                       <p className="text-stashbox-text/60 text-xs">Get notified about savings</p>
                     </div>
                     <Switch 
@@ -175,7 +185,7 @@ const Profile = () => {
                   <div className="h-px bg-stashbox-text/10"></div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-stashbox-text font-semibold text-sm">Genie Suggestions</p>
+                      <p className="text-stashbox-text font-semibold text-xs">Genie Suggestions</p>
                       <p className="text-stashbox-text/60 text-xs">AI-powered savings tips</p>
                     </div>
                     <Switch 
