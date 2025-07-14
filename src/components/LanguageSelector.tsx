@@ -11,8 +11,6 @@ import { Button } from '@/components/ui/button';
 const languages = [
   { code: 'en', name: 'common.english' },
   { code: 'es', name: 'common.spanish' },
-  { code: 'fr', name: 'common.french' },
-  { code: 'de', name: 'common.german' },
 ];
 
 export const LanguageSelector = () => {
