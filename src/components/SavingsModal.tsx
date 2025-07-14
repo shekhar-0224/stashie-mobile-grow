@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
 
@@ -17,6 +18,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const [duration, setDuration] = useState<number>(30);
   const [goalName, setGoalName] = useState("");
   const [targetAmount, setTargetAmount] = useState("");
+  const [riskLevel, setRiskLevel] = useState(2);
 
   const getModalConfig = () => {
     switch (type) {
@@ -65,6 +67,25 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     return estimatedReturn;
   };
 
+  const calculateCustomReturn = () => {
+    const inputAmount = parseFloat(targetAmount);
+    if (isNaN(inputAmount) || inputAmount <= 0) return 0;
+    
+    const principal = inputAmount;
+    const riskAPY = getRiskAPY();
+    const rate = riskAPY / 100;
+    const time = duration / 365;
+    
+    const estimatedReturn = principal * (1 + rate * time);
+    return estimatedReturn;
+  };
+
+  const getRiskAPY = () => {
+    const baseAPY = 3.0;
+    const riskMultiplier = riskLevel * 1.5;
+    return baseAPY + riskMultiplier;
+  };
+
   const config = getModalConfig();
 
   const handleDeposit = () => {
@@ -90,6 +111,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     setDuration(config.defaultDuration);
     setGoalName("");
     setTargetAmount("");
+    setRiskLevel(2);
     onClose();
   };
 
@@ -141,6 +163,49 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400"
             />
           </div>
+          
+          {type === "custom" && (
+            <div className="space-y-4">
+              <Label className="text-sm font-medium text-white">
+                Choose Risk Level: {riskLevel} 
+                <span className="text-xs text-white/70 ml-2">Higher risk, higher returns</span>
+              </Label>
+              
+              <div className="bg-white/30 rounded-stashbox p-4">
+                <Slider
+                  value={[riskLevel]}
+                  onValueChange={(value) => setRiskLevel(value[0])}
+                  max={5}
+                  min={1}
+                  step={1}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-white/60 mt-2">
+                  <span>Low Risk</span>
+                  <span>High Risk</span>
+                </div>
+              </div>
+              
+              <div className="bg-white/20 rounded-stashbox p-3">
+                <div className="flex items-center space-x-2 mb-2">
+                  <span className="text-sm">📊</span>
+                  <span className="text-sm font-medium text-white">Expected Return</span>
+                </div>
+                <div className="w-full bg-white/30 rounded-full h-2">
+                  <div 
+                    className="h-full rounded-full transition-all duration-500"
+                    style={{
+                      backgroundColor: "#F9B572",
+                      width: `${riskLevel * 20}%`
+                    }}
+                  />
+                </div>
+                <div className="text-xs text-white/70 mt-1">
+                  {riskLevel * 20}% potential
+                </div>
+              </div>
+            </div>
+          )}
           
           <div className="space-y-4">
             <Label className="text-sm font-medium text-white">
@@ -214,6 +279,24 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <p className="text-xs text-white/60">
                 Returns are fixed. Early withdrawal incurs penalty of {config.penalty}.
               </p>
+            </div>
+          )}
+
+          {/* Custom Return Estimator Card */}
+          {type === "custom" && targetAmount && (
+            <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-4 space-y-3">
+              <div className="flex items-center space-x-2">
+                <span className="text-lg">📊</span>
+                <h4 className="text-sm font-medium text-white">Custom Return Estimate</h4>
+              </div>
+              
+              <p className="text-xs text-white/80">
+                At Risk Level {riskLevel}, you could earn ~{getRiskAPY().toFixed(1)}% APY
+              </p>
+              
+              <div className="text-lg font-semibold text-stashbox-mint">
+                Est. return on ${targetAmount}: ${calculateCustomReturn().toFixed(2)}
+              </div>
             </div>
           )}
           

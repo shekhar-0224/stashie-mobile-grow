@@ -83,14 +83,11 @@ const SavingsCard = ({
           </p>
         </div>
 
-        {/* Deposited & Earned Amount for vault cards */}
+        {/* Simplified vault info */}
         {!isGoalJar && (
-          <div className="space-y-1">
-            <p className="text-xs text-stashbox-text/70">
-              Saved so far: ${totalDeposited.toFixed(2)}
-            </p>
-            <p className="text-xs text-stashbox-text/70">
-              Interest earned: ${interestEarned.toFixed(2)}
+          <div>
+            <p className={`text-stashbox-text/80 ${compact ? 'text-xs' : 'text-sm'}`}>
+              ${totalDeposited.toFixed(0)} saved · {title === "QuickSave" ? "4.5%" : title === "SafeStack" ? "6.5%" : title === "GrowFund" ? "8.0%" : "2.5%"} APY
             </p>
           </div>
         )}
@@ -120,7 +117,7 @@ const SavingsCard = ({
             isPressed ? 'scale-95' : ''
           }`}
         >
-          {isGoalJar ? 'Create Goal' : 'Start Saving'}
+          {isGoalJar ? 'Create Goal' : 'Details'}
         </Button>
       </div>
     </div>
