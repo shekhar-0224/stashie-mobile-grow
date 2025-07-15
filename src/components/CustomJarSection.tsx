@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
+import { Leaf, TrendingUp } from "lucide-react";
 
 interface CustomJarSectionProps {
   onSavingJar: () => void;
@@ -33,7 +34,7 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
               
               {/* Growing Plant */}
               <div className="absolute top-1 left-1/2 transform -translate-x-1/2">
-                <div className="text-green-500 text-sm animate-pulse">🌱</div>
+                <Leaf className="w-4 h-4 text-green-500 animate-pulse" />
               </div>
               
               {/* S Logo */}
@@ -63,9 +64,9 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
                 <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
               </div>
               
-              {/* Dice Icon */}
+              {/* Trending Up Icon */}
               <div className="absolute top-1 left-1/2 transform -translate-x-1/2">
-                <div className="text-white text-sm animate-sparkle">🎲</div>
+                <TrendingUp className="w-4 h-4 text-white animate-sparkle" />
               </div>
               
               {/* S Logo */}

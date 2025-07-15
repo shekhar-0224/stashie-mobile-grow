@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useTranslation } from 'react-i18next';
 import { useState } from "react";
+import { Leaf } from "lucide-react";
 
 interface SavingsCardProps {
   title: string;
@@ -115,11 +116,12 @@ const SavingsCard = ({
         
         <Button 
           onClick={handleButtonClick}
-          className={`w-full bg-white/20 backdrop-blur-sm text-stashbox-text hover:bg-white/30 font-medium ${compact ? 'py-2 text-sm' : 'py-3'} rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle ${
+          className={`w-full bg-white/20 backdrop-blur-sm text-stashbox-text hover:bg-white/30 font-medium ${compact ? 'py-2 text-sm' : 'py-3'} rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle flex items-center justify-center gap-2 ${
             isPressed ? 'scale-95' : ''
           }`}
         >
-          {isGoalJar ? t('savings.createGoal') : t('savings.startSaving')}
+          <Leaf className="w-4 h-4" />
+          {isGoalJar ? t('savings.createGoal') : "Let's Grow"}
         </Button>
       </div>
     </div>

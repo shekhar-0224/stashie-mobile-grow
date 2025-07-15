@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -8,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
-import { Copy, Share2, Dice6, Target } from "lucide-react";
+import { Copy, Share2, Dice6, Target, Leaf, TrendingUp, Users } from "lucide-react";
 
 interface SavingsModalProps {
   isOpen: boolean;
@@ -158,7 +159,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     
     // Reset form and close modal
     setAmount("");
-    setDuration(config.defaultDuration || 30);
+    setDuration(30);
     setGoalName("");
     setTargetAmount("");
     setRiskLevel(2);
@@ -182,7 +183,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
         <DialogContent className="sm:max-w-[425px] glass-modal border-none rounded-stashbox animate-slide-up">
           <DialogHeader>
             <DialogTitle className="text-xl font-semibold text-white flex items-center space-x-2">
-              <Dice6 className="w-6 h-6 text-stashbox-orange animate-pulse" />
+              <TrendingUp className="w-6 h-6 text-stashbox-orange animate-pulse" />
               <span>{config.title}</span>
             </DialogTitle>
           </DialogHeader>
@@ -296,16 +297,38 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                   Risk Level: {riskLevel} {getRiskEmoji(riskLevel)}
                 </Label>
                 
-                <div className="bg-white/20 rounded-stashbox p-4 space-y-3">
+                <div className="bg-white/10 rounded-stashbox p-6 space-y-4">
+                  {/* Sleek Risk Meter */}
+                  <div className="relative">
+                    <div className="h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/20 rounded-full"></div>
+                    </div>
+                    
+                    {/* Slider Handle with Logo */}
+                    <div 
+                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300"
+                      style={{ left: `${(riskLevel - 1) * 25}%` }}
+                    >
+                      <div className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-gray-200 cursor-pointer hover:scale-110 transition-transform">
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Stashbox Logo" 
+                          className="w-4 h-4"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
                   <Slider
                     value={[riskLevel]}
                     onValueChange={(value) => setRiskLevel(value[0])}
                     max={5}
                     min={1}
                     step={1}
-                    className="w-full"
+                    className="w-full opacity-0 absolute inset-0"
                   />
-                  <div className="flex justify-between text-xs text-white/60">
+                  
+                  <div className="flex justify-between text-xs text-white/60 mt-2">
                     <span className="flex items-center gap-1">
                       😌 Low Risk
                     </span>
@@ -314,17 +337,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                     </span>
                   </div>
                   
-                  <div className="bg-white/30 rounded-stashbox p-3">
-                    <div className="w-full bg-white/30 rounded-full h-3">
-                      <div 
-                        className="h-full rounded-full transition-all duration-500"
-                        style={{
-                          backgroundColor: getRiskColor(riskLevel),
-                          width: `${riskLevel * 20}%`
-                        }}
-                      />
-                    </div>
-                    <div className="text-xs text-white/70 mt-2">
+                  <div className="bg-white/20 rounded-stashbox p-3 mt-3">
+                    <div className="text-xs text-white/70">
                       Expected APY: {(3 + riskLevel * 1.5).toFixed(1)}%
                     </div>
                   </div>
@@ -334,7 +348,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <div className="bg-white/10 rounded-stashbox p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
-                    <Label className="text-sm font-medium text-white">
+                    <Label className="text-sm font-medium text-white flex items-center gap-2">
+                      <Users className="w-4 h-4" />
                       Make this a shared jar
                     </Label>
                     <p className="text-xs text-white/60">
@@ -463,9 +478,10 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           
           <Button
             onClick={handleDeposit}
-            className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle"
+            className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-3 rounded-stashbox transition-all duration-200 transform hover:scale-105 animate-bounce-gentle flex items-center justify-center gap-2"
           >
-            {type === "custom" ? (isSharedJar ? "Create Shared Jar" : t('modal.createJar')) : t('modal.depositToJar')}
+            <Leaf className="w-4 h-4" />
+            {type === "custom" ? (isSharedJar ? "Create Shared Jar" : "Let's Grow") : "Stash in Jar"}
           </Button>
           
           {config.penalty && (
