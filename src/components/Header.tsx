@@ -21,15 +21,13 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
     <div className="px-6 py-4 space-y-4">
       {/* Top Row - Logo and Streak aligned */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center">
           {/* Logo positioned parallel to streak */}
-          <div className="flex items-center justify-center">
-            <img 
-              src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
-              alt="Stashbox Logo" 
-              className="w-12 h-12 object-contain"
-            />
-          </div>
+          <img 
+            src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
+            alt="Stashbox Logo" 
+            className="w-12 h-12 object-contain"
+          />
         </div>
         
         <div className="flex items-center">
