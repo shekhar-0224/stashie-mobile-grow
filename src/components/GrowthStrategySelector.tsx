@@ -1,6 +1,6 @@
 
 import { Label } from "@/components/ui/label";
-import { Target } from "lucide-react";
+import { Target, TrendingDown, TrendingUp, BarChart3 } from "lucide-react";
 
 interface GrowthStrategySelectorProps {
   riskLevel: number;
@@ -12,35 +12,17 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
     const riskOptions = [
       { 
         name: 'Conservative', 
-        icon: (
-          <img 
-            src="/lovable-uploads/f64759bf-4871-44f9-849e-c00e4ab4a658.png" 
-            alt="Conservative"
-            className="w-8 h-8 rounded-lg object-cover"
-          />
-        ),
+        icon: <TrendingDown className="w-8 h-8 text-green-500" />,
         apy: 3.0 
       },
       { 
         name: 'Moderate', 
-        icon: (
-          <img 
-            src="/lovable-uploads/005bed64-aa43-45f2-bb7c-28b94e89d7dd.png" 
-            alt="Moderate"
-            className="w-8 h-8 rounded-lg object-cover"
-          />
-        ),
+        icon: <BarChart3 className="w-8 h-8 text-yellow-500" />,
         apy: 6.0 
       },
       { 
         name: 'Aggressive', 
-        icon: (
-          <img 
-            src="/lovable-uploads/8af907e7-75db-496c-bd76-c97041094c0c.png" 
-            alt="Aggressive"
-            className="w-8 h-8 rounded-lg object-cover"
-          />
-        ),
+        icon: <TrendingUp className="w-8 h-8 text-orange-500" />,
         apy: 9.0 
       }
     ];

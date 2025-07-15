@@ -23,6 +23,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const [isSharedJar, setIsSharedJar] = useState(false);
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [animatingDuration, setAnimatingDuration] = useState<number | null>(null);
   
   // Betting jar states
   const [betDescription, setBetDescription] = useState("");
@@ -35,6 +36,14 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     { days: 180, label: "180d" },
     { days: 365, label: "365d" }
   ];
+
+  const handleDurationChange = (days: number) => {
+    setAnimatingDuration(days);
+    setTimeout(() => {
+      setDuration(days);
+      setAnimatingDuration(null);
+    }, 200);
+  };
 
   const getModalConfig = () => {
     switch (type) {
@@ -351,11 +360,15 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                   {durationOptions.map((option) => (
                     <button
                       key={option.days}
-                      onClick={() => setDuration(option.days)}
+                      onClick={() => handleDurationChange(option.days)}
                       className={`flex-1 rounded-full py-1.5 px-2 text-xs font-medium transition-all duration-200 ${
                         duration === option.days
                           ? 'bg-stashbox-mint text-gray-800'
                           : 'bg-white/20 text-white hover:bg-white/30'
+                      } ${
+                        animatingDuration === option.days
+                          ? 'animate-pulse scale-95'
+                          : ''
                       }`}
                     >
                       {option.label}
