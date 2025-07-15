@@ -1,3 +1,4 @@
+
 import { Label } from "@/components/ui/label";
 import { Target } from "lucide-react";
 
@@ -27,7 +28,7 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Moderate', 
         icon: (
           <img 
-            src="/lovable-uploads/48f2bda4-7550-410d-8634-6cc1b9b900e3.png" 
+            src="/lovable-uploads/34be63c8-306d-4c02-bf48-9cce37121956.png" 
             alt="Moderate"
             className="w-8 h-8 object-contain"
           />
@@ -38,7 +39,7 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Aggressive', 
         icon: (
           <img 
-            src="/lovable-uploads/600dd872-526f-4abf-92e1-3c515210d5f8.png" 
+            src="/lovable-uploads/1be8ba7a-d34b-46cc-8821-74697f3b8967.png" 
             alt="Aggressive"
             className="w-8 h-8 object-contain"
           />
