@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -62,7 +61,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           title: "Create Betting Jar",
           placeholder: "Enter bet amount",
           color: 'hsl(var(--stashbox-orange))',
-          apy: 0
+          apy: 0,
+          penalty: null
         };
       default:
         return {
