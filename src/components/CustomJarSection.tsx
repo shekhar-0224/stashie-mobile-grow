@@ -16,10 +16,10 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
       <h2 className="text-xl font-bold text-stashbox-text">Create Custom Jar</h2>
       
       <div className="flex gap-4 justify-center">
-        {/* Saving Jar - Simplified */}
+        {/* Saving Jar */}
         <Button
           onClick={onSavingJar}
-          className="flex-1 max-w-[140px] h-24 p-4 bg-transparent hover:bg-emerald-50/50 border-0 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 transition-all duration-300 hover:scale-105 group"
+          className="flex-1 max-w-[140px] h-24 p-4 bg-transparent hover:bg-emerald-50/50 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 transition-all duration-300 hover:scale-105 group border-0"
         >
           {/* Glass Jar Icon */}
           <div className="w-12 h-12 bg-gradient-to-b from-emerald-100 to-emerald-200 border-2 border-emerald-300 rounded-2xl relative overflow-hidden shadow-lg">
@@ -39,10 +39,14 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
               <Leaf className="w-3 h-3 text-green-600 drop-shadow-sm" />
             </div>
             
-            {/* S Logo */}
+            {/* Logo */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4 h-4 bg-white border border-emerald-200 rounded-full flex items-center justify-center shadow-sm">
-                <span className="text-xs font-bold text-emerald-600">S</span>
+                <img 
+                  src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
+                  alt="Stashbox Logo" 
+                  className="w-2.5 h-2.5 object-contain"
+                />
               </div>
             </div>
           </div>
@@ -50,10 +54,10 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
           <span className="text-sm font-bold text-emerald-700">Saving Jar</span>
         </Button>
 
-        {/* Betting Jar - Simplified */}
+        {/* Betting Jar */}
         <Button
           onClick={onBettingJar}
-          className="flex-1 max-w-[140px] h-24 p-4 bg-transparent hover:bg-orange-50/50 border-0 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 transition-all duration-300 hover:scale-105 group"
+          className="flex-1 max-w-[140px] h-24 p-4 bg-transparent hover:bg-orange-50/50 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 transition-all duration-300 hover:scale-105 group border-0"
         >
           {/* Glass Jar Icon */}
           <div className="w-12 h-12 bg-gradient-to-b from-orange-100 to-orange-200 border-2 border-orange-300 rounded-2xl relative overflow-hidden shadow-lg">
@@ -73,10 +77,14 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
               <TrendingUp className="w-3 h-3 text-orange-600 drop-shadow-sm" />
             </div>
             
-            {/* S Logo */}
+            {/* Logo */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4 h-4 bg-white border border-orange-200 rounded-full flex items-center justify-center shadow-sm">
-                <span className="text-xs font-bold text-orange-600">S</span>
+                <img 
+                  src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
+                  alt="Stashbox Logo" 
+                  className="w-2.5 h-2.5 object-contain"
+                />
               </div>
             </div>
             
@@ -87,17 +95,21 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
           <span className="text-sm font-bold text-orange-700">Betting Jar</span>
         </Button>
 
-        {/* Coming Soon Jar - Simplified */}
+        {/* Coming Soon Jar */}
         <Button
           disabled
-          className="flex-1 max-w-[140px] h-24 p-4 bg-transparent border-0 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 opacity-60"
+          className="flex-1 max-w-[140px] h-24 p-4 bg-transparent shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 opacity-60 border-0"
         >
-          {/* S-Logo Jar Base - Faded */}
+          {/* Logo Jar Base - Faded */}
           <div className="w-12 h-12 bg-gradient-to-b from-gray-200 to-gray-300 border-2 border-gray-300 rounded-2xl relative">
-            {/* S Logo */}
+            {/* Logo */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4 h-4 bg-white border border-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-xs font-bold text-gray-400">S</span>
+                <img 
+                  src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
+                  alt="Stashbox Logo" 
+                  className="w-2.5 h-2.5 object-contain opacity-50"
+                />
               </div>
             </div>
           </div>
