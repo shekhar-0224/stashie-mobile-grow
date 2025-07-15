@@ -1,28 +1,23 @@
-
 import { useState } from "react";
-import SavingsCard from "./SavingsCard";
-import SavingsModal from "./SavingsModal";
+import JarCard from "./JarCard";
+import JarModal from "./JarModal";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from 'react-i18next';
 
 const SavingsGrid = () => {
   const { t } = useTranslation();
-  const [openModal, setOpenModal] = useState<"quick" | "safe" | "grow" | "custom" | null>(null);
+  const [openModal, setOpenModal] = useState<"savings" | "shared" | "betting" | null>(null);
 
-  const handleQuickSave = () => {
-    setOpenModal("quick");
+  const handleSavingsJar = () => {
+    setOpenModal("savings");
   };
 
-  const handleSafeStack = () => {
-    setOpenModal("safe");
+  const handleSharedJar = () => {
+    setOpenModal("shared");
   };
 
-  const handleGrowFund = () => {
-    setOpenModal("grow");
-  };
-
-  const handleCustomJar = () => {
-    setOpenModal("custom");
+  const handleBettingJar = () => {
+    setOpenModal("betting");
   };
 
   const closeModal = () => {
@@ -31,98 +26,64 @@ const SavingsGrid = () => {
 
   return (
     <>
-      <div className="px-6 py-4 space-y-4">
-        {/* Custom Goal Jar - moved to top */}
-        <SavingsCard
-          title={`🎯 ${t('savings.customJar')}`}
-          subtitle={t('savings.customJar')}
-          caption={t('savings.customJar')}
-          background="hsl(var(--stashbox-purple))"
-          onAction={handleCustomJar}
-          animationDelay={200}
-          isGoalJar={true}
-        />
-        
-        {/* 2x2 Grid Layout */}
-        <div className="grid grid-cols-2 gap-3">
-          <SavingsCard
-            title={t('savings.quickSave')}
-            subtitle={t('savings.quickSaveSubtitle')}
-            caption={t('savings.quickSaveCaption')}
-            background="hsl(var(--stashbox-blue))"
-            onAction={handleQuickSave}
+      <div className="px-4 py-4 space-y-4">
+        {/* Three Jar Types */}
+        <div className="grid grid-cols-1 gap-4">
+          {/* Savings Jar */}
+          <JarCard
+            type="savings"
+            title="💰 Savings Jar"
+            subtitle="Grow your crypto with smart yield strategies"
+            goal={1000}
+            current={450}
+            apy={8.2}
+            onAction={handleSavingsJar}
+            animationDelay={200}
+          />
+          
+          {/* Shared Jar */}
+          <JarCard
+            type="shared"
+            title="👥 Shared Jar"
+            subtitle="Save together with friends and family"
+            goal={600}
+            current={230}
+            apy={7.2}
+            participants={3}
+            onAction={handleSharedJar}
             animationDelay={400}
-            progress={45}
-            progressColor="hsl(var(--stashbox-mint))"
-            compact={true}
-            totalDeposited={124.50}
-            interestEarned={2.34}
           />
           
-          <SavingsCard
-            title={t('savings.safeStack')}
-            subtitle={t('savings.safeStackSubtitle')}
-            caption={t('savings.safeStackCaption')}
-            background="hsl(var(--stashbox-mint))"
-            onAction={handleSafeStack}
+          {/* Betting Jar */}
+          <JarCard
+            type="betting"
+            title="🏆 Betting Jar"
+            subtitle="Create challenges and compete"
+            goal={500}
+            current={125}
+            apy={15.5}
+            participants={5}
+            onAction={handleBettingJar}
             animationDelay={600}
-            progress={72}
-            progressColor="hsl(var(--stashbox-orange))"
-            compact={true}
-            totalDeposited={485.75}
-            interestEarned={12.67}
-          />
-          
-          <SavingsCard
-            title={t('savings.growFund')}
-            subtitle={t('savings.growFundSubtitle')}
-            caption={t('savings.growFundCaption')}
-            background="hsl(var(--stashbox-orange))"
-            onAction={handleGrowFund}
-            animationDelay={800}
-            progress={28}
-            progressColor="hsl(var(--stashbox-yellow))"
-            compact={true}
-            totalDeposited={892.25}
-            interestEarned={45.89}
-          />
-          
-          <SavingsCard
-            title={t('savings.emergency')}
-            subtitle={t('savings.emergencySubtitle')}
-            caption={t('savings.emergencyCaption')}
-            background="hsl(var(--stashbox-yellow))"
-            onAction={() => setOpenModal("safe")}
-            animationDelay={1000}
-            progress={15}
-            progressColor="hsl(var(--stashbox-mint))"
-            compact={true}
-            totalDeposited={67.89}
-            interestEarned={0.89}
           />
         </div>
       </div>
 
       {/* Modals */}
-      <SavingsModal
-        isOpen={openModal === "quick"}
+      <JarModal
+        isOpen={openModal === "savings"}
         onClose={closeModal}
-        type="quick"
+        type="savings"
       />
-      <SavingsModal
-        isOpen={openModal === "safe"}
+      <JarModal
+        isOpen={openModal === "shared"}
         onClose={closeModal}
-        type="safe"
+        type="shared"
       />
-      <SavingsModal
-        isOpen={openModal === "grow"}
+      <JarModal
+        isOpen={openModal === "betting"}
         onClose={closeModal}
-        type="grow"
-      />
-      <SavingsModal
-        isOpen={openModal === "custom"}
-        onClose={closeModal}
-        type="custom"
+        type="betting"
       />
     </>
   );
