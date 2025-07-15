@@ -1,9 +1,10 @@
 
 import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import { User, Flame } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
+import { useState } from "react";
 
 interface HeaderProps {
   onTotalSavedClick?: () => void;
@@ -11,6 +12,10 @@ interface HeaderProps {
 
 const Header = ({ onTotalSavedClick }: HeaderProps) => {
   const { t } = useTranslation();
+  const [streak] = useState({
+    streakDays: 5,
+    nextBadgeAt: 7
+  });
 
   return (
     <div className="px-6 py-4 space-y-4">
@@ -27,6 +32,12 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
         </div>
         
         <div className="flex items-center space-x-2">
+          {/* Streak Icon */}
+          <div className="flex items-center space-x-1 bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 rounded-full px-3 py-2 shadow-lg">
+            <Flame className="w-4 h-4 text-white animate-bounce" fill="currentColor" />
+            <span className="text-sm font-bold text-white">{streak.streakDays}</span>
+          </div>
+          
           <LanguageSelector />
           <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full">
             <User className="w-5 h-5 text-stashbox-text" />

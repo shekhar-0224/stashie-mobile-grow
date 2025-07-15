@@ -108,7 +108,6 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
-    cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23f97316' stroke='%23ea580c' stroke-width='2'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-family='Arial' font-size='12' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E") 12 12, auto;
   }
 
   body {
@@ -118,10 +117,6 @@ All colors MUST be HSL.
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-weight: 600; /* Make all text semibold for better visibility */
-  }
-
-  button, a, [role="button"] {
-    cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%2310b981' stroke='%23059669' stroke-width='2'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-family='Arial' font-size='12' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E") 12 12, pointer;
   }
 }
 
