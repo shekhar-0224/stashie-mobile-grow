@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -190,6 +189,15 @@ All colors MUST be HSL.
   .animate-icon-bounce {
     animation: iconBounce 1s ease-in-out infinite;
   }
+
+  /* New soft animations for success modal */
+  .animate-sway {
+    animation: sway 3s ease-in-out infinite;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
 }
 
 @keyframes slideUp {
@@ -239,4 +247,9 @@ All colors MUST be HSL.
 @keyframes iconBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-3px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
 }

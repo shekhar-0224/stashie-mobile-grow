@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -9,7 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
 import { Copy, Share2, Leaf, TrendingUp, Users, ArrowLeft, X } from "lucide-react";
-import JarSuccessModal from "./JarSuccessModal";
+import AnimatedSuccessModal from "./AnimatedSuccessModal";
 import AmountInput from "./AmountInput";
 import GrowthStrategySelector from "./GrowthStrategySelector";
 import ExpectedReturns from "./ExpectedReturns";
@@ -427,7 +426,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
         </DialogContent>
       </Dialog>
 
-      <JarSuccessModal
+      <AnimatedSuccessModal
         isOpen={showSuccessModal}
         onClose={() => {
           setShowSuccessModal(false);
@@ -435,6 +434,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
         }}
         jarName={goalName || config.title}
         amount={type === "custom" ? targetAmount : amount}
+        jarType={type}
       />
     </>
   );
