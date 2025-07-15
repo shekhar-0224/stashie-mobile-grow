@@ -27,12 +27,9 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Moderate', 
         icon: (
           <img 
-            src="/lovable-uploads/19cb9961-c93d-4b01-870d-0ca39ac222ee.png" 
+            src="/lovable-uploads/48f2bda4-7550-410d-8634-6cc1b9b900e3.png" 
             alt="Moderate"
             className="w-8 h-8 object-contain"
-            style={{ 
-              filter: 'hue-rotate(20deg) saturate(1.3) brightness(1.1)'
-            }}
           />
         ),
         apy: 6.0 
@@ -41,12 +38,9 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Aggressive', 
         icon: (
           <img 
-            src="/lovable-uploads/19cb9961-c93d-4b01-870d-0ca39ac222ee.png" 
+            src="/lovable-uploads/600dd872-526f-4abf-92e1-3c515210d5f8.png" 
             alt="Aggressive"
             className="w-8 h-8 object-contain"
-            style={{ 
-              filter: 'hue-rotate(300deg) saturate(1.4) brightness(1.1)'
-            }}
           />
         ),
         apy: 9.0 
