@@ -9,12 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
 import { Copy, Share2, Target, Leaf, TrendingUp, Users, ArrowLeft, X } from "lucide-react";
 import JarSuccessModal from "./JarSuccessModal";
-
-interface SavingsModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  type: "quick" | "safe" | "grow" | "custom" | "betting";
-}
+import { SavingsModalProps } from "@/types";
 
 const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const { t } = useTranslation();
