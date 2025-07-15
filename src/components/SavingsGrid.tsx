@@ -1,14 +1,16 @@
-
 import { useState } from "react";
 import SavingsCard from "./SavingsCard";
 import SavingsModal from "./SavingsModal";
 import CustomJarSection from "./CustomJarSection";
+import CreatedJarsSection from "./CreatedJarsSection";
+import AllJarsModal from "./AllJarsModal";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from 'react-i18next';
 
 const SavingsGrid = () => {
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState<"quick" | "safe" | "grow" | "custom" | "betting" | null>(null);
+  const [showAllJars, setShowAllJars] = useState(false);
 
   const handleQuickSave = () => {
     setOpenModal("quick");
@@ -41,6 +43,11 @@ const SavingsGrid = () => {
         <CustomJarSection 
           onSavingJar={handleCustomJar}
           onBettingJar={handleBettingJar}
+        />
+        
+        {/* Created Jars Section */}
+        <CreatedJarsSection 
+          onViewAll={() => setShowAllJars(true)}
         />
         
         {/* 2x2 Grid Layout for Predefined Jars */}
@@ -131,6 +138,12 @@ const SavingsGrid = () => {
         isOpen={openModal === "betting"}
         onClose={closeModal}
         type="betting"
+      />
+      
+      {/* All Jars Modal */}
+      <AllJarsModal
+        isOpen={showAllJars}
+        onClose={() => setShowAllJars(false)}
       />
     </>
   );

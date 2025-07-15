@@ -1,99 +1,60 @@
 
-import { useState } from "react";
-import { User, Flame } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bell, User } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import LanguageSelector from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from "react-router-dom";
-import { LanguageSelector } from './LanguageSelector';
 
-const Header = () => {
+interface HeaderProps {
+  onTotalSavedClick?: () => void;
+}
+
+const Header = ({ onTotalSavedClick }: HeaderProps) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [user] = useState({
-    name: "Emma",
-    totalSaved: "1,200"
-  });
-
-  const [streak] = useState({
-    streakDays: 5,
-    nextBadgeAt: 7
-  });
 
   return (
-    <header className="animate-fade-in p-6 bg-stashbox-cream">
-      <div className="flex items-center justify-between mb-6">
+    <div className="px-6 py-4 space-y-4">
+      {/* Top Row */}
+      <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="relative">
-            <img 
-              src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
-              alt="Stashie Mascot" 
-              className="w-8 h-8 animate-bounce-gentle cursor-pointer hover:animate-sparkle"
-              title={t('header.mascotTitle')}
-              onClick={() => {
-                // Add mascot reaction animation
-                if (navigator.vibrate) {
-                  navigator.vibrate(100);
-                }
-              }}
-            />
+          <div className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center">
+            <span className="text-white font-bold text-lg">S</span>
           </div>
-          <div className="text-2xl font-bold text-stashbox-text">{t('header.appName')}</div>
-        </div>
-        <div className="flex items-center space-x-3">
-          {/* Streak indicator */}
-          <div className="flex items-center space-x-1 bg-stashbox-yellow/20 px-2 py-1 rounded-full">
-            <Flame className="w-4 h-4 text-stashbox-orange animate-bounce-gentle" />
-            <span className="text-sm font-semibold text-stashbox-text">{streak.streakDays}</span>
-          </div>
-          
-          {/* Language Selector */}
-          <LanguageSelector />
-          
-          {/* Profile */}
-          <div 
-            className="w-10 h-10 bg-stashbox-orange rounded-full flex items-center justify-center cursor-pointer hover:bg-stashbox-orange/80 transition-colors"
-            onClick={() => navigate("/profile")}
-          >
-            <User className="w-5 h-5 text-stashbox-text" />
+          <div>
+            <h1 className="text-xl font-bold text-stashbox-text">Good morning</h1>
+            <p className="text-sm text-stashbox-text/60">Ready to grow your savings?</p>
           </div>
         </div>
-      </div>
-      
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold text-stashbox-text leading-tight">
-          {t('header.greeting', { name: user.name })} <br />
-          {t('header.subtitle')} <br />
-          {t('header.subtitle2')}
-        </h1>
         
-        <div className="mt-6 p-4 bg-stashbox-mint rounded-stashbox">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-stashbox-text/80 mb-1">
-                {t('header.totalSaved')}
-              </p>
-              <p className="text-3xl font-bold text-stashbox-text">
-                ${user.totalSaved}
-              </p>
-            </div>
-            <div className="relative">
-              <img 
-                src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
-                alt="Stashie celebrating your savings" 
-                className="w-16 h-16 animate-bounce-gentle hover:animate-sparkle cursor-pointer"
-                title={t('header.celebratingTitle')}
-                onClick={() => {
-                  // Trigger sparkle animation and haptic feedback
-                  if (navigator.vibrate) {
-                    navigator.vibrate([50, 100, 50]);
-                  }
-                }}
-              />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-stashbox-orange rounded-full animate-pulse"></div>
-            </div>
-          </div>
+        <div className="flex items-center space-x-2">
+          <LanguageSelector />
+          <Button variant="ghost" size="sm" className="w-8 h-8 p-0">
+            <Bell className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="w-8 h-8 p-0">
+            <User className="w-4 h-4" />
+          </Button>
         </div>
       </div>
-    </header>
+
+      {/* Total Saved Card - Now Clickable */}
+      <Card 
+        className="p-4 bg-gradient-to-r from-stashbox-mint/20 to-stashbox-blue/20 cursor-pointer hover:from-stashbox-mint/30 hover:to-stashbox-blue/30 transition-all duration-200"
+        onClick={onTotalSavedClick}
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-stashbox-text/60">{t('header.totalSaved')}</p>
+            <p className="text-2xl font-bold text-stashbox-text">$13,670.89</p>
+            <p className="text-xs text-green-600 font-medium">+$280.45 this month</p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-stashbox-text/60">5 Active Jars</p>
+            <p className="text-sm font-medium text-stashbox-text">Click to view all</p>
+          </div>
+        </div>
+      </Card>
+    </div>
   );
 };
 
