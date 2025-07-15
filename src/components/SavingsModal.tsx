@@ -1,11 +1,9 @@
-
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
@@ -75,26 +73,13 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     }
   };
 
-  const getRiskEmoji = (level: number) => {
-    const emojis = ['😌', '🙂', '😐', '😬', '😰'];
-    return emojis[level - 1] || '😐';
-  };
-
-  const getRiskColor = (level: number) => {
-    const colors = ['#10B981', '#84CC16', '#F59E0B', '#F97316', '#EF4444'];
-    return colors[level - 1] || '#F59E0B';
-  };
-
-  const calculateEstimatedReturn = () => {
-    const inputAmount = parseFloat(amount);
-    if (isNaN(inputAmount) || inputAmount <= 0) return 0;
-    
-    const principal = inputAmount;
-    const rate = config.apy / 100;
-    const time = duration / 365;
-    
-    const estimatedReturn = principal * (1 + rate * time);
-    return estimatedReturn;
+  const getRiskData = (level: number) => {
+    const riskOptions = [
+      { name: 'Conservative', emoji: '🌱', apy: 3.0 },
+      { name: 'Moderate', emoji: '😊', apy: 6.0 },
+      { name: 'Aggressive', emoji: '🚀', apy: 9.0 }
+    ];
+    return riskOptions[level - 1] || riskOptions[1];
   };
 
   const calculateCustomReturn = () => {
@@ -102,21 +87,32 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     if (isNaN(inputAmount) || inputAmount <= 0) return 0;
     
     const principal = inputAmount;
-    const riskAPY = getRiskAPY();
-    const rate = riskAPY / 100;
+    const riskData = getRiskData(riskLevel);
+    const rate = riskData.apy / 100;
     const time = duration / 365;
     
     const estimatedReturn = principal * (1 + rate * time);
     return estimatedReturn;
   };
 
-  const getRiskAPY = () => {
-    const baseAPY = 3.0;
-    const riskMultiplier = riskLevel * 1.5;
-    return baseAPY + riskMultiplier;
+  const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const percentage = clickX / width;
+    
+    // Map to 3 levels
+    if (percentage < 0.33) {
+      setRiskLevel(1);
+    } else if (percentage < 0.67) {
+      setRiskLevel(2);
+    } else {
+      setRiskLevel(3);
+    }
   };
 
   const config = getModalConfig();
+  const currentRiskData = getRiskData(riskLevel);
 
   const handleCopyLink = () => {
     const jarName = type === "custom" ? goalName : config.title;
@@ -380,18 +376,23 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <div className="space-y-3">
                 <Label className="text-xs font-medium text-white flex items-center gap-2">
                   <Target className="w-3 h-3" />
-                  Growth Strategy: {riskLevel} {getRiskEmoji(riskLevel)}
+                  Growth Strategy
                 </Label>
                 
                 <div className="bg-white/10 rounded-stashbox p-4 space-y-3">
-                  <div className="relative">
-                    <div className="h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full relative overflow-hidden">
-                      <div className="absolute inset-0 bg-white/20 rounded-full"></div>
-                    </div>
-                    
+                  <div className="text-center">
+                    <div className="text-lg mb-1">{currentRiskData.emoji}</div>
+                    <div className="text-sm font-medium text-white">{currentRiskData.name}</div>
+                    <div className="text-xs text-white/70">{currentRiskData.apy.toFixed(1)}% Expected APY</div>
+                  </div>
+                  
+                  <div 
+                    className="relative h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full cursor-pointer"
+                    onClick={handleSliderClick}
+                  >
                     <div 
-                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300 pointer-events-none"
-                      style={{ left: `${(riskLevel - 1) * 25}%` }}
+                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300"
+                      style={{ left: `${((riskLevel - 1) / 2) * 100}%` }}
                     >
                       <div className="w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-gray-200">
                         <img 
@@ -403,33 +404,44 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                     </div>
                   </div>
                   
-                  <div className="relative z-10">
-                    <Slider
-                      value={[riskLevel]}
-                      onValueChange={(value) => setRiskLevel(value[0])}
-                      max={5}
-                      min={1}
-                      step={1}
-                      className="w-full"
-                    />
-                  </div>
-                  
                   <div className="flex justify-between text-xs text-white/60">
                     <span className="flex items-center gap-1">
-                      😌 Conservative
+                      🌱 Conservative
                     </span>
                     <span className="flex items-center gap-1">
-                      😰 Aggressive
+                      😊 Moderate
                     </span>
-                  </div>
-                  
-                  <div className="bg-white/20 rounded-stashbox p-2">
-                    <div className="text-xs text-white/70">
-                      Expected APY: {(3 + riskLevel * 1.5).toFixed(1)}%
-                    </div>
+                    <span className="flex items-center gap-1">
+                      🚀 Aggressive
+                    </span>
                   </div>
                 </div>
               </div>
+
+              {/* Expected Returns Card - only show when amount is filled */}
+              {targetAmount && parseFloat(targetAmount) > 0 && (
+                <div className="bg-white/10 rounded-stashbox p-3">
+                  <div className="text-xs font-medium text-white mb-2">Expected Returns</div>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <div className="text-lg font-bold text-white">
+                        ${calculateCustomReturn().toFixed(0)}
+                      </div>
+                      <div className="text-xs text-white/70">
+                        After {duration} days
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-medium text-green-300">
+                        +${(calculateCustomReturn() - parseFloat(targetAmount)).toFixed(0)}
+                      </div>
+                      <div className="text-xs text-white/70">
+                        Profit
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </>
           )}
           
