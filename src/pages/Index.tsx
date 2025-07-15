@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import SavingsGrid from "@/components/SavingsGrid";
 import GenieModeBanner from "@/components/GenieModeBanner";
 import AllJarsModal from "@/components/AllJarsModal";
+import StreakCard from "@/components/StreakCard";
 
 const Index = () => {
   const [showAllJars, setShowAllJars] = useState(false);
@@ -12,6 +13,7 @@ const Index = () => {
     <div className="min-h-screen bg-stashbox-cream">
       <div className="max-w-md mx-auto bg-stashbox-cream animate-slide-up">
         <Header onTotalSavedClick={() => setShowAllJars(true)} />
+        <StreakCard />
         <SavingsGrid />
         <div className="py-6">
           <GenieModeBanner />
