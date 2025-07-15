@@ -19,52 +19,46 @@ const AnimatedSuccessModal = ({
   amount, 
   jarType = "quick" 
 }: AnimatedSuccessModalProps) => {
-  const [isFilled, setIsFilled] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
-      setIsFilled(false);
+      setIsAnimating(false);
       return;
     }
     
-    // Start fill animation after modal opens
-    const fillTimer = setTimeout(() => {
-      setIsFilled(true);
+    // Start animation after modal opens
+    const animationTimer = setTimeout(() => {
+      setIsAnimating(true);
     }, 300);
 
-    return () => clearTimeout(fillTimer);
+    return () => clearTimeout(animationTimer);
   }, [isOpen]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[360px] glass-modal border-none rounded-stashbox animate-scale-in bg-white/95 backdrop-blur-xl">
         <div className="flex flex-col items-center text-center py-6 space-y-6">
-          {/* Mascot Logo with fill animation */}
+          {/* Mascot Logo with bounce animation */}
           <div className="relative">
             <div className="relative w-32 h-32 mx-auto">
-              {/* Base mascot logo */}
+              {/* Base mascot logo with bounce animation */}
               <img 
                 src="/lovable-uploads/caec579f-952d-42b2-99af-2dd06979902d.png" 
                 alt="Stashie mascot"
-                className="w-full h-full object-contain"
-              />
-              
-              {/* Water fill overlay - appears when filled */}
-              <div 
-                className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
-                  isFilled ? 'opacity-100' : 'opacity-0'
+                className={`w-full h-full object-contain transition-all duration-1000 ${
+                  isAnimating ? 'animate-bounce-gentle' : ''
                 }`}
-              >
-                {/* Subtle blue tint overlay to show "filled" state */}
-                <div className="absolute inset-0 bg-blue-400/20 rounded-lg mix-blend-multiply"></div>
-              </div>
+              />
             </div>
 
-            {/* Simple sparkles - only show when filled */}
-            {isFilled && (
+            {/* Animated sparkles - only show when animating */}
+            {isAnimating && (
               <div className="absolute inset-0 pointer-events-none">
                 <Sparkles className="absolute top-4 right-4 w-4 h-4 text-stashbox-mint animate-pulse" />
                 <Sparkles className="absolute bottom-8 left-4 w-3 h-3 text-stashbox-mint animate-pulse" style={{ animationDelay: '1s' }} />
+                <Sparkles className="absolute top-8 left-6 w-3 h-3 text-green-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
+                <Sparkles className="absolute bottom-4 right-6 w-4 h-4 text-green-400 animate-pulse" style={{ animationDelay: '1.5s' }} />
               </div>
             )}
           </div>
