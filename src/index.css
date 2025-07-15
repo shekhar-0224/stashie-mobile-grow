@@ -39,12 +39,12 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    /* Stashbox Design System */
+    /* Stashbox Design System - Enhanced for better visibility */
     --stashbox-cream: 30 50% 97%;
-    --stashbox-text: 0 0% 20%;
-    --stashbox-text-light: 0 0% 70%;
-    --stashbox-text-modal: 0 0% 85%;
-    --stashbox-label-modal: 0 0% 90%;
+    --stashbox-text: 0 0% 15%; /* Darker for better contrast */
+    --stashbox-text-light: 0 0% 50%; /* Improved contrast */
+    --stashbox-text-modal: 0 0% 20%; /* Better modal text visibility */
+    --stashbox-label-modal: 0 0% 30%; /* Enhanced label visibility */
     --stashbox-mint: 154 38% 86%;
     --stashbox-orange: 30 96% 70%;
     --stashbox-yellow: 48 96% 76%;
@@ -112,6 +112,10 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-manrope;
+    /* Enhanced text rendering for better visibility */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
@@ -123,10 +127,10 @@ All colors MUST be HSL.
   .bg-stashbox-yellow { background-color: hsl(var(--stashbox-yellow)); }
   .bg-stashbox-blue { background-color: hsl(var(--stashbox-blue)); }
   .bg-stashbox-purple { background-color: hsl(var(--stashbox-purple)); }
-  .text-stashbox-text { color: hsl(var(--stashbox-text)); }
-  .text-stashbox-text-light { color: hsl(var(--stashbox-text-light)); }
-  .text-stashbox-text-modal { color: hsl(var(--stashbox-text-modal)); }
-  .text-stashbox-label-modal { color: hsl(var(--stashbox-label-modal)); }
+  .text-stashbox-text { color: hsl(var(--stashbox-text)); font-weight: 500; }
+  .text-stashbox-text-light { color: hsl(var(--stashbox-text-light)); font-weight: 500; }
+  .text-stashbox-text-modal { color: hsl(var(--stashbox-text-modal)); font-weight: 500; }
+  .text-stashbox-label-modal { color: hsl(var(--stashbox-label-modal)); font-weight: 600; }
   .border-stashbox-text { border-color: hsl(var(--stashbox-text)); }
   .rounded-stashbox { border-radius: 24px; }
   
@@ -135,6 +139,12 @@ All colors MUST be HSL.
     background: rgba(var(--glass-bg));
     backdrop-filter: var(--glass-backdrop);
     border: 1px solid rgba(var(--glass-border));
+  }
+  
+  /* Enhanced text classes for better visibility */
+  .text-enhanced {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.025em;
   }
   
   /* Duolingo-style animations */
