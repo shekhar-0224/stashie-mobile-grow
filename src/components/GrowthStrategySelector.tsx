@@ -1,6 +1,6 @@
 
 import { Label } from "@/components/ui/label";
-import { Target, TrendingDown, TrendingUp, BarChart3 } from "lucide-react";
+import { Target } from "lucide-react";
 
 interface GrowthStrategySelectorProps {
   riskLevel: number;
@@ -12,17 +12,44 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
     const riskOptions = [
       { 
         name: 'Conservative', 
-        icon: <TrendingDown className="w-8 h-8 text-green-500" />,
+        icon: (
+          <img 
+            src="/lovable-uploads/921a4dfb-6295-458a-9bc4-82a2e834dbf4.png" 
+            alt="Conservative"
+            className="w-8 h-8 object-contain"
+            style={{ 
+              clipPath: 'polygon(0% 0%, 33% 0%, 33% 100%, 0% 100%)'
+            }}
+          />
+        ),
         apy: 3.0 
       },
       { 
         name: 'Moderate', 
-        icon: <BarChart3 className="w-8 h-8 text-yellow-500" />,
+        icon: (
+          <img 
+            src="/lovable-uploads/921a4dfb-6295-458a-9bc4-82a2e834dbf4.png" 
+            alt="Moderate"
+            className="w-8 h-8 object-contain"
+            style={{ 
+              clipPath: 'polygon(33% 0%, 66% 0%, 66% 100%, 33% 100%)'
+            }}
+          />
+        ),
         apy: 6.0 
       },
       { 
         name: 'Aggressive', 
-        icon: <TrendingUp className="w-8 h-8 text-orange-500" />,
+        icon: (
+          <img 
+            src="/lovable-uploads/921a4dfb-6295-458a-9bc4-82a2e834dbf4.png" 
+            alt="Aggressive"
+            className="w-8 h-8 object-contain"
+            style={{ 
+              clipPath: 'polygon(66% 0%, 100% 0%, 100% 100%, 66% 100%)'
+            }}
+          />
+        ),
         apy: 9.0 
       }
     ];
