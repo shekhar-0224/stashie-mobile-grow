@@ -1,3 +1,4 @@
+
 // Global type definitions for Stashbox
 
 export interface User {
@@ -76,7 +77,7 @@ export interface SavingsCardProps {
 export interface SavingsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  type: 'quick' | 'safe' | 'grow' | 'custom';
+  type: 'quick' | 'safe' | 'grow' | 'custom' | 'betting';
 }
 
 export interface StreakCardProps {
