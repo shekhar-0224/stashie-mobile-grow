@@ -44,7 +44,7 @@ const AnimatedSuccessModal = ({
             <div className="relative w-32 h-32 mx-auto">
               {/* Base mascot logo */}
               <img 
-                src="/lovable-uploads/763f2049-5f89-4c6d-9b2b-457e95ab356d.png" 
+                src="/lovable-uploads/caec579f-952d-42b2-99af-2dd06979902d.png" 
                 alt="Stashie mascot"
                 className="w-full h-full object-contain"
               />
