@@ -39,13 +39,13 @@ const AnimatedSuccessModal = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[360px] glass-modal border-none rounded-stashbox animate-scale-in bg-white/95 backdrop-blur-xl">
         <div className="flex flex-col items-center text-center py-6 space-y-6">
-          {/* Logo with fill animation */}
+          {/* Mascot Logo with fill animation */}
           <div className="relative">
             <div className="relative w-32 h-32 mx-auto">
-              {/* Base logo */}
+              {/* Base mascot logo */}
               <img 
-                src="/lovable-uploads/ea39cdb9-be87-4a34-992a-a389c7fe03a4.png" 
-                alt="Stashbox Logo"
+                src="/lovable-uploads/763f2049-5f89-4c6d-9b2b-457e95ab356d.png" 
+                alt="Stashie mascot"
                 className="w-full h-full object-contain"
               />
               
