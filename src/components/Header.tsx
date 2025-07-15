@@ -21,9 +21,13 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
     <div className="px-6 py-4 space-y-4">
       {/* Top Row - Fixed Layout */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
+        <div className="flex flex-col items-start space-y-2">
           <div className="w-12 h-12 bg-gradient-to-br from-stashbox-orange to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-white font-bold text-xl">S</span>
+            <img 
+              src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
+              alt="Stashbox Logo" 
+              className="w-8 h-8 object-contain"
+            />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-stashbox-text">Hey Emma,</h1>
@@ -31,15 +35,20 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
           </div>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center">
           {/* Streak Icon */}
-          <div className="flex items-center space-x-1 bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 rounded-full px-3 py-2 shadow-lg">
+          <div className="flex items-center space-x-1 bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 rounded-full px-3 py-2 shadow-lg mr-2">
             <Flame className="w-4 h-4 text-white animate-bounce" fill="currentColor" />
             <span className="text-sm font-bold text-white">{streak.streakDays}</span>
           </div>
           
           <LanguageSelector />
-          <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="w-10 h-10 p-0 bg-stashbox-orange/20 hover:bg-stashbox-orange/30 rounded-full border-2 border-stashbox-orange ml-1"
+            onClick={() => window.location.href = '/profile'}
+          >
             <User className="w-5 h-5 text-stashbox-text" />
           </Button>
         </div>
@@ -50,16 +59,14 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
         className="p-6 bg-gradient-to-br from-stashbox-mint/90 to-stashbox-mint/70 backdrop-blur-sm cursor-pointer hover:from-stashbox-mint/95 hover:to-stashbox-mint/80 transition-all duration-300 border-0 shadow-xl relative overflow-hidden transform hover:scale-[1.02] rounded-3xl"
         onClick={onTotalSavedClick}
       >
-        {/* Cute Character Illustration */}
+        {/* Logo Character Illustration */}
         <div className="absolute top-4 right-6">
           <div className="w-16 h-16 bg-white/30 rounded-full flex items-center justify-center relative">
-            {/* Character eyes */}
-            <div className="absolute top-3 left-4 w-2 h-2 bg-stashbox-text rounded-full"></div>
-            <div className="absolute top-3 right-4 w-2 h-2 bg-stashbox-text rounded-full"></div>
-            {/* Character beak/mouth */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-400 rounded-full"></div>
-            {/* Sprouting leaf */}
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-green-500 text-lg">🌱</div>
+            <img 
+              src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
+              alt="Stashbox Character" 
+              className="w-12 h-12 object-contain"
+            />
           </div>
         </div>
         
