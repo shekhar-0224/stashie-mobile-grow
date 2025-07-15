@@ -19,8 +19,8 @@ interface CreatedJarsSectionProps {
   onViewAll: () => void;
 }
 
-const CircularProgress = ({ progress, color, size = 60 }: { progress: number; color: string; size?: number }) => {
-  const radius = (size - 8) / 2;
+const CircularProgress = ({ progress, color, size = 70 }: { progress: number; color: string; size?: number }) => {
+  const radius = (size - 12) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDasharray = circumference;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -33,16 +33,16 @@ const CircularProgress = ({ progress, color, size = 60 }: { progress: number; co
           cy={size / 2}
           r={radius}
           stroke="currentColor"
-          strokeWidth="4"
+          strokeWidth="8"
           fill="none"
-          className="text-gray-200"
+          className="text-gray-100"
         />
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           stroke={color}
-          strokeWidth="4"
+          strokeWidth="8"
           fill="none"
           strokeDasharray={strokeDasharray}
           strokeDashoffset={strokeDashoffset}
@@ -51,7 +51,7 @@ const CircularProgress = ({ progress, color, size = 60 }: { progress: number; co
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-sm font-bold text-stashbox-text">{progress}%</span>
+        <span className="text-lg font-bold text-stashbox-text">{progress}%</span>
       </div>
     </div>
   );
@@ -61,7 +61,7 @@ const CreatedJarsSection = ({ onViewAll }: CreatedJarsSectionProps) => {
   const { t } = useTranslation();
   const [showActions, setShowActions] = useState<string | null>(null);
 
-  // Mock data - replace with actual data from your state management
+  // Mock data - only show first 2 items
   const createdJars: CreatedJar[] = [
     {
       id: '1',
@@ -80,46 +80,8 @@ const CreatedJarsSection = ({ onViewAll }: CreatedJarsSectionProps) => {
       progress: 45,
       color: '#F59E0B',
       isShared: true
-    },
-    {
-      id: '3',
-      name: 'Emergency Fund',
-      type: 'saving',
-      totalDeposited: 2150.25,
-      progress: 82,
-      color: '#3B82F6',
-      isShared: false
-    },
-    {
-      id: '4',
-      name: 'House Down Payment',
-      type: 'saving',
-      totalDeposited: 50452.00,
-      progress: 25,
-      color: '#8B5CF6',
-      isShared: false
-    },
-    {
-      id: '5',
-      name: 'Wedding Fund',
-      type: 'saving',
-      totalDeposited: 5670.30,
-      progress: 91,
-      color: '#EC4899',
-      isShared: true
-    },
-    {
-      id: '6',
-      name: 'New Car',
-      type: 'saving',
-      totalDeposited: 3420.00,
-      progress: 34,
-      color: '#06B6D4',
-      isShared: false
     }
   ];
-
-  const visibleJars = createdJars.slice(0, 6);
 
   const handleCopyLink = (jarId: string) => {
     navigator.clipboard.writeText(`https://stashbox.app/jar/${jarId}`);
@@ -155,73 +117,73 @@ const CreatedJarsSection = ({ onViewAll }: CreatedJarsSectionProps) => {
         </Button>
       </div>
       
-      <div className="grid grid-cols-2 gap-3">
-        {visibleJars.map((jar) => (
+      <div className="grid grid-cols-2 gap-4">
+        {createdJars.map((jar) => (
           <Card 
             key={jar.id} 
-            className="p-4 bg-white/80 backdrop-blur-sm hover:bg-white/90 transition-all duration-300 border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] relative"
+            className="p-5 bg-white/90 backdrop-blur-sm hover:bg-white/95 transition-all duration-300 border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] relative rounded-3xl"
           >
-            <div className="flex flex-col items-center space-y-3">
+            <div className="flex flex-col items-center space-y-4">
               {/* Circular Progress */}
               <div className="relative">
-                <CircularProgress progress={jar.progress} color={jar.color} size={50} />
+                <CircularProgress progress={jar.progress} color={jar.color} size={70} />
                 <div 
-                  className="absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center shadow-md"
+                  className="absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
                   style={{ backgroundColor: jar.color }}
                 >
                   {jar.type === 'saving' ? (
-                    <Leaf className="w-3 h-3 text-white" />
+                    <Leaf className="w-4 h-4 text-white" />
                   ) : (
-                    <TrendingUp className="w-3 h-3 text-white" />
+                    <TrendingUp className="w-4 h-4 text-white" />
                   )}
                 </div>
               </div>
               
               <div className="text-center">
-                <h4 className="font-bold text-stashbox-text text-sm leading-tight">{jar.name}</h4>
-                <p className="text-xs text-stashbox-text font-semibold opacity-70 mt-1">
+                <h4 className="font-bold text-stashbox-text text-base leading-tight mb-1">{jar.name}</h4>
+                <p className="text-sm text-stashbox-text font-semibold opacity-80">
                   ${jar.totalDeposited.toLocaleString()}
                 </p>
               </div>
               
               {jar.isShared && (
-                <div className="absolute top-2 right-2">
+                <div className="absolute top-3 right-3">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowActions(showActions === jar.id ? null : jar.id)}
-                    className="w-6 h-6 p-0 bg-white/60 hover:bg-white/80 rounded-full"
+                    className="w-7 h-7 p-0 bg-white/80 hover:bg-white/90 rounded-full shadow-md"
                   >
-                    <MoreHorizontal className="w-3 h-3 text-stashbox-text" />
+                    <MoreHorizontal className="w-4 h-4 text-stashbox-text" />
                   </Button>
                   
                   {showActions === jar.id && (
-                    <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-xl border p-1 z-10 min-w-[120px]">
+                    <div className="absolute right-0 top-full mt-2 bg-white rounded-xl shadow-xl border p-1 z-10 min-w-[130px]">
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleCopyLink(jar.id)}
-                        className="w-full justify-start px-2 py-1 h-8 text-xs"
+                        className="w-full justify-start px-3 py-2 h-9 text-sm rounded-lg"
                       >
-                        <Copy className="w-3 h-3 mr-2" />
+                        <Copy className="w-4 h-4 mr-2" />
                         Copy Link
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleShare(jar.id)}
-                        className="w-full justify-start px-2 py-1 h-8 text-xs"
+                        className="w-full justify-start px-3 py-2 h-9 text-sm rounded-lg"
                       >
-                        <Share className="w-3 h-3 mr-2" />
+                        <Share className="w-4 h-4 mr-2" />
                         Share
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDelete(jar.id)}
-                        className="w-full justify-start px-2 py-1 h-8 text-xs text-red-600 hover:text-red-700"
+                        className="w-full justify-start px-3 py-2 h-9 text-sm text-red-600 hover:text-red-700 rounded-lg"
                       >
-                        <Trash2 className="w-3 h-3 mr-2" />
+                        <Trash2 className="w-4 h-4 mr-2" />
                         Delete
                       </Button>
                     </div>

@@ -13,11 +13,11 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="px-6 py-4 space-y-4">
+    <div className="px-6 py-4 space-y-5">
       {/* Top Row */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-stashbox-orange rounded-full flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-stashbox-orange to-orange-500 rounded-full flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-xl">S</span>
           </div>
           <div>
@@ -28,40 +28,40 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
         
         <div className="flex items-center space-x-2">
           <LanguageSelector />
-          <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/10 backdrop-blur-sm hover:bg-white/20">
+          <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full">
             <Bell className="w-5 h-5 text-stashbox-text" />
           </Button>
-          <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/10 backdrop-blur-sm hover:bg-white/20">
+          <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full">
             <User className="w-5 h-5 text-stashbox-text" />
           </Button>
         </div>
       </div>
 
-      {/* Total Saved Card - Better design */}
+      {/* Total Saved Card - Redesigned */}
       <Card 
-        className="p-5 bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm cursor-pointer hover:from-white/90 hover:to-white/70 transition-all duration-300 border-0 shadow-xl relative overflow-hidden transform hover:scale-[1.02]"
+        className="p-6 bg-gradient-to-br from-stashbox-mint/80 to-stashbox-mint/60 backdrop-blur-sm cursor-pointer hover:from-stashbox-mint/90 hover:to-stashbox-mint/70 transition-all duration-300 border-0 shadow-xl relative overflow-hidden transform hover:scale-[1.02] rounded-3xl"
         onClick={onTotalSavedClick}
       >
-        {/* Decorative elements */}
-        <div className="absolute top-3 right-4 flex items-center space-x-1">
-          <div className="w-3 h-3 bg-stashbox-mint rounded-full animate-pulse"></div>
-          <div className="w-3 h-3 bg-stashbox-orange rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-          <div className="w-3 h-3 bg-stashbox-yellow rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+        {/* Background illustration */}
+        <div className="absolute top-4 right-6">
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+            <div className="text-2xl">💰</div>
+          </div>
         </div>
         
-        <div className="pr-16">
-          <p className="text-sm font-semibold text-stashbox-text/70 mb-2">Your total saved so far:</p>
-          <p className="text-4xl font-bold text-stashbox-text mb-2">$1,200</p>
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-green-600 font-bold bg-green-50 px-3 py-1 rounded-full">+$280.45 this month</p>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="text-sm text-stashbox-text/80 font-semibold hover:text-stashbox-text hover:bg-stashbox-mint/20 px-4 py-2 rounded-full"
-            >
-              5 Active Jars • Tap to view →
-            </Button>
+        <div className="pr-20">
+          <p className="text-sm font-semibold text-stashbox-text/80 mb-2">Your total saved so far:</p>
+          <div className="flex items-baseline space-x-3 mb-3">
+            <p className="text-4xl font-bold text-stashbox-text">$1,200</p>
+            <p className="text-sm text-green-700 font-bold bg-green-100 px-3 py-1 rounded-full">+$280.45</p>
           </div>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-sm text-stashbox-text/90 font-semibold hover:text-stashbox-text hover:bg-white/20 px-4 py-2 rounded-full transition-all duration-200"
+          >
+            5 Active Jars • Tap to view →
+          </Button>
         </div>
       </Card>
     </div>

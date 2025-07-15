@@ -41,10 +41,10 @@ All colors MUST be HSL.
 
     /* Stashbox Design System - Enhanced for better visibility */
     --stashbox-cream: 30 50% 97%;
-    --stashbox-text: 0 0% 15%; /* Darker for better contrast */
-    --stashbox-text-light: 0 0% 50%; /* Improved contrast */
-    --stashbox-text-modal: 0 0% 20%; /* Better modal text visibility */
-    --stashbox-label-modal: 0 0% 30%; /* Enhanced label visibility */
+    --stashbox-text: 0 0% 10%; /* Much darker for better contrast */
+    --stashbox-text-light: 0 0% 40%; /* Improved contrast */
+    --stashbox-text-modal: 0 0% 15%; /* Better modal text visibility */
+    --stashbox-label-modal: 0 0% 20%; /* Enhanced label visibility */
     --stashbox-mint: 154 38% 86%;
     --stashbox-orange: 30 96% 70%;
     --stashbox-yellow: 48 96% 76%;
@@ -116,6 +116,7 @@ All colors MUST be HSL.
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-weight: 500; /* Make all text medium weight for better visibility */
   }
 }
 
@@ -127,10 +128,22 @@ All colors MUST be HSL.
   .bg-stashbox-yellow { background-color: hsl(var(--stashbox-yellow)); }
   .bg-stashbox-blue { background-color: hsl(var(--stashbox-blue)); }
   .bg-stashbox-purple { background-color: hsl(var(--stashbox-purple)); }
-  .text-stashbox-text { color: hsl(var(--stashbox-text)); font-weight: 500; }
-  .text-stashbox-text-light { color: hsl(var(--stashbox-text-light)); font-weight: 500; }
-  .text-stashbox-text-modal { color: hsl(var(--stashbox-text-modal)); font-weight: 500; }
-  .text-stashbox-label-modal { color: hsl(var(--stashbox-label-modal)); font-weight: 600; }
+  .text-stashbox-text { 
+    color: hsl(var(--stashbox-text)); 
+    font-weight: 600; /* Bolder for better visibility */
+  }
+  .text-stashbox-text-light { 
+    color: hsl(var(--stashbox-text-light)); 
+    font-weight: 600; 
+  }
+  .text-stashbox-text-modal { 
+    color: hsl(var(--stashbox-text-modal)); 
+    font-weight: 600; 
+  }
+  .text-stashbox-label-modal { 
+    color: hsl(var(--stashbox-label-modal)); 
+    font-weight: 700; 
+  }
   .border-stashbox-text { border-color: hsl(var(--stashbox-text)); }
   .rounded-stashbox { border-radius: 24px; }
   
@@ -145,6 +158,7 @@ All colors MUST be HSL.
   .text-enhanced {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.025em;
+    font-weight: 600;
   }
   
   /* Duolingo-style animations */
@@ -166,6 +180,15 @@ All colors MUST be HSL.
   
   .animate-confetti {
     animation: confetti 1s ease-out;
+  }
+
+  /* Duolingo-style icon animations */
+  .animate-icon-pulse {
+    animation: iconPulse 2s ease-in-out infinite;
+  }
+
+  .animate-icon-bounce {
+    animation: iconBounce 1s ease-in-out infinite;
   }
 }
 
@@ -200,4 +223,20 @@ All colors MUST be HSL.
   0% { transform: scale(1) rotate(0deg); opacity: 1; }
   50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
   100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+@keyframes iconPulse {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }

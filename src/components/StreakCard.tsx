@@ -13,39 +13,26 @@ const StreakCard = () => {
   const progressPercent = (streak.streakDays / streak.nextBadgeAt) * 100;
 
   return (
-    <div className="bg-gradient-to-br from-red-500 via-red-400 to-orange-400 p-5 rounded-stashbox animate-slide-up shadow-xl relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10"></div>
-      <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-8 -translate-x-8"></div>
-      
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-              <Flame className="w-6 h-6 text-white animate-bounce-gentle" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white">
-                {streak.streakDays} Day Streak!
-              </h3>
-              <p className="text-xs text-white/80 font-medium">
-                Keep it going! 🔥
-              </p>
+    <div className="flex justify-center mb-4">
+      {/* Duolingo-style Streak Badge */}
+      <div 
+        className="bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 rounded-full px-6 py-3 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer animate-pulse"
+        style={{
+          boxShadow: '0 8px 25px rgba(239, 68, 68, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+        }}
+      >
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+            <Flame className="w-5 h-5 text-white animate-bounce" />
+          </div>
+          <div className="text-white">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl font-bold">{streak.streakDays}</span>
+              <span className="text-sm font-semibold opacity-90">day streak!</span>
             </div>
           </div>
-          <div className="text-3xl animate-bounce-gentle">🎯</div>
+          <div className="text-xl">🔥</div>
         </div>
-        
-        <div className="relative w-full bg-white/20 rounded-full h-3 mb-3 overflow-hidden">
-          <div 
-            className="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-300 to-white rounded-full transition-all duration-1000 animate-fluid-fill shadow-inner"
-            style={{ width: `${progressPercent}%` }}
-          ></div>
-        </div>
-        
-        <p className="text-sm text-white font-semibold">
-          {streak.nextBadgeAt - streak.streakDays} days to next badge! 🏆
-        </p>
       </div>
     </div>
   );
