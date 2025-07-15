@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -8,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
-import { Copy, Share2, Target, Leaf, TrendingUp, Users, ArrowLeft, X, Clock, Calendar } from "lucide-react";
+import { Copy, Share2, Target, Leaf, TrendingUp, Users, ArrowLeft, X } from "lucide-react";
 
 interface SavingsModalProps {
   isOpen: boolean;
@@ -53,7 +54,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
         };
       case "custom":
         return {
-          title: "🪄 Create Your Jar",
+          title: "Create Custom Saving Jar",
           ...SAVINGS_JARS.CUSTOM,
           placeholder: "e.g., 500"
         };
@@ -79,18 +80,9 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
     return emojis[level - 1] || '😐';
   };
 
-  const getDurationEmoji = (days: number) => {
-    if (days <= 30) return '⚡';
-    if (days <= 90) return '🌙';
-    if (days <= 180) return '🌟';
-    return '🏆';
-  };
-
-  const getDurationLabel = (days: number) => {
-    if (days <= 30) return 'Sprint';
-    if (days <= 90) return 'Marathon';
-    if (days <= 180) return 'Journey';
-    return 'Legacy';
+  const getRiskColor = (level: number) => {
+    const colors = ['#10B981', '#84CC16', '#F59E0B', '#F97316', '#EF4444'];
+    return colors[level - 1] || '#F59E0B';
   };
 
   const calculateEstimatedReturn = () => {
@@ -338,124 +330,75 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   // Main Form View
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[400px] max-h-[80vh] overflow-y-auto bg-white border-none rounded-[24px] animate-slide-up shadow-2xl">
-        <DialogHeader className="relative pb-4">
+      <DialogContent className="sm:max-w-[350px] max-h-[80vh] overflow-y-auto glass-modal border-none rounded-stashbox animate-slide-up">
+        <DialogHeader className="relative pb-2">
           <Button
             onClick={onClose}
             variant="ghost"
             size="sm"
-            className="absolute -right-2 -top-2 h-8 w-8 p-0 text-gray-400 hover:bg-gray-100 rounded-full z-50"
+            className="absolute -right-1 -top-1 h-6 w-6 p-0 text-white hover:bg-white/20 rounded-full z-50"
           >
-            <X className="h-4 w-4" />
+            <X className="h-3 w-3" />
           </Button>
-          <DialogTitle className="text-xl font-bold text-gray-800 flex items-center space-x-2 pr-8">
+          <DialogTitle className="text-base font-semibold text-white flex items-center space-x-2 pr-6">
+            <Leaf className="w-4 h-4 text-stashbox-mint" />
             <span>{config.title}</span>
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-6 py-2">
+        <div className="space-y-3 py-1">
+          {type === "custom" && (
+            <div className="space-y-1.5">
+              <Label htmlFor="goalName" className="text-xs font-medium text-white">
+                {t('modal.goalName')}
+              </Label>
+              <Input
+                id="goalName"
+                placeholder={t('modal.goalNamePlaceholder')}
+                value={goalName}
+                onChange={(e) => setGoalName(e.target.value)}
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+              />
+            </div>
+          )}
+          
+          <div className="space-y-1.5">
+            <Label htmlFor="amount" className="text-xs font-medium text-white">
+              {type === "custom" ? t('modal.targetAmount') : t('modal.enterAmount')}
+            </Label>
+            <Input
+              id="amount"
+              placeholder={config.placeholder}
+              value={type === "custom" ? targetAmount : amount}
+              onChange={(e) => type === "custom" ? setTargetAmount(e.target.value) : setAmount(e.target.value)}
+              className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+            />
+          </div>
+          
           {type === "custom" && (
             <>
               <div className="space-y-3">
-                <Label className="text-sm font-semibold text-gray-700">
-                  What are you saving for?
-                </Label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-lg">🎯</span>
-                  <Input
-                    placeholder="e.g., PS5, Rent, Travel Fund"
-                    value={goalName}
-                    onChange={(e) => setGoalName(e.target.value)}
-                    className="pl-12 h-12 rounded-[20px] border-2 border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 text-base font-medium focus:border-stashbox-mint focus:bg-white transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Label className="text-sm font-semibold text-gray-700">
-                  How much do you need?
-                </Label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-lg font-bold text-green-600">$</span>
-                  <Input
-                    placeholder="500"
-                    value={targetAmount}
-                    onChange={(e) => setTargetAmount(e.target.value)}
-                    className="pl-12 h-12 rounded-[20px] border-2 border-gray-200 bg-gray-50 text-gray-800 placeholder:text-gray-400 text-base font-medium focus:border-stashbox-mint focus:bg-white transition-all"
-                    inputMode="numeric"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <Label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  Select Duration
+                <Label className="text-xs font-medium text-white flex items-center gap-2">
+                  <Target className="w-3 h-3" />
+                  Growth Strategy: {riskLevel} {getRiskEmoji(riskLevel)}
                 </Label>
                 
-                <div className="bg-gray-50 rounded-[20px] p-4 space-y-4">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">{getDurationEmoji(duration)}</span>
-                      <div>
-                        <div className="text-sm font-semibold text-gray-800">{getDurationLabel(duration)}</div>
-                        <div className="text-xs text-gray-500">{duration} days</div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-lg font-bold text-gray-800">{duration}</div>
-                      <div className="text-xs text-gray-500">days</div>
-                    </div>
-                  </div>
-                  
-                  <Slider
-                    value={[duration]}
-                    onValueChange={(value) => setDuration(value[0])}
-                    max={365}
-                    min={30}
-                    step={30}
-                    className="w-full"
-                  />
-                  
-                  <div className="flex justify-between text-xs text-gray-400">
-                    <span>30 days</span>
-                    <span>365 days</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <Label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                  <Target className="w-4 h-4" />
-                  Growth Strategy
-                </Label>
-                
-                <div className="bg-gray-50 rounded-[20px] p-4 space-y-4">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">🌱</span>
-                      <div>
-                        <div className="text-sm font-semibold text-gray-800">Risk Level {riskLevel}</div>
-                        <div className="text-xs text-gray-500">{getRiskEmoji(riskLevel)} {riskLevel === 1 ? 'Conservative' : riskLevel === 5 ? 'Aggressive' : 'Moderate'}</div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-lg font-bold text-gray-800">{(3 + riskLevel * 1.5).toFixed(1)}%</div>
-                      <div className="text-xs text-gray-500">Expected APY</div>
-                    </div>
-                  </div>
-                  
+                <div className="bg-white/10 rounded-stashbox p-4 space-y-3">
                   <div className="relative">
-                    <div className="h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full relative overflow-hidden">
-                      <div className="absolute inset-0 bg-white/30 rounded-full"></div>
+                    <div className="h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/20 rounded-full"></div>
                     </div>
                     
                     <div 
                       className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300 pointer-events-none"
                       style={{ left: `${(riskLevel - 1) * 25}%` }}
                     >
-                      <div className="w-5 h-5 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-gray-300">
-                        <span className="text-xs">🌱</span>
+                      <div className="w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-gray-200">
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Stashbox Logo" 
+                          className="w-3 h-3"
+                        />
                       </div>
                     </div>
                   </div>
@@ -467,11 +410,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                       max={5}
                       min={1}
                       step={1}
-                      className="w-full opacity-0"
+                      className="w-full"
                     />
                   </div>
                   
-                  <div className="flex justify-between text-xs text-gray-400">
+                  <div className="flex justify-between text-xs text-white/60">
                     <span className="flex items-center gap-1">
                       😌 Conservative
                     </span>
@@ -479,34 +422,25 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                       😰 Aggressive
                     </span>
                   </div>
+                  
+                  <div className="bg-white/20 rounded-stashbox p-2">
+                    <div className="text-xs text-white/70">
+                      Expected APY: {(3 + riskLevel * 1.5).toFixed(1)}%
+                    </div>
+                  </div>
                 </div>
               </div>
             </>
           )}
           
-          {type !== "custom" && (
-            <div className="space-y-2">
-              <Label htmlFor="amount" className="text-sm font-medium text-gray-700">
-                {t('modal.enterAmount')}
-              </Label>
-              <Input
-                id="amount"
-                placeholder={config.placeholder}
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="h-10 rounded-[16px] border-gray-200 bg-white text-gray-800 placeholder:text-gray-400 text-sm"
-              />
-            </div>
-          )}
-          
-          <div className="bg-gray-50 rounded-[20px] p-4 space-y-3">
+          <div className="bg-white/10 rounded-stashbox p-3 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <Label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                  <Users className="w-4 h-4" />
+              <div className="space-y-0.5">
+                <Label className="text-xs font-medium text-white flex items-center gap-2">
+                  <Users className="w-3 h-3" />
                   Allow friends to contribute
                 </Label>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-white/60">
                   Let others add funds to boost your goal
                 </p>
               </div>
@@ -519,10 +453,10 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           
           <Button
             onClick={handleDeposit}
-            className="w-full bg-stashbox-mint text-gray-700 hover:bg-stashbox-mint/90 font-semibold py-3 rounded-[20px] transition-all duration-200 flex items-center justify-center gap-2 text-base h-12"
+            className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-2 rounded-stashbox transition-all duration-200 flex items-center justify-center gap-2 text-sm h-8"
           >
-            <Leaf className="w-4 h-4" />
-            {type === "custom" ? (isSharedJar ? "🌿 Create Shared Jar" : "🌿 Create Jar") : "Start Saving"}
+            <Leaf className="w-3 h-3" />
+            {type === "custom" ? (isSharedJar ? "Create Shared Jar" : "Create Jar") : "Start Saving"}
           </Button>
         </div>
       </DialogContent>
