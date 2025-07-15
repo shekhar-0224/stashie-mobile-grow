@@ -35,51 +35,28 @@ const AnimatedSuccessModal = ({
     return () => clearTimeout(fillTimer);
   }, [isOpen]);
 
-  // Get jar color based on type
-  const getJarColor = () => {
-    switch (jarType) {
-      case "safe": return "from-stashbox-blue to-blue-300";
-      case "grow": return "from-stashbox-mint to-green-300";
-      case "custom": return "from-stashbox-purple to-purple-300";
-      case "betting": return "from-stashbox-orange to-orange-300";
-      default: return "from-stashbox-yellow to-yellow-300";
-    }
-  };
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[360px] glass-modal border-none rounded-stashbox animate-scale-in bg-white/95 backdrop-blur-xl">
         <div className="flex flex-col items-center text-center py-6 space-y-6">
-          {/* Simple Jar Logo */}
+          {/* Logo with fill animation */}
           <div className="relative">
             <div className="relative w-32 h-32 mx-auto">
-              {/* Jar Body */}
-              <div className={`w-full h-full rounded-3xl bg-gradient-to-br ${getJarColor()} shadow-xl relative overflow-hidden border-4 border-white/50`}>
-                {/* Water Fill - Simple transition */}
-                <div 
-                  className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-blue-400/60 to-blue-300/40 transition-all duration-2000 ease-in-out rounded-b-3xl ${
-                    isFilled ? 'h-3/4 opacity-100' : 'h-0 opacity-0'
-                  }`}
-                >
-                  {/* Simple water surface shimmer */}
-                  <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                </div>
-
-                {/* Simple jar face - appears when filled */}
-                <div 
-                  className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1000 ${
-                    isFilled ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <div className="flex space-x-3 mb-4">
-                    <div className="w-3 h-3 bg-gray-700 rounded-full"></div>
-                    <div className="w-3 h-3 bg-gray-700 rounded-full"></div>
-                  </div>
-                  <div className="w-4 h-2 bg-gray-700 rounded-full"></div>
-                </div>
-                
-                {/* Jar Rim */}
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full shadow-lg border-2 border-white/50"></div>
+              {/* Base logo */}
+              <img 
+                src="/lovable-uploads/ea39cdb9-be87-4a34-992a-a389c7fe03a4.png" 
+                alt="Stashbox Logo"
+                className="w-full h-full object-contain"
+              />
+              
+              {/* Water fill overlay - appears when filled */}
+              <div 
+                className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
+                  isFilled ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                {/* Subtle blue tint overlay to show "filled" state */}
+                <div className="absolute inset-0 bg-blue-400/20 rounded-lg mix-blend-multiply"></div>
               </div>
             </div>
 
