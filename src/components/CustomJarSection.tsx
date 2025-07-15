@@ -21,10 +21,10 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
           onClick={onSavingJar}
           className="flex-1 max-w-[140px] h-24 p-4 bg-transparent hover:bg-emerald-50/50 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 transition-all duration-300 hover:scale-105 group border-0"
         >
-          {/* Glass Jar Icon */}
-          <div className="w-12 h-12 bg-gradient-to-b from-emerald-100 to-emerald-200 border-2 border-emerald-300 rounded-2xl relative overflow-hidden shadow-lg">
+          {/* Square Glass Jar Icon */}
+          <div className="w-12 h-12 bg-gradient-to-b from-emerald-100 to-emerald-200 border-2 border-emerald-300 rounded-lg relative overflow-hidden shadow-lg">
             {/* Liquid Fill */}
-            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-emerald-400 to-emerald-300 rounded-b-2xl"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-emerald-400 to-emerald-300 rounded-b-lg"></div>
             
             {/* Floating Coins */}
             <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
@@ -59,8 +59,8 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
           onClick={onBettingJar}
           className="flex-1 max-w-[140px] h-24 p-4 bg-transparent hover:bg-orange-50/50 shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 transition-all duration-300 hover:scale-105 group border-0"
         >
-          {/* Glass Jar Icon */}
-          <div className="w-12 h-12 bg-gradient-to-b from-orange-100 to-orange-200 border-2 border-orange-300 rounded-2xl relative overflow-hidden shadow-lg">
+          {/* Square Glass Jar Icon */}
+          <div className="w-12 h-12 bg-gradient-to-b from-orange-100 to-orange-200 border-2 border-orange-300 rounded-lg relative overflow-hidden shadow-lg">
             {/* Coins */}
             <div className="absolute bottom-2 left-2">
               <div className="w-2 h-2 bg-yellow-400 border border-yellow-500 rounded-full shadow-sm"></div>
@@ -100,8 +100,8 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
           disabled
           className="flex-1 max-w-[140px] h-24 p-4 bg-transparent shadow-none rounded-3xl flex flex-col items-center justify-center space-y-2 opacity-60 border-0"
         >
-          {/* Logo Jar Base - Faded */}
-          <div className="w-12 h-12 bg-gradient-to-b from-gray-200 to-gray-300 border-2 border-gray-300 rounded-2xl relative">
+          {/* Square Logo Jar Base - Faded */}
+          <div className="w-12 h-12 bg-gradient-to-b from-gray-200 to-gray-300 border-2 border-gray-300 rounded-lg relative">
             {/* Logo */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4 h-4 bg-white border border-gray-200 rounded-full flex items-center justify-center">
