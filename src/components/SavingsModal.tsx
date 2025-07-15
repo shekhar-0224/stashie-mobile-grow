@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -170,8 +171,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   if (type === "betting") {
     return (
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-[350px] max-h-[80vh] overflow-y-auto glass-modal border-none rounded-stashbox animate-slide-up">
-          <DialogHeader className="relative pb-2">
+        <DialogContent className="sm:max-w-[350px] glass-modal border-none rounded-stashbox animate-slide-up">
+          <DialogHeader className="relative pb-1">
             <Button
               onClick={onClose}
               variant="ghost"
@@ -186,8 +187,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             </DialogTitle>
           </DialogHeader>
           
-          <div className="space-y-3 py-1">
-            <div className="space-y-1.5">
+          <div className="space-y-2 py-1">
+            <div className="space-y-1">
               <Label htmlFor="betDescription" className="text-xs font-medium text-white">
                 Define the bet
               </Label>
@@ -195,12 +196,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 value={betDescription}
                 onChange={(e) => setBetDescription(e.target.value.slice(0, 20))}
                 placeholder="e.g., Who will win the match?"
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
               />
               <p className="text-xs text-white/60">({betDescription.length}/20)</p>
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <Label htmlFor="winConditions" className="text-xs font-medium text-white">
                 Set win condition(s)
               </Label>
@@ -208,12 +209,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 value={winConditions}
                 onChange={(e) => setWinConditions(e.target.value.slice(0, 20))}
                 placeholder="e.g., Team A wins or match ends in draw"
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
               />
               <p className="text-xs text-white/60">({winConditions.length}/20)</p>
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <Label htmlFor="inviteList" className="text-xs font-medium text-white">
                 Invite people to join
               </Label>
@@ -221,7 +222,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 value={inviteList}
                 onChange={(e) => setInviteList(e.target.value.slice(0, 20))}
                 placeholder="Enter email addresses or usernames"
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
               />
               <p className="text-xs text-white/60">({inviteList.length}/20)</p>
             </div>
@@ -234,7 +235,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             
             <Button
               onClick={handleDeposit}
-              className="w-full bg-stashbox-orange text-white hover:bg-stashbox-orange/90 font-medium py-2 rounded-stashbox transition-all duration-200 text-sm h-8"
+              className="w-full bg-stashbox-orange text-white hover:bg-stashbox-orange/90 font-medium py-2 rounded-stashbox transition-all duration-200 text-sm h-7"
             >
               Create Betting Jar
             </Button>
@@ -248,8 +249,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   if (showShareOptions) {
     return (
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-[350px] max-h-[80vh] overflow-y-auto glass-modal border-none rounded-stashbox animate-slide-up">
-          <DialogHeader className="relative pb-2">
+        <DialogContent className="sm:max-w-[350px] glass-modal border-none rounded-stashbox animate-slide-up">
+          <DialogHeader className="relative pb-1">
             <Button
               onClick={handleBackToForm}
               variant="ghost"
@@ -271,9 +272,9 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             </DialogTitle>
           </DialogHeader>
           
-          <div className="space-y-3 py-1">
+          <div className="space-y-2 py-1">
             <div className="text-center">
-              <p className="text-white/80 text-xs mb-3">
+              <p className="text-white/80 text-xs mb-2">
                 Your {goalName || config.title} is ready! Share it with others to start collecting contributions.
               </p>
             </div>
@@ -282,7 +283,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Button
                 onClick={handleCopyLink}
                 variant="outline"
-                className="flex-1 bg-white/20 text-white border-white/30 hover:bg-white/30 text-xs h-8"
+                className="flex-1 bg-white/20 text-white border-white/30 hover:bg-white/30 text-xs h-7"
               >
                 <Copy className="w-3 h-3 mr-1" />
                 Copy Link
@@ -290,7 +291,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Button
                 onClick={handleShare}
                 variant="outline"
-                className="flex-1 bg-white/20 text-white border-white/30 hover:bg-white/30 text-xs h-8"
+                className="flex-1 bg-white/20 text-white border-white/30 hover:bg-white/30 text-xs h-7"
               >
                 <Share2 className="w-3 h-3 mr-1" />
                 Share
@@ -299,7 +300,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             
             <Button
               onClick={onClose}
-              className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-2 rounded-stashbox text-xs h-8"
+              className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-2 rounded-stashbox text-xs h-7"
             >
               Continue to Dashboard
             </Button>
@@ -313,7 +314,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-[350px] max-h-[85vh] overflow-y-auto glass-modal border-none rounded-stashbox animate-slide-up">
+        <DialogContent className="sm:max-w-[350px] glass-modal border-none rounded-stashbox animate-slide-up">
           <DialogHeader className="relative pb-0">
             <Button
               onClick={onClose}
@@ -329,8 +330,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             </DialogTitle>
           </DialogHeader>
           
-          <div className="space-y-2.5 py-1">
-            <div className="space-y-1.5">
+          <div className="space-y-2 py-1">
+            <div className="space-y-1">
               <Label htmlFor="purpose" className="text-xs font-medium text-white">
                 {type === "custom" ? t('modal.goalName') : "Purpose"}
               </Label>
@@ -338,12 +339,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 value={goalName}
                 onChange={(e) => setGoalName(e.target.value.slice(0, 20))}
                 placeholder={type === "custom" ? t('modal.goalNamePlaceholder') : "e.g., Vacation fund"}
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
               />
               <p className="text-xs text-white/60">({goalName.length}/20)</p>
             </div>
             
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <Label htmlFor="amount" className="text-xs font-medium text-white">
                 {type === "custom" ? t('modal.targetAmount') : t('modal.enterAmount')}
               </Label>
@@ -351,22 +352,22 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 value={type === "custom" ? targetAmount : amount}
                 onChange={type === "custom" ? (value) => setTargetAmount(value) : (value) => setAmount(value)}
                 placeholder={config.placeholder}
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
               />
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <Label className="text-xs font-medium text-white">
                 Duration ({duration} days)
               </Label>
               
-              <div className="bg-white/10 rounded-stashbox p-2">
-                <div className="flex gap-1.5">
+              <div className="bg-white/10 rounded-stashbox p-1.5">
+                <div className="flex gap-1">
                   {durationOptions.map((option) => (
                     <button
                       key={option.days}
                       onClick={() => handleDurationChange(option.days)}
-                      className={`flex-1 rounded-full py-1.5 px-2 text-xs font-medium transition-all duration-200 ${
+                      className={`flex-1 rounded-full py-1 px-2 text-xs font-medium transition-all duration-200 ${
                         duration === option.days
                           ? 'bg-stashbox-mint text-gray-800'
                           : 'bg-white/20 text-white hover:bg-white/30'
@@ -397,7 +398,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               showPercentage={type !== "custom"}
             />
             
-            <div className="bg-white/10 rounded-stashbox p-2.5 space-y-2">
+            <div className="bg-white/10 rounded-stashbox p-2 space-y-1.5">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label className="text-xs font-medium text-white flex items-center gap-2">
@@ -417,7 +418,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             
             <Button
               onClick={handleDeposit}
-              className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-2 rounded-stashbox transition-all duration-200 flex items-center justify-center gap-2 text-sm h-8"
+              className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-2 rounded-stashbox transition-all duration-200 flex items-center justify-center gap-2 text-sm h-7"
             >
               <Leaf className="w-3 h-3" />
               {type === "custom" ? "Stash It" : "Start Saving"}
