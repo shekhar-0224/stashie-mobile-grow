@@ -12,7 +12,7 @@ export interface User {
 
 export interface SavingsJar {
   id: string;
-  type: 'quick' | 'safe' | 'grow' | 'custom';
+  type: 'quick' | 'safe' | 'grow' | 'custom' | 'betting';
   name: string;
   targetAmount?: number;
   currentAmount: number;

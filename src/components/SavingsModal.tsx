@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
-import { Copy, Share2, Target, Leaf, TrendingUp, Users, ArrowLeft, X } from "lucide-react";
+import { Copy, Share2, Leaf, TrendingUp, Users, ArrowLeft, X } from "lucide-react";
 import JarSuccessModal from "./JarSuccessModal";
+import AmountInput from "./AmountInput";
+import GrowthStrategySelector from "./GrowthStrategySelector";
+import ExpectedReturns from "./ExpectedReturns";
 import { SavingsModalProps } from "@/types";
 
 const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
@@ -79,73 +81,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
 
   const getRiskData = (level: number) => {
     const riskOptions = [
-      { 
-        name: 'Conservative', 
-        icon: (
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-300 to-green-400 flex items-center justify-center">
-            <div className="flex space-x-0.5">
-              <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-              <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-            </div>
-          </div>
-        ),
-        apy: 3.0 
-      },
-      { 
-        name: 'Moderate', 
-        icon: (
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-300 to-yellow-400 flex items-center justify-center">
-            <div className="flex space-x-0.5">
-              <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-              <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-            </div>
-          </div>
-        ),
-        apy: 6.0 
-      },
-      { 
-        name: 'Aggressive', 
-        icon: (
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-300 to-red-400 flex items-center justify-center">
-            <div className="flex space-x-0.5">
-              <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-              <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-            </div>
-          </div>
-        ),
-        apy: 9.0 
-      }
+      { name: 'Conservative', apy: 3.0 },
+      { name: 'Moderate', apy: 6.0 },
+      { name: 'Aggressive', apy: 9.0 }
     ];
     return riskOptions[level - 1] || riskOptions[1];
-  };
-
-  const calculateReturn = () => {
-    const inputAmount = parseFloat(type === "custom" ? targetAmount : amount);
-    if (isNaN(inputAmount) || inputAmount <= 0) return 0;
-    
-    const principal = inputAmount;
-    const config = getModalConfig();
-    const rate = type === "custom" ? getRiskData(riskLevel).apy : config.apy || 0;
-    const time = duration / 365;
-    
-    const estimatedReturn = principal * (1 + (rate / 100) * time);
-    return estimatedReturn;
-  };
-
-  const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
-    const percentage = clickX / width;
-    
-    // Map to 3 levels
-    if (percentage < 0.33) {
-      setRiskLevel(1);
-    } else if (percentage < 0.67) {
-      setRiskLevel(2);
-    } else {
-      setRiskLevel(3);
-    }
   };
 
   const config = getModalConfig();
@@ -177,23 +117,18 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   };
 
   const handleDeposit = () => {
-    // For saving jars, show share options after creation
     if (type !== "betting" && isSharedJar) {
       setShowShareOptions(true);
       return;
     }
 
-    // Show success modal
     setShowSuccessModal(true);
     
-    // Trigger confetti animation
     const confettiEvent = () => {
-      // Vibration feedback
       if (navigator.vibrate) {
         navigator.vibrate([50, 100, 50, 100]);
       }
       
-      // Show success toast
       toast({
         title: type === "betting" ? "Betting Jar Created!" : t('toast.saved'),
         description: type === "betting" ? "Your betting jar is ready for participants!" : t('toast.savedDescription'),
@@ -202,7 +137,6 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
 
     setTimeout(confettiEvent, 300);
     
-    // Reset form after delay
     setTimeout(() => {
       setAmount("");
       setDuration(30);
@@ -247,11 +181,10 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Label htmlFor="betDescription" className="text-xs font-medium text-white">
                 Define the bet
               </Label>
-              <Input
-                id="betDescription"
-                placeholder="e.g., Who will win the match?"
+              <AmountInput
                 value={betDescription}
-                onChange={(e) => setBetDescription(e.target.value)}
+                onChange={(value) => setBetDescription(value)}
+                placeholder="e.g., Who will win the match?"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
             </div>
@@ -260,11 +193,10 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Label htmlFor="winConditions" className="text-xs font-medium text-white">
                 Set win condition(s)
               </Label>
-              <Input
-                id="winConditions"
-                placeholder="e.g., Team A wins or match ends in draw"
+              <AmountInput
                 value={winConditions}
-                onChange={(e) => setWinConditions(e.target.value)}
+                onChange={(value) => setWinConditions(value)}
+                placeholder="e.g., Team A wins or match ends in draw"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
             </div>
@@ -273,11 +205,10 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Label htmlFor="inviteList" className="text-xs font-medium text-white">
                 Invite people to join
               </Label>
-              <Input
-                id="inviteList"
-                placeholder="Enter email addresses or usernames"
+              <AmountInput
                 value={inviteList}
-                onChange={(e) => setInviteList(e.target.value)}
+                onChange={(value) => setInviteList(value)}
+                placeholder="Enter email addresses or usernames"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
             </div>
@@ -386,134 +317,85 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           </DialogHeader>
           
           <div className="space-y-2.5 py-1">
-            {type !== "betting" && (
-              <div className="space-y-1.5">
-                <Label htmlFor="purpose" className="text-xs font-medium text-white">
-                  {type === "custom" ? t('modal.goalName') : "Purpose"}
-                </Label>
-                <Input
-                  id="purpose"
-                  placeholder={type === "custom" ? t('modal.goalNamePlaceholder') : "e.g., Vacation fund"}
-                  value={goalName}
-                  onChange={(e) => setGoalName(e.target.value)}
-                  className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
-                />
-              </div>
-            )}
+            <div className="space-y-1.5">
+              <Label htmlFor="purpose" className="text-xs font-medium text-white">
+                {type === "custom" ? t('modal.goalName') : "Purpose"}
+              </Label>
+              <AmountInput
+                value={goalName}
+                onChange={(value) => setGoalName(value)}
+                placeholder={type === "custom" ? t('modal.goalNamePlaceholder') : "e.g., Vacation fund"}
+                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+              />
+            </div>
             
             <div className="space-y-1.5">
               <Label htmlFor="amount" className="text-xs font-medium text-white">
                 {type === "custom" ? t('modal.targetAmount') : t('modal.enterAmount')}
               </Label>
-              <Input
-                id="amount"
-                placeholder={config.placeholder}
+              <AmountInput
                 value={type === "custom" ? targetAmount : amount}
-                onChange={(e) => type === "custom" ? setTargetAmount(e.target.value) : setAmount(e.target.value)}
+                onChange={type === "custom" ? (value) => setTargetAmount(value) : (value) => setAmount(value)}
+                placeholder={config.placeholder}
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
             </div>
 
-            {/* Duration for all jar types except betting */}
-            {type !== "betting" && (
-              <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-white">
-                  Duration ({duration} days)
-                </Label>
-                
-                <div className="bg-white/10 rounded-stashbox p-2">
-                  <div className="flex gap-1.5">
-                    {durationOptions.map((option) => (
-                      <button
-                        key={option.days}
-                        onClick={() => setDuration(option.days)}
-                        className={`flex-1 rounded-full py-1.5 px-2 text-xs font-medium transition-all duration-200 ${
-                          duration === option.days
-                            ? 'bg-stashbox-mint text-gray-800'
-                            : 'bg-white/20 text-white hover:bg-white/30'
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
+            <div className="space-y-1.5">
+              <Label className="text-xs font-medium text-white">
+                Duration ({duration} days)
+              </Label>
+              
+              <div className="bg-white/10 rounded-stashbox p-2">
+                <div className="flex gap-1.5">
+                  {durationOptions.map((option) => (
+                    <button
+                      key={option.days}
+                      onClick={() => setDuration(option.days)}
+                      className={`flex-1 rounded-full py-1.5 px-2 text-xs font-medium transition-all duration-200 ${
+                        duration === option.days
+                          ? 'bg-stashbox-mint text-gray-800'
+                          : 'bg-white/20 text-white hover:bg-white/30'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
+            </div>
 
             {type === "custom" && (
-              <div className="space-y-2">
-                <Label className="text-xs font-medium text-white flex items-center gap-2">
-                  <Target className="w-3 h-3" />
-                  Growth Strategy
-                </Label>
-                
-                <div className="bg-white/10 rounded-stashbox p-3 space-y-3">
-                  <div className="text-center">
-                    <div className="mb-2 flex justify-center">{getRiskData(riskLevel).icon}</div>
-                    <div className="text-sm font-medium text-white">{getRiskData(riskLevel).name}</div>
-                    <div className="text-xs text-white/70">{getRiskData(riskLevel).apy.toFixed(1)}% Expected APY</div>
-                  </div>
-                  
-                  <div 
-                    className="relative h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full cursor-pointer"
-                    onClick={handleSliderClick}
-                  >
-                    <div 
-                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300"
-                      style={{ left: `${((riskLevel - 1) / 2) * 100}%` }}
-                    >
-                      <div className="w-4 h-4 bg-white rounded-full shadow-lg"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <GrowthStrategySelector
+                riskLevel={riskLevel}
+                onRiskLevelChange={setRiskLevel}
+              />
             )}
 
-            {/* Expected Returns - show for all types except betting when amount is filled */}
-            {type !== "betting" && ((type === "custom" ? targetAmount : amount) && parseFloat(type === "custom" ? targetAmount : amount) > 0) && (
-              <div className="bg-white/10 rounded-stashbox p-2.5">
-                <div className="text-xs font-medium text-white mb-2">Expected Returns</div>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="text-base font-bold text-white">
-                      ${calculateReturn().toFixed(0)}
-                    </div>
-                    <div className="text-xs text-white/70">
-                      After {duration} days
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm font-medium text-green-300">
-                      +${(calculateReturn() - parseFloat(type === "custom" ? targetAmount : amount)).toFixed(0)}
-                    </div>
-                    <div className="text-xs text-white/70">
-                      Profit
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+            <ExpectedReturns
+              amount={type === "custom" ? targetAmount : amount}
+              duration={duration}
+              apy={type === "custom" ? currentRiskData.apy : config.apy || 0}
+              showPercentage={type !== "custom"}
+            />
             
-            {type !== "betting" && (
-              <div className="bg-white/10 rounded-stashbox p-2.5 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-xs font-medium text-white flex items-center gap-2">
-                      <Users className="w-3 h-3" />
-                      Allow friends to contribute
-                    </Label>
-                    <p className="text-xs text-white/60">
-                      Let others add funds to boost your goal
-                    </p>
-                  </div>
-                  <Switch
-                    checked={isSharedJar}
-                    onCheckedChange={setIsSharedJar}
-                  />
+            <div className="bg-white/10 rounded-stashbox p-2.5 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="text-xs font-medium text-white flex items-center gap-2">
+                    <Users className="w-3 h-3" />
+                    Allow friends to contribute
+                  </Label>
+                  <p className="text-xs text-white/60">
+                    Let others add funds to boost your goal
+                  </p>
                 </div>
+                <Switch
+                  checked={isSharedJar}
+                  onCheckedChange={setIsSharedJar}
+                />
               </div>
-            )}
+            </div>
             
             <Button
               onClick={handleDeposit}
@@ -526,7 +408,6 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
         </DialogContent>
       </Dialog>
 
-      {/* Success Modal */}
       <JarSuccessModal
         isOpen={showSuccessModal}
         onClose={() => {
