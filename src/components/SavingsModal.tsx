@@ -117,7 +117,8 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const config = getModalConfig();
 
   const handleCopyLink = () => {
-    const jarLink = `https://stashbox.app/jar/${goalName.toLowerCase().replace(/\s+/g, '-')}`;
+    const jarName = type === "custom" ? goalName : config.title;
+    const jarLink = `https://stashbox.app/jar/${jarName.toLowerCase().replace(/\s+/g, '-')}`;
     navigator.clipboard.writeText(jarLink);
     toast({
       title: "Link Copied!",
@@ -126,11 +127,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   };
 
   const handleShare = () => {
-    const jarLink = `https://stashbox.app/jar/${goalName.toLowerCase().replace(/\s+/g, '-')}`;
+    const jarName = type === "custom" ? goalName : config.title;
+    const jarLink = `https://stashbox.app/jar/${jarName.toLowerCase().replace(/\s+/g, '-')}`;
     
     if (navigator.share) {
       navigator.share({
-        title: `Join my ${goalName} Jar`,
+        title: `Join my ${jarName} Jar`,
         text: `Help me reach my saving goal!`,
         url: jarLink,
       });
@@ -386,6 +388,50 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 )}
               </div>
             </>
+          )}
+
+          {/* Add shared jar option for quick start jars too */}
+          {(type === "quick" || type === "safe" || type === "grow") && (
+            <div className="bg-white/10 rounded-stashbox p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <Label className="text-sm font-medium text-white flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    Make this a shared jar
+                  </Label>
+                  <p className="text-xs text-white/60">
+                    Allow others to contribute to your goal
+                  </p>
+                </div>
+                <Switch
+                  checked={isSharedJar}
+                  onCheckedChange={setIsSharedJar}
+                />
+              </div>
+              
+              {isSharedJar && (
+                <div className="flex gap-2 pt-2">
+                  <Button
+                    onClick={handleCopyLink}
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 bg-white/20 text-white border-white/30 hover:bg-white/30"
+                  >
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copy Link
+                  </Button>
+                  <Button
+                    onClick={handleShare}
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 bg-white/20 text-white border-white/30 hover:bg-white/30"
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Share
+                  </Button>
+                </div>
+              )}
+            </div>
           )}
           
           <div className="space-y-4">

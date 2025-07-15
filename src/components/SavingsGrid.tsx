@@ -38,7 +38,7 @@ const SavingsGrid = () => {
 
   return (
     <>
-      <div className="px-6 py-4 space-y-6">
+      <div className="px-6 py-2 space-y-4">
         {/* Custom Jar Creation Section */}
         <CustomJarSection 
           onSavingJar={handleCustomJar}
@@ -52,7 +52,7 @@ const SavingsGrid = () => {
         
         {/* 2x2 Grid Layout for Predefined Jars */}
         <div>
-          <h3 className="text-lg font-semibold text-stashbox-text mb-4">Quick Start Jars</h3>
+          <h3 className="text-lg font-semibold text-stashbox-text mb-3">Quick Start Jars</h3>
           <div className="grid grid-cols-2 gap-3">
             <SavingsCard
               title={t('savings.quickSave')}
