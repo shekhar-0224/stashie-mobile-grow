@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
-import { Leaf, TrendingUp, Plus } from "lucide-react";
+import { Coins, Swords, Plus } from "lucide-react";
 
 interface CustomJarSectionProps {
   onSavingJar: () => void;
@@ -22,7 +22,14 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
             onClick={onSavingJar}
             className="w-24 h-24 bg-emerald-200 hover:bg-emerald-300 border-2 border-emerald-400 rounded-2xl shadow-none flex items-center justify-center transition-all duration-200 hover:scale-105"
           >
-            <Leaf className="w-8 h-8 text-emerald-700" />
+            <div className="flex flex-col items-center gap-1">
+              <img 
+                src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                alt="Stashbox Logo" 
+                className="w-6 h-6"
+              />
+              <span className="text-xs font-medium text-emerald-800">Save</span>
+            </div>
           </Button>
           <span className="text-sm font-semibold text-stashbox-text">Saving Jar</span>
         </div>
@@ -33,7 +40,17 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
             onClick={onBettingJar}
             className="w-24 h-24 bg-yellow-200 hover:bg-yellow-300 border-2 border-yellow-400 rounded-2xl shadow-none flex items-center justify-center transition-all duration-200 hover:scale-105"
           >
-            <TrendingUp className="w-8 h-8 text-yellow-700" />
+            <div className="flex flex-col items-center gap-1">
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                  alt="Stashbox Logo" 
+                  className="w-5 h-5"
+                />
+                <Swords className="w-3 h-3 text-yellow-800 absolute -top-0.5 -right-0.5" />
+              </div>
+              <span className="text-xs font-medium text-yellow-800">Bet</span>
+            </div>
           </Button>
           <span className="text-sm font-semibold text-stashbox-text">Betting Jar</span>
         </div>
@@ -44,7 +61,14 @@ const CustomJarSection = ({ onSavingJar, onBettingJar }: CustomJarSectionProps) 
             disabled
             className="w-24 h-24 bg-gray-200 border-2 border-gray-300 rounded-2xl shadow-none flex items-center justify-center opacity-60"
           >
-            <Plus className="w-8 h-8 text-gray-500" />
+            <div className="flex flex-col items-center gap-1">
+              <img 
+                src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                alt="Stashbox Logo" 
+                className="w-5 h-5 opacity-50"
+              />
+              <Plus className="w-3 h-3 text-gray-500" />
+            </div>
           </Button>
           <span className="text-sm font-medium text-gray-500">Coming Soon</span>
         </div>
