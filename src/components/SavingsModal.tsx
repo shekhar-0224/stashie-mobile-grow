@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -327,7 +328,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[350px] max-h-[80vh] overflow-y-auto glass-modal border-none rounded-stashbox animate-slide-up">
-        <DialogHeader className="relative pb-2">
+        <DialogHeader className="relative pb-1">
           <Button
             onClick={onClose}
             variant="ghost"
@@ -342,7 +343,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-3 py-1">
+        <div className="space-y-3">
           {type === "custom" && (
             <div className="space-y-1.5">
               <Label htmlFor="goalName" className="text-xs font-medium text-white">
@@ -402,18 +403,6 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                         />
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="flex justify-between text-xs text-white/60">
-                    <span className="flex items-center gap-1">
-                      🌱 Conservative
-                    </span>
-                    <span className="flex items-center gap-1">
-                      😊 Moderate
-                    </span>
-                    <span className="flex items-center gap-1">
-                      🚀 Aggressive
-                    </span>
                   </div>
                 </div>
               </div>
