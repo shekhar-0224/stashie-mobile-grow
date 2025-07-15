@@ -19,19 +19,16 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
 
   return (
     <div className="px-6 py-4 space-y-4">
-      {/* Top Row - Fixed Layout */}
+      {/* Top Row - Logo and Streak aligned */}
       <div className="flex items-center justify-between">
-        <div className="flex flex-col items-start space-y-2">
-          <div className="w-12 h-12 bg-gradient-to-br from-stashbox-orange to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+        <div className="flex items-center space-x-4">
+          {/* Logo positioned parallel to streak */}
+          <div className="flex items-center justify-center">
             <img 
               src="/lovable-uploads/091f1444-42b6-4d20-808e-e89d3b9acca3.png" 
               alt="Stashbox Logo" 
-              className="w-8 h-8 object-contain"
+              className="w-12 h-12 object-contain"
             />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-stashbox-text">Hey Emma,</h1>
-            <p className="text-base text-stashbox-text font-medium opacity-70">let's grow your stash!</p>
           </div>
         </div>
         
@@ -52,6 +49,12 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
             <User className="w-5 h-5 text-stashbox-text" />
           </Button>
         </div>
+      </div>
+
+      {/* Hello section moved below logo */}
+      <div className="flex flex-col items-start">
+        <h1 className="text-2xl font-bold text-stashbox-text">Hey Emma,</h1>
+        <p className="text-base text-stashbox-text font-medium opacity-70">let's grow your stash!</p>
       </div>
 
       {/* Total Saved Card - Simpler Design */}
