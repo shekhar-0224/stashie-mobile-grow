@@ -20,15 +20,19 @@ const StreakCard = () => {
         }}
       >
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center animate-pulse">
-            <Flame className="w-5 h-5 text-white animate-bounce" />
+          {/* Prominent Flame Icon */}
+          <div className="w-10 h-10 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center">
+            <Flame className="w-6 h-6 text-white drop-shadow-lg" fill="currentColor" />
           </div>
+          
           <div className="text-white">
             <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold">{streak.streakDays}</span>
-              <span className="text-sm font-semibold opacity-90">day streak!</span>
+              <span className="text-2xl font-bold drop-shadow-md">{streak.streakDays}</span>
+              <span className="text-sm font-semibold opacity-90 drop-shadow-sm">day streak!</span>
             </div>
           </div>
+          
+          {/* Fire Emoji for extra emphasis */}
           <div className="text-xl animate-bounce">🔥</div>
         </div>
         
