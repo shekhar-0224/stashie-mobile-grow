@@ -41,10 +41,10 @@ All colors MUST be HSL.
 
     /* Stashbox Design System - Enhanced for better visibility */
     --stashbox-cream: 30 50% 97%;
-    --stashbox-text: 0 0% 10%; /* Much darker for better contrast */
-    --stashbox-text-light: 0 0% 40%; /* Improved contrast */
-    --stashbox-text-modal: 0 0% 15%; /* Better modal text visibility */
-    --stashbox-label-modal: 0 0% 20%; /* Enhanced label visibility */
+    --stashbox-text: 0 0% 5%; /* Much darker for better contrast */
+    --stashbox-text-light: 0 0% 25%; /* Improved contrast */
+    --stashbox-text-modal: 0 0% 10%; /* Better modal text visibility */
+    --stashbox-label-modal: 0 0% 15%; /* Enhanced label visibility */
     --stashbox-mint: 154 38% 86%;
     --stashbox-orange: 30 96% 70%;
     --stashbox-yellow: 48 96% 76%;
@@ -108,6 +108,7 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
+    cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23f97316' stroke='%23ea580c' stroke-width='2'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-family='Arial' font-size='12' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E") 12 12, auto;
   }
 
   body {
@@ -116,7 +117,11 @@ All colors MUST be HSL.
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-weight: 500; /* Make all text medium weight for better visibility */
+    font-weight: 600; /* Make all text semibold for better visibility */
+  }
+
+  button, a, [role="button"] {
+    cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%2310b981' stroke='%23059669' stroke-width='2'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-family='Arial' font-size='12' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E") 12 12, pointer;
   }
 }
 
@@ -130,19 +135,19 @@ All colors MUST be HSL.
   .bg-stashbox-purple { background-color: hsl(var(--stashbox-purple)); }
   .text-stashbox-text { 
     color: hsl(var(--stashbox-text)); 
-    font-weight: 600; /* Bolder for better visibility */
+    font-weight: 700; /* Even bolder for better visibility */
   }
   .text-stashbox-text-light { 
     color: hsl(var(--stashbox-text-light)); 
-    font-weight: 600; 
+    font-weight: 700; 
   }
   .text-stashbox-text-modal { 
     color: hsl(var(--stashbox-text-modal)); 
-    font-weight: 600; 
+    font-weight: 700; 
   }
   .text-stashbox-label-modal { 
     color: hsl(var(--stashbox-label-modal)); 
-    font-weight: 700; 
+    font-weight: 800; 
   }
   .border-stashbox-text { border-color: hsl(var(--stashbox-text)); }
   .rounded-stashbox { border-radius: 24px; }
@@ -158,7 +163,7 @@ All colors MUST be HSL.
   .text-enhanced {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.025em;
-    font-weight: 600;
+    font-weight: 700;
   }
   
   /* Duolingo-style animations */

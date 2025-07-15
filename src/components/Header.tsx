@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Bell, User } from "lucide-react";
+import { User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
@@ -13,8 +13,8 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="px-6 py-4 space-y-5">
-      {/* Top Row */}
+    <div className="px-6 py-4 space-y-4">
+      {/* Top Row - Fixed Layout */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="w-12 h-12 bg-gradient-to-br from-stashbox-orange to-orange-500 rounded-full flex items-center justify-center shadow-lg">
@@ -29,23 +29,26 @@ const Header = ({ onTotalSavedClick }: HeaderProps) => {
         <div className="flex items-center space-x-2">
           <LanguageSelector />
           <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full">
-            <Bell className="w-5 h-5 text-stashbox-text" />
-          </Button>
-          <Button variant="ghost" size="sm" className="w-10 h-10 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full">
             <User className="w-5 h-5 text-stashbox-text" />
           </Button>
         </div>
       </div>
 
-      {/* Total Saved Card - Redesigned */}
+      {/* Total Saved Card - Simpler Design */}
       <Card 
-        className="p-6 bg-gradient-to-br from-stashbox-mint/80 to-stashbox-mint/60 backdrop-blur-sm cursor-pointer hover:from-stashbox-mint/90 hover:to-stashbox-mint/70 transition-all duration-300 border-0 shadow-xl relative overflow-hidden transform hover:scale-[1.02] rounded-3xl"
+        className="p-6 bg-gradient-to-br from-stashbox-mint/90 to-stashbox-mint/70 backdrop-blur-sm cursor-pointer hover:from-stashbox-mint/95 hover:to-stashbox-mint/80 transition-all duration-300 border-0 shadow-xl relative overflow-hidden transform hover:scale-[1.02] rounded-3xl"
         onClick={onTotalSavedClick}
       >
-        {/* Background illustration */}
+        {/* Cute Character Illustration */}
         <div className="absolute top-4 right-6">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-            <div className="text-2xl">💰</div>
+          <div className="w-16 h-16 bg-white/30 rounded-full flex items-center justify-center relative">
+            {/* Character eyes */}
+            <div className="absolute top-3 left-4 w-2 h-2 bg-stashbox-text rounded-full"></div>
+            <div className="absolute top-3 right-4 w-2 h-2 bg-stashbox-text rounded-full"></div>
+            {/* Character beak/mouth */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-400 rounded-full"></div>
+            {/* Sprouting leaf */}
+            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-green-500 text-lg">🌱</div>
           </div>
         </div>
         
