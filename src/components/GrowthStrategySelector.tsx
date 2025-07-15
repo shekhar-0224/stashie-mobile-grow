@@ -14,11 +14,11 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Conservative', 
         icon: (
           <img 
-            src="/lovable-uploads/921a4dfb-6295-458a-9bc4-82a2e834dbf4.png" 
+            src="/lovable-uploads/19cb9961-c93d-4b01-870d-0ca39ac222ee.png" 
             alt="Conservative"
-            className="w-6 h-6 object-contain"
+            className="w-8 h-8 object-contain"
             style={{ 
-              clipPath: 'polygon(0% 0%, 33% 0%, 33% 100%, 0% 100%)'
+              filter: 'hue-rotate(0deg) saturate(1.2)'
             }}
           />
         ),
@@ -28,11 +28,11 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Moderate', 
         icon: (
           <img 
-            src="/lovable-uploads/921a4dfb-6295-458a-9bc4-82a2e834dbf4.png" 
+            src="/lovable-uploads/19cb9961-c93d-4b01-870d-0ca39ac222ee.png" 
             alt="Moderate"
-            className="w-6 h-6 object-contain"
+            className="w-8 h-8 object-contain"
             style={{ 
-              clipPath: 'polygon(33% 0%, 66% 0%, 66% 100%, 33% 100%)'
+              filter: 'hue-rotate(20deg) saturate(1.3) brightness(1.1)'
             }}
           />
         ),
@@ -42,11 +42,11 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
         name: 'Aggressive', 
         icon: (
           <img 
-            src="/lovable-uploads/921a4dfb-6295-458a-9bc4-82a2e834dbf4.png" 
+            src="/lovable-uploads/19cb9961-c93d-4b01-870d-0ca39ac222ee.png" 
             alt="Aggressive"
-            className="w-6 h-6 object-contain"
+            className="w-8 h-8 object-contain"
             style={{ 
-              clipPath: 'polygon(66% 0%, 100% 0%, 100% 100%, 66% 100%)'
+              filter: 'hue-rotate(300deg) saturate(1.4) brightness(1.1)'
             }}
           />
         ),
@@ -75,28 +75,37 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
   const currentRiskData = getRiskData(riskLevel);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <Label className="text-xs font-medium text-white flex items-center gap-2">
         <Target className="w-3 h-3" />
         Growth Strategy
       </Label>
       
-      <div className="bg-white/10 rounded-stashbox p-4 space-y-4">
-        <div className="text-center">
-          <div className="mb-3 flex justify-center">{currentRiskData.icon}</div>
-          <div className="text-sm font-medium text-white">{currentRiskData.name}</div>
-          <div className="text-xs text-white/70">{currentRiskData.apy.toFixed(1)}% Expected APY</div>
+      <div className="bg-white/10 rounded-stashbox p-3">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            {currentRiskData.icon}
+            <div>
+              <div className="text-sm font-medium text-white">{currentRiskData.name}</div>
+              <div className="text-xs text-white/70">{currentRiskData.apy.toFixed(1)}% APY</div>
+            </div>
+          </div>
         </div>
         
         <div 
-          className="relative h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full cursor-pointer shadow-inner"
+          className="relative h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full cursor-pointer"
           onClick={handleSliderClick}
         >
+          {/* Middle point markers */}
+          <div className="absolute top-1/2 transform -translate-y-1/2 w-0.5 h-3 bg-white/40" style={{ left: '33.33%' }}></div>
+          <div className="absolute top-1/2 transform -translate-y-1/2 w-0.5 h-3 bg-white/40" style={{ left: '66.66%' }}></div>
+          
+          {/* Slider handle */}
           <div 
             className="absolute top-1/2 transform -translate-y-1/2 transition-all duration-300 ease-out"
-            style={{ left: `calc(${((riskLevel - 1) / 2) * 100}% - 8px)` }}
+            style={{ left: `calc(${((riskLevel - 1) / 2) * 100}% - 6px)` }}
           >
-            <div className="w-4 h-4 bg-white rounded-full shadow-lg border-2 border-white/50 hover:scale-110 transition-transform duration-200"></div>
+            <div className="w-3 h-3 bg-white rounded-full shadow-lg border border-white/30 hover:scale-110 transition-transform duration-200"></div>
           </div>
         </div>
       </div>
