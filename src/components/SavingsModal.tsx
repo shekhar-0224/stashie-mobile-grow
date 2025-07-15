@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import { SAVINGS_JARS } from "@/constants";
@@ -190,39 +191,39 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Label htmlFor="betDescription" className="text-xs font-medium text-white">
                 Define the bet
               </Label>
-              <AmountInput
+              <Input
                 value={betDescription}
-                onChange={(value) => setBetDescription(value.slice(0, 20))}
+                onChange={(e) => setBetDescription(e.target.value.slice(0, 20))}
                 placeholder="e.g., Who will win the match?"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
-              <p className="text-xs text-white/60">{betDescription.length}/20 characters</p>
+              <p className="text-xs text-white/60">({betDescription.length}/20)</p>
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="winConditions" className="text-xs font-medium text-white">
                 Set win condition(s)
               </Label>
-              <AmountInput
+              <Input
                 value={winConditions}
-                onChange={(value) => setWinConditions(value.slice(0, 20))}
+                onChange={(e) => setWinConditions(e.target.value.slice(0, 20))}
                 placeholder="e.g., Team A wins or match ends in draw"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
-              <p className="text-xs text-white/60">{winConditions.length}/20 characters</p>
+              <p className="text-xs text-white/60">({winConditions.length}/20)</p>
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="inviteList" className="text-xs font-medium text-white">
                 Invite people to join
               </Label>
-              <AmountInput
+              <Input
                 value={inviteList}
-                onChange={(value) => setInviteList(value.slice(0, 20))}
+                onChange={(e) => setInviteList(e.target.value.slice(0, 20))}
                 placeholder="Enter email addresses or usernames"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
-              <p className="text-xs text-white/60">{inviteList.length}/20 characters</p>
+              <p className="text-xs text-white/60">({inviteList.length}/20)</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-2">
@@ -333,13 +334,13 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               <Label htmlFor="purpose" className="text-xs font-medium text-white">
                 {type === "custom" ? t('modal.goalName') : "Purpose"}
               </Label>
-              <AmountInput
+              <Input
                 value={goalName}
-                onChange={(value) => setGoalName(value.slice(0, 20))}
+                onChange={(e) => setGoalName(e.target.value.slice(0, 20))}
                 placeholder={type === "custom" ? t('modal.goalNamePlaceholder') : "e.g., Vacation fund"}
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
-              <p className="text-xs text-white/60">{goalName.length}/20 characters</p>
+              <p className="text-xs text-white/60">({goalName.length}/20)</p>
             </div>
             
             <div className="space-y-1.5">
