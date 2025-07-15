@@ -192,10 +192,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </Label>
               <AmountInput
                 value={betDescription}
-                onChange={(value) => setBetDescription(value)}
+                onChange={(value) => setBetDescription(value.slice(0, 20))}
                 placeholder="e.g., Who will win the match?"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
+              <p className="text-xs text-white/60">{betDescription.length}/20 characters</p>
             </div>
 
             <div className="space-y-1.5">
@@ -204,10 +205,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </Label>
               <AmountInput
                 value={winConditions}
-                onChange={(value) => setWinConditions(value)}
+                onChange={(value) => setWinConditions(value.slice(0, 20))}
                 placeholder="e.g., Team A wins or match ends in draw"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
+              <p className="text-xs text-white/60">{winConditions.length}/20 characters</p>
             </div>
 
             <div className="space-y-1.5">
@@ -216,10 +218,11 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </Label>
               <AmountInput
                 value={inviteList}
-                onChange={(value) => setInviteList(value)}
+                onChange={(value) => setInviteList(value.slice(0, 20))}
                 placeholder="Enter email addresses or usernames"
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
               />
+              <p className="text-xs text-white/60">{inviteList.length}/20 characters</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-2">
@@ -335,7 +338,6 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
                 onChange={(value) => setGoalName(value.slice(0, 20))}
                 placeholder={type === "custom" ? t('modal.goalNamePlaceholder') : "e.g., Vacation fund"}
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
-                maxLength={20}
               />
               <p className="text-xs text-white/60">{goalName.length}/20 characters</p>
             </div>
