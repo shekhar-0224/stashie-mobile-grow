@@ -332,10 +332,12 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               </Label>
               <AmountInput
                 value={goalName}
-                onChange={(value) => setGoalName(value)}
+                onChange={(value) => setGoalName(value.slice(0, 20))}
                 placeholder={type === "custom" ? t('modal.goalNamePlaceholder') : "e.g., Vacation fund"}
                 className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
+                maxLength={20}
               />
+              <p className="text-xs text-white/60">{goalName.length}/20 characters</p>
             </div>
             
             <div className="space-y-1.5">
