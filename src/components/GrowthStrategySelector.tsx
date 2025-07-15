@@ -1,4 +1,3 @@
-
 import { Label } from "@/components/ui/label";
 import { Target } from "lucide-react";
 
@@ -96,9 +95,8 @@ const GrowthStrategySelector = ({ riskLevel, onRiskLevelChange }: GrowthStrategy
           className="relative h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full cursor-pointer"
           onClick={handleSliderClick}
         >
-          {/* Middle point markers */}
-          <div className="absolute top-1/2 transform -translate-y-1/2 w-0.5 h-3 bg-white/40" style={{ left: '33.33%' }}></div>
-          <div className="absolute top-1/2 transform -translate-y-1/2 w-0.5 h-3 bg-white/40" style={{ left: '66.66%' }}></div>
+          {/* Middle point marker for moderate */}
+          <div className="absolute top-1/2 transform -translate-y-1/2 w-0.5 h-3 bg-white/40" style={{ left: '50%' }}></div>
           
           {/* Slider handle */}
           <div 
