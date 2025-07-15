@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -30,6 +31,13 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const [betDescription, setBetDescription] = useState("");
   const [winConditions, setWinConditions] = useState("");
   const [inviteList, setInviteList] = useState("");
+
+  const durationOptions = [
+    { days: 30, label: "30d" },
+    { days: 90, label: "90d" },
+    { days: 180, label: "180d" },
+    { days: 365, label: "365d" }
+  ];
 
   const getModalConfig = () => {
     switch (type) {
@@ -371,9 +379,59 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
               className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-8"
             />
           </div>
-          
+
           {type === "custom" && (
             <>
+              <div className="space-y-1.5">
+                <Label className="text-xs font-medium text-white">
+                  Duration ({duration} days)
+                </Label>
+                
+                <div className="bg-white/10 rounded-stashbox p-3">
+                  <div className="flex gap-2 mb-3">
+                    {durationOptions.map((option) => (
+                      <button
+                        key={option.days}
+                        onClick={() => setDuration(option.days)}
+                        className={`flex-1 rounded-full py-2 px-3 text-xs font-medium transition-all duration-200 flex flex-col items-center gap-1 ${
+                          duration === option.days
+                            ? 'bg-stashbox-mint text-gray-800'
+                            : 'bg-white/20 text-white hover:bg-white/30'
+                        }`}
+                      >
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Stashbox Logo" 
+                          className="w-4 h-4"
+                        />
+                        <span>{option.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="h-1 bg-white/20 rounded-full">
+                      <div 
+                        className="h-full bg-stashbox-mint rounded-full transition-all duration-300"
+                        style={{ width: `${((durationOptions.findIndex(opt => opt.days === duration) + 1) / durationOptions.length) * 100}%` }}
+                      />
+                    </div>
+                    <div 
+                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300"
+                      style={{ left: `${((durationOptions.findIndex(opt => opt.days === duration) + 1) / durationOptions.length) * 100}%` }}
+                    >
+                      <div className="w-4 h-4 bg-white rounded-full shadow-lg flex items-center justify-center">
+                        <img 
+                          src="/lovable-uploads/da7d41e5-363b-4f62-8f48-6bb81deaa23b.png" 
+                          alt="Stashbox Logo" 
+                          className="w-2 h-2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-3">
                 <Label className="text-xs font-medium text-white flex items-center gap-2">
                   <Target className="w-3 h-3" />
@@ -457,7 +515,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             className="w-full bg-stashbox-mint text-gray-600 hover:bg-stashbox-mint/90 font-medium py-2 rounded-stashbox transition-all duration-200 flex items-center justify-center gap-2 text-sm h-8"
           >
             <Leaf className="w-3 h-3" />
-            {type === "custom" ? (isSharedJar ? "Create Shared Jar" : "Create Jar") : "Start Saving"}
+            {type === "custom" ? "Stash It" : "Start Saving"}
           </Button>
         </div>
       </DialogContent>
@@ -466,3 +524,4 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
 };
 
 export default SavingsModal;
+
