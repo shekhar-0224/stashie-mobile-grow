@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Clock } from "lucide-react";
+import { searchPolymarketMarkets } from "@/utils/polymarketApi";
 
 interface PolymarketOutcome {
   id: string;
@@ -34,51 +35,32 @@ const MarketSelector = ({
   const [markets, setMarkets] = useState<PolymarketMarket[]>([]);
   const [loading, setLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const searchMarkets = async () => {
       if (query.length < 3) {
         setMarkets([]);
         setShowDropdown(false);
+        setError(null);
         return;
       }
 
       setLoading(true);
+      setError(null);
+      
       try {
-        // Mock API call - replace with actual Polymarket API
-        const mockMarkets: PolymarketMarket[] = [
-          {
-            id: "1",
-            title: "India vs England Cricket Match Winner",
-            outcomes: [
-              { id: "1a", title: "India" },
-              { id: "1b", title: "England" },
-              { id: "1c", title: "Draw" }
-            ],
-            resolveTime: "2024-01-20T15:00:00Z"
-          },
-          {
-            id: "2",
-            title: "Premier League: Manchester City vs Arsenal",
-            outcomes: [
-              { id: "2a", title: "Manchester City" },
-              { id: "2b", title: "Arsenal" },
-              { id: "2c", title: "Draw" }
-            ],
-            resolveTime: "2024-01-18T17:30:00Z"
-          }
-        ];
-
-        // Filter based on query
-        const filtered = mockMarkets.filter(market =>
-          market.title.toLowerCase().includes(query.toLowerCase())
-        );
-
-        setMarkets(filtered.slice(0, 5));
-        setShowDropdown(filtered.length > 0);
+        console.log('Searching Polymarket for:', query);
+        const fetchedMarkets = await searchPolymarketMarkets(query);
+        console.log('Fetched markets:', fetchedMarkets);
+        
+        setMarkets(fetchedMarkets.slice(0, 5));
+        setShowDropdown(fetchedMarkets.length > 0);
       } catch (error) {
         console.error('Error fetching markets:', error);
+        setError('Failed to fetch markets');
         setMarkets([]);
+        setShowDropdown(false);
       } finally {
         setLoading(false);
       }
@@ -89,18 +71,23 @@ const MarketSelector = ({
   }, [query]);
 
   const handleMarketSelect = (market: PolymarketMarket) => {
+    console.log('Market selected:', market);
     onMarketSelect(market);
     onOutcomeSelect(null);
     setShowDropdown(false);
   };
 
   const formatResolveTime = (timestamp: string) => {
-    return new Date(timestamp).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    try {
+      return new Date(timestamp).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      return 'Invalid date';
+    }
   };
 
   return (
@@ -110,7 +97,14 @@ const MarketSelector = ({
         <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-2 space-y-2">
           <p className="text-xs text-white/60 font-medium">Matching markets:</p>
           {loading ? (
-            <p className="text-sm text-white/60">Searching...</p>
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 border-2 border-white/20 border-t-white/60 rounded-full animate-spin"></div>
+              <p className="text-sm text-white/60">Searching Polymarket...</p>
+            </div>
+          ) : error ? (
+            <p className="text-sm text-red-400">{error}</p>
+          ) : markets.length === 0 ? (
+            <p className="text-sm text-white/60">No matching markets found</p>
           ) : (
             markets.map((market) => (
               <div
