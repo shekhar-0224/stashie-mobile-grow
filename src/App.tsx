@@ -32,10 +32,14 @@ const App = () => (
         },
         loginMethods: [
           "email",
-          "sms"
+          "sms",
+          "farcaster"
         ],
         fundingMethodConfig: {
           moonpay: {
+            useSandbox: true
+          },
+          coinbaseOnramp: {
             useSandbox: true
           }
         },
