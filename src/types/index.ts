@@ -21,6 +21,14 @@ export interface SavingsJar {
   createdAt: Date;
   maturityDate: Date;
   isActive: boolean;
+  // Betting jar specific fields
+  betDescription?: string;
+  winConditions?: string[];
+  invitees?: string[];
+  umaRequestId?: string;
+  oracleStatus?: 'pending' | 'resolved' | 'disputed';
+  oracleResult?: boolean | null;
+  polymarketLink?: string;
 }
 
 export interface Streak {
@@ -45,7 +53,7 @@ export interface Transaction {
   id: string;
   jarId: string;
   amount: number;
-  type: 'deposit' | 'withdrawal' | 'interest';
+  type: 'deposit' | 'withdrawal' | 'interest' | 'bet' | 'payout';
   status: 'pending' | 'completed' | 'failed';
   createdAt: Date;
   description?: string;
@@ -83,6 +91,26 @@ export interface SavingsModalProps {
 export interface StreakCardProps {
   streak: Streak;
   className?: string;
+}
+
+// Betting Jar Types
+
+export interface BettingJarData {
+  description: string;
+  winConditions: string[];
+  amount: string;
+  invitees: string[];
+}
+
+export interface OracleRequest {
+  id: string;
+  identifier: string;
+  timestamp: number;
+  ancillaryData: string;
+  currency: string;
+  status: 'pending' | 'resolved' | 'disputed';
+  result?: boolean;
+  settlementTime?: number;
 }
 
 // API Response Types

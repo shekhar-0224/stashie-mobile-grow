@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -12,6 +13,7 @@ import AnimatedSuccessModal from "./AnimatedSuccessModal";
 import AmountInput from "./AmountInput";
 import GrowthStrategySelector from "./GrowthStrategySelector";
 import ExpectedReturns from "./ExpectedReturns";
+import BettingJarForm from "./BettingJarForm";
 import { SavingsModalProps } from "@/types";
 
 const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
@@ -25,11 +27,6 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [animatingDuration, setAnimatingDuration] = useState<number | null>(null);
-  
-  // Betting jar states
-  const [betDescription, setBetDescription] = useState("");
-  const [winConditions, setWinConditions] = useState("");
-  const [inviteList, setInviteList] = useState("");
 
   const durationOptions = [
     { days: 30, label: "30d" },
@@ -155,9 +152,6 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
       setRiskLevel(2);
       setIsSharedJar(false);
       setShowShareOptions(false);
-      setBetDescription("");
-      setWinConditions("");
-      setInviteList("");
       onClose();
     }, 2000);
   };
@@ -186,59 +180,7 @@ const SavingsModal = ({ isOpen, onClose, type }: SavingsModalProps) => {
             </DialogTitle>
           </DialogHeader>
           
-          <div className="space-y-2 py-1">
-            <div className="space-y-1">
-              <Label htmlFor="betDescription" className="text-xs font-medium text-white">
-                Define the bet
-              </Label>
-              <Input
-                value={betDescription}
-                onChange={(e) => setBetDescription(e.target.value.slice(0, 20))}
-                placeholder="e.g., Who will win the match?"
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
-              />
-              <p className="text-xs text-white/60">({betDescription.length}/20)</p>
-            </div>
-
-            <div className="space-y-1">
-              <Label htmlFor="winConditions" className="text-xs font-medium text-white">
-                Set win condition(s)
-              </Label>
-              <Input
-                value={winConditions}
-                onChange={(e) => setWinConditions(e.target.value.slice(0, 20))}
-                placeholder="e.g., Team A wins or match ends in draw"
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
-              />
-              <p className="text-xs text-white/60">({winConditions.length}/20)</p>
-            </div>
-
-            <div className="space-y-1">
-              <Label htmlFor="inviteList" className="text-xs font-medium text-white">
-                Invite people to join
-              </Label>
-              <Input
-                value={inviteList}
-                onChange={(e) => setInviteList(e.target.value.slice(0, 20))}
-                placeholder="Enter email addresses or usernames"
-                className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm h-7"
-              />
-              <p className="text-xs text-white/60">({inviteList.length}/20)</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-2">
-              <p className="text-xs text-white/80 leading-relaxed">
-                💡 <span className="font-medium">How it works:</span> Funds are pooled together. Manual agreement or consensus closes the bet. Winner receives the full pot.
-              </p>
-            </div>
-            
-            <Button
-              onClick={handleDeposit}
-              className="w-full bg-stashbox-orange text-white hover:bg-stashbox-orange/90 font-medium py-2 rounded-stashbox transition-all duration-200 text-sm h-7"
-            >
-              Create Betting Jar
-            </Button>
-          </div>
+          <BettingJarForm onSubmit={handleDeposit} />
         </DialogContent>
       </Dialog>
     );
