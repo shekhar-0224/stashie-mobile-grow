@@ -1,13 +1,13 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { ExternalLink } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { X, ExternalLink } from "lucide-react";
 import BetAmountInput from "./BetAmountInput";
 import InviteChips from "./InviteChips";
 import MarketSelector from "./MarketSelector";
-import { getPolymarketUrl } from "@/utils/polymarketApi";
 
 interface BettingJarFormProps {
   onSubmit: () => void;
@@ -23,10 +23,6 @@ interface PolymarketMarket {
   title: string;
   outcomes: PolymarketOutcome[];
   resolveTime: string;
-  slug?: string;
-  active?: boolean;
-  closed?: boolean;
-  isResolved?: boolean;
 }
 
 const BettingJarForm = ({ onSubmit }: BettingJarFormProps) => {
@@ -55,15 +51,15 @@ const BettingJarForm = ({ onSubmit }: BettingJarFormProps) => {
 
   return (
     <div className="space-y-4 py-2">
-      {/* Step 1: Search Real-World Bet */}
+      {/* Step 1: Write Your Bet Condition */}
       <div className="space-y-2">
         <Label htmlFor="betQuery" className="text-sm font-medium text-white">
-          Search a real-world bet
+          What do you want to bet on?
         </Label>
         <Input
           value={betQuery}
           onChange={(e) => setBetQuery(e.target.value)}
-          placeholder="e.g., India vs England 4th Test"
+          placeholder="e.g., India vs England winner"
           className="rounded-stashbox border-gray-200 bg-white/90 text-gray-800 placeholder:text-gray-400 text-sm"
         />
       </div>
@@ -83,10 +79,10 @@ const BettingJarForm = ({ onSubmit }: BettingJarFormProps) => {
         onChange={setBetAmount}
       />
 
-      {/* Step 4: Invite Opponent */}
+      {/* Step 4: Invite Friends */}
       <div className="space-y-2">
         <Label className="text-sm font-medium text-white">
-          Invite opponent (email or username)
+          Invite a friend to bet against you
         </Label>
         <InviteChips
           invitees={invitees}
@@ -110,16 +106,9 @@ const BettingJarForm = ({ onSubmit }: BettingJarFormProps) => {
       {/* Info Box */}
       <div className="bg-white/10 backdrop-blur-sm rounded-stashbox p-3">
         <p className="text-sm text-white/80 leading-relaxed flex items-center gap-2">
-          💡 <span className="font-medium">Funds are pooled. Polymarket resolves the outcome post-event. Winner takes the pot.</span>
-          {selectedMarket?.slug && (
-            <a 
-              href={getPolymarketUrl(selectedMarket.slug)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-stashbox-orange hover:text-stashbox-orange/80"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
+          💡 <span className="font-medium">Using Polymarket markets.</span> Oracle-backed resolution.
+          {selectedMarket && (
+            <ExternalLink className="w-4 h-4 text-white/60" />
           )}
         </p>
       </div>
