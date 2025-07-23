@@ -1,4 +1,3 @@
-
 // Global type definitions for Stashbox
 
 export interface User {
@@ -97,9 +96,23 @@ export interface StreakCardProps {
 
 export interface BettingJarData {
   description: string;
-  winConditions: string[];
+  selectedMarket: PolymarketMarket | null;
+  selectedOutcome: PolymarketOutcome | null;
   amount: string;
   invitees: string[];
+  openChallenge: boolean;
+}
+
+export interface PolymarketOutcome {
+  id: string;
+  title: string;
+}
+
+export interface PolymarketMarket {
+  id: string;
+  title: string;
+  outcomes: PolymarketOutcome[];
+  resolveTime: string;
 }
 
 export interface OracleRequest {
@@ -111,6 +124,7 @@ export interface OracleRequest {
   status: 'pending' | 'resolved' | 'disputed';
   result?: boolean;
   settlementTime?: number;
+  polymarketId?: string;
 }
 
 // API Response Types
